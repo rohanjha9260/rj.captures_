@@ -1,0 +1,704 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.5) rgba(10, 10, 10, 0.1);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(10, 10, 10, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.5);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.7);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-dark-bg text-gray-100 font-inter;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════
+   LOADING SCREEN
+   ═══════════════════════════════════════ */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #050505;
+}
+
+.loading-screen.fade-out {
+  animation: loaderFade 0.8s ease-out forwards;
+}
+
+.loader-ring {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(212, 175, 55, 0.15);
+  border-top: 3px solid #d4af37;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader-text {
+  margin-top: 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: #d4af37;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+@keyframes loaderFade {
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* ═══════════════════════════════════════
+   GLASSMORPHISM
+   ═══════════════════════════════════════ */
+.glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 0.75rem;
+}
+
+.glass-hover {
+  @apply transition-all duration-500;
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.12);
+}
+
+.glass-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(10, 22, 40, 0.4) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 1rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.1);
+  transform: translateY(-4px);
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════ */
+.btn-gold {
+  @apply px-8 py-3.5 rounded-lg font-semibold transition-all duration-500;
+  background: linear-gradient(135deg, #d4af37 0%, #e8c547 50%, #d4af37 100%);
+  background-size: 200% auto;
+  @apply text-dark-bg transform hover:scale-105 active:scale-95;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+  letter-spacing: 0.05em;
+}
+
+.btn-gold:hover {
+  background-position: right center;
+  box-shadow: 0 8px 40px rgba(212, 175, 55, 0.4);
+}
+
+.btn-outline-gold {
+  @apply px-8 py-3.5 rounded-lg font-semibold transition-all duration-500;
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  color: #d4af37;
+  background: transparent;
+  letter-spacing: 0.05em;
+}
+
+.btn-outline-gold:hover {
+  border-color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+  transform: scale(1.05);
+}
+
+/* ═══════════════════════════════════════
+   TEXT EFFECTS
+   ═══════════════════════════════════════ */
+.text-gold-accent {
+  background: linear-gradient(135deg, #d4af37 0%, #e8c547 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-shadow-gold {
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.1);
+}
+
+.text-shadow-deep {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+/* ═══════════════════════════════════════
+   SECTION STYLING
+   ═══════════════════════════════════════ */
+section {
+  @apply scroll-mt-20;
+  position: relative;
+}
+
+.section-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-4xl md:text-5xl font-bold mb-4;
+  background: linear-gradient(135deg, #e8c547 0%, #d4af37 50%, #e8c547 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  @apply text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════ */
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-6xl md:text-8xl font-bold tracking-tight;
+}
+
+.hero-subtitle {
+  @apply text-lg md:text-2xl font-light tracking-widest;
+  color: rgba(232, 197, 71, 0.9);
+  letter-spacing: 0.3em;
+}
+
+.overlay-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 22, 40, 0.3) 0%,
+    rgba(5, 5, 5, 0.5) 40%,
+    rgba(5, 5, 5, 0.85) 100%
+  );
+}
+
+.hero-vignette {
+  box-shadow: inset 0 0 150px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Hero Swiper z-index fix */
+#home .swiper {
+  z-index: 0 !important;
+}
+
+/* Ken Burns effect for hero slides */
+.swiper-slide-active .hero-ken-burns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.15) translate(-2%, -1%); }
+}
+
+/* ═══════════════════════════════════════
+   PARALLAX
+   ═══════════════════════════════════════ */
+.parallax-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.parallax-bg::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(10, 22, 40, 0.5) 0%, transparent 70%),
+              radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 60%);
+}
+
+/* ═══════════════════════════════════════
+   CARD STYLING
+   ═══════════════════════════════════════ */
+.card {
+  @apply rounded-xl p-6 transition-all duration-500;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(17, 17, 17, 0.9) 100%);
+  border: 1px solid rgba(45, 45, 45, 0.5);
+}
+
+.card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   PORTFOLIO IMAGES
+   ═══════════════════════════════════════ */
+.portfolio-image-wrapper {
+  @apply relative overflow-hidden rounded-xl;
+  border: 1px solid rgba(45, 45, 45, 0.3);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-image-wrapper:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+.portfolio-image-wrapper img {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-image-wrapper:hover img {
+  transform: scale(1.12);
+}
+
+/* ═══════════════════════════════════════
+   MASONRY GRID
+   ═══════════════════════════════════════ */
+.masonry-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 280px;
+  }
+  .masonry-grid .masonry-tall {
+    grid-row: span 2;
+  }
+  .masonry-grid .masonry-wide {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 260px;
+  }
+}
+
+/* ═══════════════════════════════════════
+   SPINNER / LOADING
+   ═══════════════════════════════════════ */
+.spinner {
+  border: 3px solid rgba(212, 175, 55, 0.2);
+  border-radius: 50%;
+  border-top: 3px solid #d4af37;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════ */
+.underline-animation {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-animation::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #d4af37, #e8c547);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.underline-animation:hover::after {
+  width: 100%;
+}
+
+.floating-nav {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-nav.scrolled {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ═══════════════════════════════════════
+   SWIPER OVERRIDES
+   ═══════════════════════════════════════ */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #d4af37 !important;
+  background: rgba(5, 5, 5, 0.6);
+  backdrop-filter: blur(10px);
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(212, 175, 55, 0.4) !important;
+  width: 10px !important;
+  height: 10px !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: #d4af37 !important;
+  width: 28px !important;
+  border-radius: 5px !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-poppins font-bold tracking-tight;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+}
+
+p {
+  @apply text-gray-300 leading-relaxed;
+}
+
+a {
+  @apply text-gold hover:text-gold-light transition-colors duration-300;
+}
+
+/* ═══════════════════════════════════════
+   FORM INPUTS
+   ═══════════════════════════════════════ */
+input, textarea {
+  @apply rounded-xl px-5 py-3.5 text-gray-100 placeholder-gray-500;
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid rgba(45, 45, 45, 0.5);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.1), inset 0 0 20px rgba(212, 175, 55, 0.02);
+  background: rgba(26, 26, 26, 0.95);
+}
+
+/* ═══════════════════════════════════════
+   SELECTION & MISC
+   ═══════════════════════════════════════ */
+::selection {
+  @apply bg-gold text-dark-bg;
+}
+
+::-moz-selection {
+  @apply bg-gold text-dark-bg;
+}
+
+/* Social icon glow */
+.social-glow {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-glow:hover {
+  filter: drop-shadow(0 0 15px currentColor);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 640px) {
+  .hero-title {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  .masonry-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .masonry-grid .masonry-tall,
+  .masonry-grid .masonry-wide {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+}
+
+/* ═══════════════════════════════════════
+   GLIGHTBOX — FULLSCREEN MODERN VIEWER
+   ═══════════════════════════════════════ */
+
+/* Force the lightbox container to be a true fullscreen fixed overlay */
+.glightbox-container {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  background: rgba(0, 0, 0, 0.97) !important;
+}
+
+/* Full dark overlay backdrop */
+.goverlay {
+  background: rgba(0, 0, 0, 0.97) !important;
+}
+
+/* CRITICAL: Hide the description/info panel that causes white space */
+.gslide-description,
+.gdesc-inner,
+.gslide-desc,
+.gslide-title,
+.gdesc-open {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Remove any default white backgrounds */
+.gslide,
+.gslide-inner-content,
+.ginner-container,
+.gslide-media {
+  background: transparent !important;
+}
+
+/* Make the slide container fill the full viewport and center image */
+.gslide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+/* Inner container — remove max-width so image can fill */
+.ginner-container {
+  max-width: 100vw !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Slide inner content — full size */
+.gslide-inner-content {
+  width: 100% !important;
+  max-width: 100vw !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Image wrapper — center and fill viewport */
+.gslide-image {
+  max-width: 95vw !important;
+  max-height: 95vh !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  margin: 0 auto !important;
+}
+
+/* Image itself — responsive fill with nice styling */
+.gslide-image img {
+  max-width: 94vw !important;
+  max-height: 92vh !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 6px !important;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8),
+              0 0 1px rgba(212, 175, 55, 0.2) !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+/* Close button — circular dark glass */
+.glightbox-clean .gclose,
+.gclose {
+  background: rgba(5, 5, 5, 0.85) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  border-radius: 50% !important;
+  width: 46px !important;
+  height: 46px !important;
+  top: 20px !important;
+  right: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  transition: all 0.3s ease !important;
+  opacity: 0.85 !important;
+  z-index: 999999 !important;
+}
+
+.glightbox-clean .gclose:hover,
+.gclose:hover {
+  background: rgba(212, 175, 55, 0.2) !important;
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  opacity: 1 !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25) !important;
+}
+
+.gclose svg,
+.gclose path {
+  fill: #d4af37 !important;
+}
+
+/* Navigation arrows — modern circular */
+.glightbox-clean .gnext,
+.glightbox-clean .gprev,
+.gnext,
+.gprev {
+  background: rgba(5, 5, 5, 0.85) !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  border-radius: 50% !important;
+  width: 52px !important;
+  height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  transition: all 0.3s ease !important;
+  opacity: 0.75 !important;
+  z-index: 999999 !important;
+}
+
+.glightbox-clean .gnext:hover,
+.glightbox-clean .gprev:hover,
+.gnext:hover,
+.gprev:hover {
+  background: rgba(212, 175, 55, 0.15) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+  opacity: 1 !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2) !important;
+}
+
+.gnext svg,
+.gprev svg,
+.gnext path,
+.gprev path {
+  fill: #d4af37 !important;
+}
+
+/* Hide scrollbar when lightbox is open */
+.glightbox-open {
+  overflow: hidden !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .gslide-image img {
+    max-width: 98vw !important;
+    max-height: 88vh !important;
+    border-radius: 4px !important;
+  }
+
+  .glightbox-clean .gclose,
+  .gclose {
+    top: 12px !important;
+    right: 12px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .glightbox-clean .gnext,
+  .glightbox-clean .gprev,
+  .gnext,
+  .gprev {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}

@@ -1,0 +1,113 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'dark-bg': '#050505',
+        'dark-900': '#0a0a0a',
+        'dark-800': '#1a1a1a',
+        'dark-700': '#2d2d2d',
+        'dark-600': '#3d3d3d',
+        'charcoal': '#3d3d3d',
+        'gold': '#d4af37',
+        'gold-light': '#e8c547',
+        'gold-dark': '#b8941f',
+        'gold-muted': '#a08930',
+        'deep-blue': '#0a1628',
+        'deep-blue-light': '#1a2a4a',
+        'deep-blue-accent': '#2a3a5a',
+        'midnight': '#0d1117',
+      },
+      backgroundImage: {
+        'gradient-gold': 'linear-gradient(135deg, #d4af37 0%, #e8c547 100%)',
+        'gradient-gold-dark': 'linear-gradient(135deg, #b8941f 0%, #d4af37 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
+        'gradient-glass': 'linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(232, 197, 71, 0.05) 100%)',
+        'gradient-cinematic': 'linear-gradient(180deg, #0a0a0a 0%, #0a1628 50%, #0a0a0a 100%)',
+        'gradient-hero': 'linear-gradient(135deg, rgba(10,22,40,0.9) 0%, rgba(10,10,10,0.85) 50%, rgba(10,22,40,0.9) 100%)',
+        'gradient-section': 'linear-gradient(180deg, rgba(10,10,10,1) 0%, rgba(10,22,40,0.3) 50%, rgba(10,10,10,1) 100%)',
+      },
+      boxShadow: {
+        'glass': '0 8px 32px 0 rgba(212, 175, 55, 0.1)',
+        'glass-hover': '0 8px 32px 0 rgba(212, 175, 55, 0.25)',
+        'gold-glow': '0 0 20px rgba(212, 175, 55, 0.3)',
+        'gold-glow-lg': '0 0 40px rgba(212, 175, 55, 0.4)',
+        'gold-glow-xl': '0 0 60px rgba(212, 175, 55, 0.3), 0 0 120px rgba(212, 175, 55, 0.1)',
+        'card-hover': '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.15)',
+        'deep-shadow': '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+      },
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
+        'poppins': ['Poppins', 'sans-serif'],
+        'playfair': ['"Playfair Display"', 'serif'],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.6s ease-in-out',
+        'fade-in-up': 'fadeInUp 0.8s ease-out',
+        'slide-in-left': 'slideInLeft 0.8s ease-out',
+        'slide-in-right': 'slideInRight 0.8s ease-out',
+        'pulse-gold': 'pulseGold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float': 'float 3s ease-in-out infinite',
+        'shimmer': 'shimmer 3s ease-in-out infinite',
+        'glow-pulse': 'glowPulse 2s ease-in-out infinite',
+        'ken-burns': 'kenBurns 20s ease-in-out infinite alternate',
+        'spin-slow': 'spin 3s linear infinite',
+        'loader-fade': 'loaderFade 0.8s ease-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-40px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(40px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        pulseGold: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(212, 175, 55, 0.7)' },
+          '50%': { boxShadow: '0 0 0 10px rgba(212, 175, 55, 0)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        glowPulse: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
+        kenBurns: {
+          '0%': { transform: 'scale(1) translate(0, 0)' },
+          '100%': { transform: 'scale(1.1) translate(-2%, -1%)' },
+        },
+        loaderFade: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0', visibility: 'hidden' },
+        },
+      },
+      backdropBlur: {
+        'xs': '2px',
+      },
+      transitionDuration: {
+        '2000': '2000ms',
+        '3000': '3000ms',
+      },
+    },
+  },
+  plugins: [],
+}
