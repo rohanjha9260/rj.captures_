@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
+import { FiSettings } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
+import SettingsPanel from './SettingsPanel'
 
 const Navbar = ({ isScrolled }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -72,7 +75,7 @@ const Navbar = ({ isScrolled }) => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-2">
+              <div className="ml-10 flex items-center space-x-2">
                 {navLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
@@ -87,11 +90,31 @@ const Navbar = ({ isScrolled }) => {
                     {link.name}
                   </motion.a>
                 ))}
+                
+                {/* Settings Button */}
+                <motion.button
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: navLinks.length * 0.1 }}
+                  onClick={() => setIsSettingsOpen(true)}
+                  className="ml-4 p-2 rounded-full text-gray-300 hover:text-gold hover:bg-gold/10 transition-all duration-300"
+                  aria-label="Settings"
+                >
+                  <FiSettings className="w-5 h-5" />
+                </motion.button>
               </div>
             </div>
 
-            {/* Mobile menu button — modern hamburger */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile menu buttons */}
+            <div className="md:hidden flex items-center space-x-4">
+              <motion.button
+                onClick={() => setIsSettingsOpen(true)}
+                className="p-2 text-gold hover:text-gold-light transition-colors"
+                aria-label="Settings"
+              >
+                <FiSettings className="w-5 h-5" />
+              </motion.button>
+              
               <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative w-10 h-10 flex items-center justify-center rounded-lg border border-gold/20 hover:border-gold/40 transition-all duration-300"
@@ -184,6 +207,8 @@ const Navbar = ({ isScrolled }) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <SettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   )
 }

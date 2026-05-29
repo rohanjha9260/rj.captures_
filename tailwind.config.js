@@ -7,7 +7,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#050505',
+        'theme-bg': 'var(--color-bg-primary)',
+        'theme-bg-sec': 'var(--color-bg-secondary)',
+        'theme-card': 'var(--color-bg-card)',
+        'theme-card-hover': 'var(--color-bg-card-hover)',
+        'theme-text': 'var(--color-text-primary)',
+        'theme-text-sec': 'var(--color-text-secondary)',
+        'theme-text-muted': 'var(--color-text-muted)',
+        'theme-border': 'var(--color-border)',
+        'theme-border-hover': 'var(--color-border-hover)',
+        'theme-nav': 'var(--color-nav-bg)',
+        gray: {
+          100: 'var(--color-text-primary)',
+          200: 'var(--color-text-primary)',
+          300: 'var(--color-text-secondary)',
+          400: 'var(--color-text-secondary)',
+          500: 'var(--color-text-muted)',
+          600: 'var(--color-text-muted)',
+          800: 'var(--color-bg-card)',
+          900: 'var(--color-bg-primary)',
+        },
+        'dark-bg': 'var(--color-bg-primary)',
         'dark-900': '#0a0a0a',
         'dark-800': '#1a1a1a',
         'dark-700': '#2d2d2d',

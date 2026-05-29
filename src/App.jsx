@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import FilmStrip from './components/FilmStrip'
 import PortfolioCarousel from './components/PortfolioCarousel'
 import FeaturedWork from './components/FeaturedWork'
 import SocialLinks from './components/SocialLinks'
@@ -48,11 +49,14 @@ function App() {
         )}
       </AnimatePresence>
 
-      <div className="w-full min-h-screen bg-dark-bg text-gray-100">
+      <div className="w-full min-h-screen">
         <Navbar isScrolled={isScrolled} />
 
         {/* Hero Section */}
         <Hero />
+
+        {/* Infinite Film Strip */}
+        <FilmStrip />
 
         {/* About Section */}
         <About />
