@@ -25,24 +25,18 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
   const generateImages = () => {
     const baseImages = {
       nature: [
-        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1488714614849-e4c9b23c3b63?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1518173946687-a8c8ff4964e6?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=800&h=600&fit=crop&q=80',
+        '/images/nature/IMG_20260228_172521.jpg',
+        '/images/nature/IMG_20260304_081602.jpg',
+        '/images/nature/IMG_20260304_165317.jpg',
+        '/images/nature/IMG_20260307_182107.jpg',
+        '/images/nature/IMG_20260310_125032~2.jpg',
+        '/images/nature/IMG_20260310_125041.jpg',
       ],
       sky: [
-        'https://images.unsplash.com/photo-1495954484750-af469f1dabb6?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1482228172698-27d1dd19ffc6?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1500375592092-40eb0e7dd5e8?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1517483000871-1dbf64a6e1c6?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=800&h=600&fit=crop&q=80',
+        '/images/sky/IMG-20240825-WA0037.jpg',
+        '/images/sky/IMG_20250730_161227.jpg',
+        '/images/sky/IMG_20250928_125653.jpg',
+        '/images/sky/IMG_20260511_182543.jpg',
       ],
       village: [
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop&q=80',
@@ -65,14 +59,10 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
         'https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&h=600&fit=crop&q=80',
       ],
       portrait: [
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1506277886041-6fcd4ecd57ab?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&h=600&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=600&fit=crop&q=80',
+        '/images/portrait/IMG_20260104_141749.jpg',
+        '/images/portrait/IMG_20260218_130129.jpg',
+        '/images/portrait/IMG_20260405_132005.jpg',
+        '/images/portrait/IMG_20260522_203539.jpg',
       ],
     }
     return baseImages[category] || baseImages.nature
