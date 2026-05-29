@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import FilmStrip from './components/FilmStrip'
 import PortfolioCarousel from './components/PortfolioCarousel'
 import FeaturedWork from './components/FeaturedWork'
 import SocialLinks from './components/SocialLinks'
@@ -53,6 +54,9 @@ function App() {
 
         {/* Hero Section */}
         <Hero />
+
+        {/* Infinite Film Strip */}
+        <FilmStrip />
 
         {/* About Section */}
         <About />
