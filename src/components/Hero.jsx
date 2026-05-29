@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiInstagram, FiSun, FiMoon } from 'react-icons/fi'
+import { FiInstagram } from 'react-icons/fi'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade } from 'swiper/modules'
+import { useTheme } from '../context/ThemeContext'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 
 const Hero = () => {
-  const [isNightMode, setIsNightMode] = useState(false)
+  const { theme } = useTheme()
+  const isNightMode = theme !== 'day'
 
   const scrollToPortfolio = () => {
     document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
@@ -95,38 +97,6 @@ const Hero = () => {
       <div className="absolute top-1/4 left-8 w-px h-32 bg-gradient-to-b from-transparent via-gold/20 to-transparent hidden lg:block pointer-events-none" style={{ zIndex: 3 }} />
       <div className="absolute top-1/3 right-8 w-px h-24 bg-gradient-to-b from-transparent via-gold/20 to-transparent hidden lg:block pointer-events-none" style={{ zIndex: 3 }} />
 
-      {/* Day/Night Toggle Button */}
-      <div className="absolute top-24 right-8 lg:top-32 lg:right-12" style={{ zIndex: 20 }}>
-        <button
-          onClick={() => setIsNightMode(!isNightMode)}
-          className="group relative flex items-center justify-center w-12 h-12 rounded-full border border-gold/30 bg-dark-bg/40 backdrop-blur-md hover:bg-gold/10 hover:border-gold/60 transition-all duration-300 overflow-hidden cursor-pointer"
-          aria-label="Toggle Day/Night Mode"
-        >
-          <AnimatePresence mode="wait">
-            {isNightMode ? (
-              <motion.div
-                key="moon"
-                initial={{ y: 20, opacity: 0, rotate: -45 }}
-                animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: -20, opacity: 0, rotate: 45 }}
-                transition={{ duration: 0.4 }}
-              >
-                <FiMoon className="text-gold w-5 h-5" />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="sun"
-                initial={{ y: 20, opacity: 0, rotate: -45 }}
-                animate={{ y: 0, opacity: 1, rotate: 0 }}
-                exit={{ y: -20, opacity: 0, rotate: 45 }}
-                transition={{ duration: 0.4 }}
-              >
-                <FiSun className="text-gold w-5 h-5" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </button>
-      </div>
 
       {/* Layer 4: Main Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center pointer-events-none" style={{ zIndex: 10 }}>

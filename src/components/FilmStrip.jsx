@@ -46,6 +46,7 @@ const FilmStrip = () => {
       {/* Scrolling Container */}
       <motion.div
         className="flex gap-2 min-w-max px-2"
+        style={{ willChange: 'transform' }}
         animate={{
           x: ['0%', '-50%'],
         }}
@@ -64,6 +65,8 @@ const FilmStrip = () => {
               src={image}
               alt={`Film strip item ${index}`}
               className="w-full h-full object-cover filter grayscale-[30%] contrast-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+              loading="lazy"
+              decoding="async"
             />
             {/* Inner vignette per image */}
             <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] pointer-events-none" />

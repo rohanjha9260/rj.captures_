@@ -21,49 +21,53 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
     setViewerOpen(true)
   }
 
-  // Generate images for each category
-  const generateImages = () => {
-    const baseImages = {
-      nature: [
-        '/images/nature/IMG_20260228_172521.jpg',
-        '/images/nature/IMG_20260304_081602.jpg',
-        '/images/nature/IMG_20260304_165317.jpg',
-        '/images/nature/IMG_20260307_182107.jpg',
-        '/images/nature/IMG_20260310_125032~2.jpg',
-        '/images/nature/IMG_20260310_125041.jpg',
-      ],
-      sky: [
-        '/images/sky/IMG-20240825-WA0037.jpg',
-        '/images/sky/IMG_20250730_161227.jpg',
-        '/images/sky/IMG_20250928_125653.jpg',
-        '/images/sky/IMG_20260511_182543.jpg',
-      ],
-      village: [
-        '/images/village/IMG20190727165427~2.jpg',
-        '/images/village/IMG_20220513_181151.jpg',
-        '/images/village/IMG_20230625_170128.jpg',
-        '/images/village/IMG_20250409_142547.jpg',
-        '/images/village/IMG_20250906_164119.jpg',
-      ],
-      travel: [
-        '/images/travel/IMG-20260129-WA0113.jpg',
-        '/images/travel/IMG_20241129_185851~2.jpg',
-        '/images/travel/IMG_20241201_162759~2.jpg',
-        '/images/travel/IMG_20250716_142310.jpg',
-        '/images/travel/IMG_20260127_210047.jpg',
-        '/images/travel/IMG_20260128_110708.jpg',
-      ],
-      portrait: [
-        '/images/portrait/IMG_20260104_141749.jpg',
-        '/images/portrait/IMG_20260218_130129.jpg',
-        '/images/portrait/IMG_20260405_132005.jpg',
-        '/images/portrait/IMG_20260522_203539.jpg',
-      ],
-    }
-    return baseImages[category] || baseImages.nature
+  // All available images for each category
+  const baseImages = {
+    nature: [
+      '/images/nature/IMG_20260228_172521.jpg',
+      '/images/nature/IMG_20260304_081602.jpg',
+      '/images/nature/IMG_20260304_165317.jpg',
+      '/images/nature/IMG_20260307_182107.jpg',
+      '/images/nature/IMG_20260310_125032~2.jpg',
+      '/images/nature/IMG_20260310_125041.jpg',
+    ],
+    sky: [
+      '/images/sky/IMG-20240825-WA0037.jpg',
+      '/images/sky/IMG_20250730_161227.jpg',
+      '/images/sky/IMG_20250928_125653.jpg',
+      '/images/sky/IMG_20260511_182543.jpg',
+    ],
+    village: [
+      '/images/village/IMG20190727165427~2.jpg',
+      '/images/village/IMG_20220513_181151.jpg',
+      '/images/village/IMG_20230625_170128.jpg',
+      '/images/village/IMG_20250409_142547.jpg',
+      '/images/village/IMG_20250906_164119.jpg',
+    ],
+    travel: [
+      '/images/travel/IMG-20260129-WA0113.jpg',
+      '/images/travel/IMG_20241129_185851~2.jpg',
+      '/images/travel/IMG_20241201_162759~2.jpg',
+      '/images/travel/IMG_20250716_142310.jpg',
+      '/images/travel/IMG_20260127_210047.jpg',
+      '/images/travel/IMG_20260128_110708.jpg',
+    ],
+    portrait: [
+      '/images/portrait/IMG_20260104_141749.jpg',
+      '/images/portrait/IMG_20260218_130129.jpg',
+      '/images/portrait/IMG_20260405_132005.jpg',
+      '/images/portrait/IMG_20260522_203539.jpg',
+    ],
   }
 
-  const images = generateImages()
+  // Pick up to 8 random images on first load so they don't re-shuffle on every render
+  const [images] = useState(() => {
+    const categoryImages = baseImages[category] || baseImages.nature;
+    // Shuffle the array using sort and Math.random()
+    const shuffled = [...categoryImages].sort(() => 0.5 - Math.random());
+    // Take exactly the first 8 (or fewer if the array is smaller)
+    return shuffled.slice(0, 8);
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -130,7 +134,7 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
             spaceBetween={20}
             breakpoints={{
               640: { slidesPerView: 2, spaceBetween: 20 },
-              1024: { slidesPerView: 3, spaceBetween: 24 },
+              1024: { slidesPerView: 4, spaceBetween: 24 },
             }}
             className="portfolio-carousel pb-14"
           >
@@ -146,6 +150,7 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
                       alt={`${title} ${index + 1}`}
                       className="w-full h-64 md:h-80 object-cover"
                       loading="lazy"
+                      decoding="async"
                     />
 
                     {/* Hover overlay */}
