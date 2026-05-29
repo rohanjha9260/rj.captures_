@@ -31,7 +31,7 @@ const About = () => {
 
   const skills = [
     { name: 'Nature Photography', icon: FiCamera },
-    { name: 'Sky Photography', icon: FiSun },
+    { name: 'Microshot Photography', icon: FiSun },
     { name: 'Village Photography', icon: FiMapPin },
     { name: 'Travel Photography', icon: FiImage },
   ]
@@ -131,16 +131,12 @@ const About = () => {
 
             {/* CTA */}
             <motion.a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-              }}
+              href="mailto:rjcaptures.photography@gmail.com"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="btn-gold inline-block text-sm uppercase tracking-widest cursor-pointer"
             >
-              Let's Collaborate
+              Let's Connect
             </motion.a>
           </motion.div>
         </motion.div>

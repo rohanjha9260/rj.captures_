@@ -95,6 +95,54 @@ const FeaturedWork = () => {
       category: 'Featured',
       className: 'masonry-wide',
     },
+    {
+      src: '/images/featured/IMG_20241015_162056.jpg',
+      title: 'Urban Exploration',
+      category: 'Featured',
+      className: '',
+    },
+    {
+      src: '/images/featured/IMG_20250411_182007~2.jpg',
+      title: 'Serene Moments',
+      category: 'Featured',
+      className: 'masonry-tall',
+    },
+    {
+      src: '/images/featured/IMG_20250821_174734~2.jpg',
+      title: 'City Lights',
+      category: 'Featured',
+      className: '',
+    },
+    {
+      src: '/images/featured/IMG_20251001_204952.jpg',
+      title: 'Night Sky',
+      category: 'Featured',
+      className: 'masonry-wide',
+    },
+    {
+      src: '/images/featured/IMG_20260104_140737.jpg',
+      title: 'Winter Wonderland',
+      category: 'Featured',
+      className: 'masonry-tall',
+    },
+    {
+      src: '/images/featured/IMG_20260322_195857.jpg',
+      title: 'Spring Awakening',
+      category: 'Featured',
+      className: '',
+    },
+    {
+      src: '/images/featured/IMG_20260404_181712.jpg',
+      title: 'Cherry Blossoms',
+      category: 'Featured',
+      className: 'masonry-wide',
+    },
+    {
+      src: '/images/featured/IMG_20260403_164610.jpg',
+      title: 'Spring Day',
+      category: 'Featured',
+      className: '',
+    },
   ]
 
 

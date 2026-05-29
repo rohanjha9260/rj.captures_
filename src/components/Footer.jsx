@@ -1,13 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FiInstagram, FiYoutube, FiLinkedin, FiGithub } from 'react-icons/fi'
+import { FiInstagram, FiYoutube, FiTwitter, FiFacebook } from 'react-icons/fi'
 
 const Footer = () => {
   const socials = [
-    { icon: FiInstagram, url: 'https://instagram.com/rj.captures_', name: 'Instagram' },
+    { icon: FiInstagram, url: 'https://instagram.com/@rj.captures_', name: 'Instagram' },
     { icon: FiYoutube, url: 'https://youtube.com', name: 'YouTube' },
-    { icon: FiLinkedin, url: 'https://linkedin.com', name: 'LinkedIn' },
-    { icon: FiGithub, url: 'https://github.com', name: 'GitHub' },
+    { icon: FiTwitter, url: 'https://x.com', name: 'Twitter' },
+    { icon: FiFacebook, url: 'https://facebook.com', name: 'Facebook' },
   ]
 
   const quickLinks = [
@@ -105,8 +105,8 @@ const Footer = () => {
               <p className="text-gray-500 text-sm">
                 <span className="text-gray-400">Email:</span>
                 <br />
-                <a href="mailto:hello@rjcaptures.com" className="hover:text-gold transition-colors text-sm">
-                  hello@rjcaptures.com
+                <a href="mailto:rjcaptures.photography@gmail.com" className="hover:text-gold transition-colors text-sm">
+                  rjcaptures.photography@gmail.com
                 </a>
               </p>
               <p className="text-gray-500 text-sm">
