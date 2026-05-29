@@ -49,7 +49,7 @@ function App() {
         )}
       </AnimatePresence>
 
-      <div className="w-full min-h-screen bg-dark-bg text-gray-100">
+      <div className="w-full min-h-screen">
         <Navbar isScrolled={isScrolled} />
 
         {/* Hero Section */}
