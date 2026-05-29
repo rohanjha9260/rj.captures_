@@ -300,6 +300,7 @@ section {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: dense;
 }
 
 @media (min-width: 768px) {

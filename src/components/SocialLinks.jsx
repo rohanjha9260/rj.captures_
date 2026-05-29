@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../hooks/useInView'
-import { FiInstagram, FiYoutube, FiLinkedin, FiGithub } from 'react-icons/fi'
+import { FiInstagram, FiYoutube, FiTwitter, FiFacebook } from 'react-icons/fi'
 
 const SocialLinks = () => {
   const { ref, inView } = useInView({
@@ -25,17 +25,17 @@ const SocialLinks = () => {
       gradient: 'from-red-600 to-red-400',
     },
     {
-      name: 'LinkedIn',
-      icon: FiLinkedin,
-      url: 'https://linkedin.com',
-      color: '#0A66C2',
-      gradient: 'from-blue-600 to-blue-400',
+      name: 'Twitter',
+      icon: FiTwitter,
+      url: 'https://twitter.com/RjCaptures',
+      color: '#739328ff ',
+      gradient: 'from-gray-600 to-gray-400',
     },
     {
-      name: 'GitHub',
-      icon: FiGithub,
-      url: 'https://github.com',
-      color: '#FFFFFF',
+      name: 'Facebook',
+      icon: FiFacebook,
+      url: 'https://facebook.com/RjCaptures',
+      color: '#1877F2',
       gradient: 'from-gray-400 to-gray-200',
     },
   ]
