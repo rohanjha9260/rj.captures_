@@ -1,10 +1,87 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiX, FiMoon, FiSun, FiMonitor } from 'react-icons/fi';
+import { FiX, FiMoon, FiSun, FiCompass, FiDroplet, FiSunset } from 'react-icons/fi';
 import { useTheme } from '../context/ThemeContext';
 
 const SettingsPanel = ({ isOpen, onClose }) => {
   const { theme, setTheme } = useTheme();
+
+  const themesList = [
+    {
+      group: "Night Themes (Nature-Inspired)",
+      items: [
+        {
+          id: 'dark',
+          name: 'Golden Black',
+          desc: 'Cinematic deep black & gold',
+          icon: FiMoon,
+          accentColor: '#d4af37',
+          bgColor: '#050505'
+        },
+        {
+          id: 'forest-dark',
+          name: 'Forest Emerald',
+          desc: 'Deep woods & moss green',
+          icon: FiCompass,
+          accentColor: '#52b788',
+          bgColor: '#0b1a14'
+        },
+        {
+          id: 'ocean-dark',
+          name: 'Ocean Deep',
+          desc: 'Abyss blue & coastal teal',
+          icon: FiDroplet,
+          accentColor: '#4ea8de',
+          bgColor: '#031122'
+        },
+        {
+          id: 'autumn-dark',
+          name: 'Autumn Amber',
+          desc: 'Charcoal & terracotta rust',
+          icon: FiSunset,
+          accentColor: '#f39c12',
+          bgColor: '#180d07'
+        }
+      ]
+    },
+    {
+      group: "Day Themes (Nature-Inspired)",
+      items: [
+        {
+          id: 'day',
+          name: 'Golden Desert',
+          desc: 'Sunlit sand & gold accents',
+          icon: FiSun,
+          accentColor: '#d4af37',
+          bgColor: '#ffffff'
+        },
+        {
+          id: 'forest-light',
+          name: 'Forest Sage',
+          desc: 'Crisp morning mist & sage',
+          icon: FiCompass,
+          accentColor: '#2d6a4f',
+          bgColor: '#f4fcf7'
+        },
+        {
+          id: 'ocean-light',
+          name: 'Ocean Breeze',
+          desc: 'Clear sky blue & shore teal',
+          icon: FiDroplet,
+          accentColor: '#0077b6',
+          bgColor: '#f0f7ff'
+        },
+        {
+          id: 'autumn-light',
+          name: 'Autumn Gold',
+          desc: 'Crisp birch cream & maple rust',
+          icon: FiSunset,
+          accentColor: '#d35400',
+          bgColor: '#fffbf7'
+        }
+      ]
+    }
+  ];
 
   return (
     <AnimatePresence>
@@ -39,78 +116,51 @@ const SettingsPanel = ({ isOpen, onClose }) => {
             </div>
 
             {/* Content */}
-            <div className="p-6 flex-1 overflow-y-auto">
-              {/* Appearance Section */}
-              <div className="mb-8">
-                <h3 className="text-sm font-medium text-theme-text-muted uppercase tracking-wider mb-4">
-                  Appearance
-                </h3>
-                
-                <div className="space-y-3">
-                  {/* Dark (Black) Option */}
-                  <button
-                    onClick={() => setTheme('dark')}
-                    className={`w-full flex items-center p-4 rounded-xl border transition-all duration-300 ${
-                      theme === 'dark'
-                        ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(212,175,55,0.15)]'
-                        : 'border-theme-border hover:border-theme-border-hover bg-theme-bg'
-                    }`}
-                  >
-                    <div className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-gold/20 text-gold' : 'bg-black text-gray-400'}`}>
-                      <FiMoon className="w-5 h-5" />
-                    </div>
-                    <div className="ml-4 text-left">
-                      <p className={`font-medium ${theme === 'dark' ? 'text-gold' : 'text-theme-text'}`}>Dark Mode</p>
-                      <p className="text-xs text-theme-text-muted">Deep black background</p>
-                    </div>
-                    {theme === 'dark' && (
-                      <div className="ml-auto w-2 h-2 rounded-full bg-gold" />
-                    )}
-                  </button>
-
-                  {/* Dark Gray Option */}
-                  <button
-                    onClick={() => setTheme('dark-gray')}
-                    className={`w-full flex items-center p-4 rounded-xl border transition-all duration-300 ${
-                      theme === 'dark-gray'
-                        ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(212,175,55,0.15)]'
-                        : 'border-theme-border hover:border-theme-border-hover bg-theme-bg'
-                    }`}
-                  >
-                    <div className={`p-2 rounded-lg ${theme === 'dark-gray' ? 'bg-gold/20 text-gold' : 'bg-gray-800 text-gray-400'}`}>
-                      <FiMonitor className="w-5 h-5" />
-                    </div>
-                    <div className="ml-4 text-left">
-                      <p className={`font-medium ${theme === 'dark-gray' ? 'text-gold' : 'text-theme-text'}`}>Dark Gray</p>
-                      <p className="text-xs text-theme-text-muted">Softer contrast</p>
-                    </div>
-                    {theme === 'dark-gray' && (
-                      <div className="ml-auto w-2 h-2 rounded-full bg-gold" />
-                    )}
-                  </button>
-
-                  {/* Day Option */}
-                  <button
-                    onClick={() => setTheme('day')}
-                    className={`w-full flex items-center p-4 rounded-xl border transition-all duration-300 ${
-                      theme === 'day'
-                        ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(212,175,55,0.15)]'
-                        : 'border-theme-border hover:border-theme-border-hover bg-theme-bg'
-                    }`}
-                  >
-                    <div className={`p-2 rounded-lg ${theme === 'day' ? 'bg-gold/20 text-gold' : 'bg-gray-100 text-gray-600'}`}>
-                      <FiSun className="w-5 h-5" />
-                    </div>
-                    <div className="ml-4 text-left">
-                      <p className={`font-medium ${theme === 'day' ? 'text-gold' : 'text-theme-text'}`}>Day Mode</p>
-                      <p className="text-xs text-theme-text-muted">Clean white background</p>
-                    </div>
-                    {theme === 'day' && (
-                      <div className="ml-auto w-2 h-2 rounded-full bg-gold" />
-                    )}
-                  </button>
+            <div className="p-6 flex-1 overflow-y-auto space-y-8">
+              {themesList.map((group, groupIdx) => (
+                <div key={groupIdx}>
+                  <h3 className="text-xs font-semibold text-theme-text-muted uppercase tracking-wider mb-4">
+                    {group.group}
+                  </h3>
+                  
+                  <div className="space-y-3">
+                    {group.items.map((item) => {
+                      const IconComponent = item.icon;
+                      const isSelected = theme === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => setTheme(item.id)}
+                          className={`w-full flex items-center p-4 rounded-xl border transition-all duration-300 ${
+                            isSelected
+                              ? 'border-gold bg-gold/5 shadow-[0_0_15px_rgba(var(--color-gold-rgb),0.15)] scale-[1.02]'
+                              : 'border-theme-border hover:border-theme-border-hover bg-theme-bg hover:scale-[1.01]'
+                          }`}
+                        >
+                          <div 
+                            className="p-2 rounded-lg"
+                            style={{ 
+                              backgroundColor: isSelected ? 'rgba(var(--color-gold-rgb), 0.2)' : item.bgColor,
+                              color: isSelected ? 'var(--color-gold)' : item.accentColor 
+                            }}
+                          >
+                            <IconComponent className="w-5 h-5" />
+                          </div>
+                          <div className="ml-4 text-left">
+                            <p className={`font-semibold text-sm ${isSelected ? 'text-gold font-bold' : 'text-theme-text'}`}>
+                              {item.name}
+                            </p>
+                            <p className="text-xs text-theme-text-sec mt-0.5">{item.desc}</p>
+                          </div>
+                          {isSelected && (
+                            <div className="ml-auto w-2 h-2 rounded-full bg-gold animate-pulse" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
             
             {/* Footer */}
