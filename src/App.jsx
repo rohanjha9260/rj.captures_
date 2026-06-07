@@ -10,6 +10,7 @@ import SocialLinks from './components/SocialLinks'
 
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
+import ChatBot from './components/ChatBot'
 import './index.css'
 
 function App() {
@@ -112,6 +113,9 @@ function App() {
 
         {/* Back to Top Button */}
         <BackToTop />
+
+        {/* Photography AI Chatbot */}
+        <ChatBot />
       </div>
     </>
   )
