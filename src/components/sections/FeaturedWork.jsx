@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
-import ImageViewer from './ImageViewer'
+import { useInView } from '../../hooks/useInView'
+import ImageViewer from '../ui/ImageViewer'
 
 const FeaturedWork = () => {
   const [viewerOpen, setViewerOpen] = useState(false)
