@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
+import { useInView } from '../../hooks/useInView'
 import { HiCheckCircle, HiExclamationCircle } from 'react-icons/hi'
 import { FiMail, FiMapPin, FiClock, FiSend } from 'react-icons/fi'
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
 import { FiSettings } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
-import SettingsPanel from './SettingsPanel'
+import SettingsPanel from '../ui/SettingsPanel'
 
 const Navbar = ({ isScrolled }) => {
   const [isOpen, setIsOpen] = useState(false)
