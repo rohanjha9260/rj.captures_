@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FiX, FiSend, FiCamera } from 'react-icons/fi'
 import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2'
 
-const GEMINI_API_KEY = 'AIzaSyC6vXOV1GE493rTe648ZL0y9zoO6vgRZSA'
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY
 const GEMINI_API_URL =
   'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent'
 
@@ -65,6 +65,10 @@ const ChatBot = () => {
     setIsLoading(true)
 
     try {
+      if (!GEMINI_API_KEY) {
+        throw new Error('ChatBot is not configured. Missing VITE_GEMINI_API_KEY.')
+      }
+
       // Build a clean contents array.
       // Rules: must start with 'user', must alternate user/model, no empty parts.
       const history = []

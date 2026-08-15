@@ -50,11 +50,16 @@ rj-captures/
 # Install dependencies
 npm install
 
+# Create local env file from example and set your key
+cp .env.example .env.local
+
 # Start development server
 npm run dev
 
 # Open http://localhost:5173 in your browser
 ```
+
+Set `VITE_GEMINI_API_KEY` in `.env.local` before using the chatbot.
 
 ### Production Build
 
