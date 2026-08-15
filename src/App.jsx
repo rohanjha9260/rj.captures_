@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
@@ -10,26 +10,54 @@ import SocialLinks from './components/ui/SocialLinks'
 
 import Footer from './components/layout/Footer'
 import BackToTop from './components/ui/BackToTop'
-import ChatBot from './components/ui/ChatBot'
 import './index.css'
+
+const ChatBot = lazy(() => import('./components/ui/ChatBot'))
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [shouldMountChatBot, setShouldMountChatBot] = useState(false)
+  const scrollTickRef = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      if (scrollTickRef.current) return
+
+      scrollTickRef.current = true
+      window.requestAnimationFrame(() => {
+        scrollTickRef.current = false
+        setIsScrolled((previous) => {
+          const nextValue = window.scrollY > 50
+          return previous === nextValue ? previous : nextValue
+        })
+      })
     }
-    window.addEventListener('scroll', handleScroll)
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined
+
+    const mountChatBot = () => setShouldMountChatBot(true)
+
+    if (typeof window.requestIdleCallback === 'function') {
+      const idleId = window.requestIdleCallback(mountChatBot, { timeout: 2500 })
+      return () => window.cancelIdleCallback?.(idleId)
+    }
+
+    const timer = window.setTimeout(mountChatBot, 1600)
+    return () => window.clearTimeout(timer)
   }, [])
 
   // Loading screen
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 1800)
+    }, 900)
     return () => clearTimeout(timer)
   }, [])
 
@@ -41,7 +69,7 @@ function App() {
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.35 }}
             className="loading-screen"
           >
             <div className="loader-ring" />
@@ -115,7 +143,9 @@ function App() {
         <BackToTop />
 
         {/* Photography AI Chatbot */}
-        <ChatBot />
+        <Suspense fallback={null}>
+          {shouldMountChatBot && <ChatBot />}
+        </Suspense>
       </div>
     </>
   )
