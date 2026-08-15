@@ -3,9 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FiX, FiSend, FiCamera } from 'react-icons/fi'
 import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2'
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY
-const GEMINI_API_URL =
-  'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent'
+const CHATBOT_API_URL = '/api/chatbot'
 
 const SYSTEM_PROMPT = `You are a friendly and knowledgeable photography assistant for "RJ Captures" — a premium cinematic photography portfolio by Rohan Jha based in Delhi, India.
 
@@ -65,10 +63,6 @@ const ChatBot = () => {
     setIsLoading(true)
 
     try {
-      if (!GEMINI_API_KEY) {
-        throw new Error('ChatBot is not configured. Missing VITE_GEMINI_API_KEY.')
-      }
-
       // Build a clean contents array.
       // Rules: must start with 'user', must alternate user/model, no empty parts.
       const history = []
@@ -92,7 +86,7 @@ const ChatBot = () => {
         })
       }
 
-      const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      const response = await fetch(CHATBOT_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
