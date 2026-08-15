@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useInView } from '../hooks/useInView'
-import ImageViewer from './ImageViewer'
+import { useInView } from '../../hooks/useInView'
+import ImageViewer from '../ui/ImageViewer'
 
 const FeaturedWork = () => {
   const [viewerOpen, setViewerOpen] = useState(false)
@@ -18,127 +18,127 @@ const FeaturedWork = () => {
 
   const featuredImages = [
     {
-      src: '/images/featured/IMG_20260228_172521.jpg',
+      src: '/images/featured/IMG_20260228_172521.webp',
       title: 'Majestic Peaks',
       category: 'Nature',
       className: 'masonry-tall',
     },
     {
-      src: '/images/featured/IMG_20260304_081602.jpg',
+      src: '/images/featured/IMG_20260304_081602.webp',
       title: 'Green Horizons',
       category: 'Nature',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20260304_165317.jpg',
+      src: '/images/featured/IMG_20260304_165317.webp',
       title: 'Sunset Reflections',
       category: 'Nature',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20260307_182107.jpg',
+      src: '/images/featured/IMG_20260307_182107.webp',
       title: 'Mountain Paths',
       category: 'Nature',
       className: 'masonry-tall',
     },
     {
-      src: '/images/featured/IMG_20260310_125041.jpg',
+      src: '/images/featured/IMG_20260310_125041.webp',
       title: 'Scenic Vistas',
       category: 'Nature',
       className: 'masonry-wide',
     },
     {
-      src: '/images/featured/IMG-20240825-WA0037.jpg',
+      src: '/images/featured/IMG-20240825-WA0037.webp',
       title: 'Nature Palette',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20250730_161227.jpg',
+      src: '/images/featured/IMG_20250730_161227.webp',
       title: 'Summer Memories',
       category: 'Featured',
       className: 'masonry-tall',
     },
     {
-      src: '/images/featured/IMG_20250928_125653.jpg',
+      src: '/images/featured/IMG_20250928_125653.webp',
       title: 'Autumn Moments',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20260104_141749.jpg',
+      src: '/images/featured/IMG_20260104_141749.webp',
       title: 'Winter Whispers',
       category: 'Featured',
       className: 'masonry-wide',
     },
     {
-      src: '/images/featured/IMG_20260218_130129.jpg',
+      src: '/images/featured/IMG_20260218_130129.webp',
       title: 'Spring Blossoms',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20260405_132005.jpg',
+      src: '/images/featured/IMG_20260405_132005.webp',
       title: 'April Skies',
       category: 'Featured',
       className: 'masonry-tall',
     },
     {
-      src: '/images/featured/IMG_20260511_182543.jpg',
+      src: '/images/featured/IMG_20260511_182543.webp',
       title: 'May Breezes',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20260522_203539.jpg',
+      src: '/images/featured/IMG_20260522_203539.webp',
       title: 'Late Spring',
       category: 'Featured',
       className: 'masonry-wide',
     },
     {
-      src: '/images/featured/IMG_20241015_162056.jpg',
+      src: '/images/featured/IMG_20241015_162056.webp',
       title: 'Urban Exploration',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20250411_182007~2.jpg',
+      src: '/images/featured/IMG_20250411_182007~2.webp',
       title: 'Serene Moments',
       category: 'Featured',
       className: 'masonry-tall',
     },
     {
-      src: '/images/featured/IMG_20250821_174734~2.jpg',
+      src: '/images/featured/IMG_20250821_174734~2.webp',
       title: 'City Lights',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20251001_204952.jpg',
+      src: '/images/featured/IMG_20251001_204952.webp',
       title: 'Night Sky',
       category: 'Featured',
       className: 'masonry-wide',
     },
     {
-      src: '/images/featured/IMG_20260104_140737.jpg',
+      src: '/images/featured/IMG_20260104_140737.webp',
       title: 'Winter Wonderland',
       category: 'Featured',
       className: 'masonry-tall',
     },
     {
-      src: '/images/featured/IMG_20260322_195857.jpg',
+      src: '/images/featured/IMG_20260322_195857.webp',
       title: 'Spring Awakening',
       category: 'Featured',
       className: '',
     },
     {
-      src: '/images/featured/IMG_20260404_181712.jpg',
+      src: '/images/featured/IMG_20260404_181712.webp',
       title: 'Cherry Blossoms',
       category: 'Featured',
       className: 'masonry-wide',
     },
     {
-      src: '/images/featured/IMG_20260403_164610.jpg',
+      src: '/images/featured/IMG_20260403_164610.webp',
       title: 'Spring Day',
       category: 'Featured',
       className: '',

@@ -16,7 +16,6 @@
     --color-border: rgba(45, 45, 45, 0.5);
     --color-border-hover: rgba(45, 45, 45, 0.8);
     --color-nav-bg: rgba(5, 5, 5, 0.85);
-
     --color-gold: #d4af37;
     --color-gold-light: #e8c547;
     --color-gold-dark: #b8941f;
@@ -35,7 +34,6 @@
     --color-border: rgba(209, 213, 219, 1); /* gray-300 */
     --color-border-hover: rgba(156, 163, 175, 1); /* gray-400 */
     --color-nav-bg: rgba(255, 255, 255, 0.85);
-
     --color-gold: #d4af37;
     --color-gold-light: #e8c547;
     --color-gold-dark: #b8941f;
@@ -54,7 +52,6 @@
     --color-border: rgba(82, 183, 136, 0.2);
     --color-border-hover: rgba(82, 183, 136, 0.4);
     --color-nav-bg: rgba(11, 26, 20, 0.85);
-
     --color-gold: #52b788;
     --color-gold-light: #74c69d;
     --color-gold-dark: #40916c;
@@ -73,7 +70,6 @@
     --color-border: rgba(82, 183, 136, 0.3);
     --color-border-hover: rgba(82, 183, 136, 0.5);
     --color-nav-bg: rgba(244, 252, 247, 0.85);
-
     --color-gold: #2d6a4f;
     --color-gold-light: #40916c;
     --color-gold-dark: #1b4332;
@@ -92,7 +88,6 @@
     --color-border: rgba(78, 168, 222, 0.25);
     --color-border-hover: rgba(78, 168, 222, 0.45);
     --color-nav-bg: rgba(3, 17, 34, 0.85);
-
     --color-gold: #4ea8de;
     --color-gold-light: #56cfe1;
     --color-gold-dark: #5390d9;
@@ -111,7 +106,6 @@
     --color-border: rgba(0, 119, 182, 0.3);
     --color-border-hover: rgba(0, 119, 182, 0.5);
     --color-nav-bg: rgba(240, 247, 255, 0.85);
-
     --color-gold: #0077b6;
     --color-gold-light: #0096c7;
     --color-gold-dark: #03045e;
@@ -130,7 +124,6 @@
     --color-border: rgba(243, 156, 18, 0.25);
     --color-border-hover: rgba(243, 156, 18, 0.45);
     --color-nav-bg: rgba(24, 13, 7, 0.85);
-
     --color-gold: #f39c12;
     --color-gold-light: #f1c40f;
     --color-gold-dark: #d35400;
@@ -149,7 +142,6 @@
     --color-border: rgba(211, 84, 0, 0.3);
     --color-border-hover: rgba(211, 84, 0, 0.5);
     --color-nav-bg: rgba(255, 251, 247, 0.85);
-
     --color-gold: #d35400;
     --color-gold-light: #e67e22;
     --color-gold-dark: #ba3c00;
