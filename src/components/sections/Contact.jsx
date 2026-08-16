@@ -49,15 +49,61 @@ const Contact = () => {
     if (!validateForm()) return
 
     setIsSubmitting(true)
-    setTimeout(() => {
-      setStatus({
-        type: 'success',
-        message: "Thank you! Your message has been sent. I'll get back to you soon!",
+    setStatus(null)
+
+    const endpoint =
+      import.meta.env.VITE_CONTACT_FORM_ENDPOINT ||
+      (import.meta.env.VITE_WEB3FORMS_KEY
+        ? 'https://api.web3forms.com/submit'
+        : 'https://formspree.io/f/rjcaptures.photography@gmail.com')
+
+    try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        to_email: 'rjcaptures.photography@gmail.com',
+        subject: `New Client Inquiry from ${formData.name}`,
+        access_key: import.meta.env.VITE_WEB3FORMS_KEY || undefined,
+      }
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
       })
-      setFormData({ name: '', email: '', message: '' })
+
+      const data = await response.json().catch(() => ({}))
+
+      if (response.ok && data.success !== false) {
+        setStatus({
+          type: 'success',
+          message: "Thank you! Your message has been sent successfully. I'll get back to you soon!",
+        })
+        setFormData({ name: '', email: '', message: '' })
+        setTimeout(() => setStatus(null), 7000)
+      } else {
+        const errorMsg =
+          data.message ||
+          'Failed to send message. Please try again or email directly at rjcaptures.photography@gmail.com.'
+        setStatus({
+          type: 'error',
+          message: errorMsg,
+        })
+      }
+    } catch (err) {
+      console.error('Contact form submission error:', err)
+      setStatus({
+        type: 'error',
+        message:
+          'Network error while sending message. Please try again or email directly at rjcaptures.photography@gmail.com.',
+      })
+    } finally {
       setIsSubmitting(false)
-      setTimeout(() => setStatus(null), 5000)
-    }, 1500)
+    }
   }
 
   const containerVariants = {
@@ -81,8 +127,8 @@ const Contact = () => {
     {
       icon: FiMail,
       title: 'Email',
-      value: 'hello@rjcaptures.com',
-      href: 'mailto:hello@rjcaptures.com',
+      value: 'rjcaptures.photography@gmail.com',
+      href: 'mailto:rjcaptures.photography@gmail.com',
     },
     {
       icon: FiMapPin,
