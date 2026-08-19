@@ -18,17 +18,42 @@ function walkDir(dir) {
       const ext = path.extname(entry.name).toLowerCase();
       if (['.jpg', '.jpeg', '.png'].includes(ext)) {
         const outputPath = fullPath.replace(/\.[^.]+$/, '.webp');
-        // Skip if already up‑to‑date
+        const thumbOutputPath = fullPath.replace(/\.[^.]+$/, '-thumb.webp');
+        
+        let needsFull = true;
+        let needsThumb = true;
+
         if (fs.existsSync(outputPath)) {
           const srcStat = fs.statSync(fullPath);
           const outStat = fs.statSync(outputPath);
-          if (outStat.mtimeMs >= srcStat.mtimeMs) continue;
+          if (outStat.mtimeMs >= srcStat.mtimeMs) needsFull = false;
         }
-        sharp(fullPath)
-          .webp({ quality: 80 })
-          .toFile(outputPath)
-          .then(() => console.log(`Converted: ${fullPath} → ${outputPath}`))
-          .catch(err => console.error(`Error converting ${fullPath}:`, err));
+
+        if (fs.existsSync(thumbOutputPath)) {
+          const srcStat = fs.statSync(fullPath);
+          const outStat = fs.statSync(thumbOutputPath);
+          if (outStat.mtimeMs >= srcStat.mtimeMs) needsThumb = false;
+        }
+
+        if (!needsFull && !needsThumb) continue;
+
+        if (needsFull) {
+          sharp(fullPath)
+            .resize({ width: 1920, withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toFile(outputPath)
+            .then(() => console.log(`Converted: ${fullPath} → ${outputPath}`))
+            .catch(err => console.error(`Error converting ${fullPath} (full):`, err));
+        }
+
+        if (needsThumb) {
+          sharp(fullPath)
+            .resize({ width: 800, withoutEnlargement: true })
+            .webp({ quality: 80 })
+            .toFile(thumbOutputPath)
+            .then(() => console.log(`Converted: ${fullPath} → ${thumbOutputPath}`))
+            .catch(err => console.error(`Error converting ${fullPath} (thumb):`, err));
+        }
       }
     }
   }

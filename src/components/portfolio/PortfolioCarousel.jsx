@@ -24,39 +24,39 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
   // All available images for each category
   const baseImages = {
     nature: [
-      '/images/nature/IMG_20260228_172521.jpg',
-      '/images/nature/IMG_20260304_081602.jpg',
-      '/images/nature/IMG_20260304_165317.jpg',
-      '/images/nature/IMG_20260307_182107.jpg',
-      '/images/nature/IMG_20260310_125032~2.jpg',
-      '/images/nature/IMG_20260310_125041.jpg',
+      '/images/nature/IMG_20260228_172521.webp',
+      '/images/nature/IMG_20260304_081602.webp',
+      '/images/nature/IMG_20260304_165317.webp',
+      '/images/nature/IMG_20260307_182107.webp',
+      '/images/nature/IMG_20260310_125032~2.webp',
+      '/images/nature/IMG_20260310_125041.webp',
     ],
     sky: [
-      '/images/sky/IMG-20240825-WA0037.jpg',
-      '/images/sky/IMG_20250730_161227.jpg',
-      '/images/sky/IMG_20250928_125653.jpg',
-      '/images/sky/IMG_20260511_182543.jpg',
+      '/images/sky/IMG-20240825-WA0037.webp',
+      '/images/sky/IMG_20250730_161227.webp',
+      '/images/sky/IMG_20250928_125653.webp',
+      '/images/sky/IMG_20260511_182543.webp',
     ],
     village: [
-      '/images/village/IMG20190727165427~2.jpg',
-      '/images/village/IMG_20220513_181151.jpg',
-      '/images/village/IMG_20230625_170128.jpg',
-      '/images/village/IMG_20250409_142547.jpg',
-      '/images/village/IMG_20250906_164119.jpg',
+      '/images/village/IMG20190727165427~2.webp',
+      '/images/village/IMG_20220513_181151.webp',
+      '/images/village/IMG_20230625_170128.webp',
+      '/images/village/IMG_20250409_142547.webp',
+      '/images/village/IMG_20250906_164119.webp',
     ],
     travel: [
-      '/images/travel/IMG-20260129-WA0113.jpg',
-      '/images/travel/IMG_20241129_185851~2.jpg',
-      '/images/travel/IMG_20241201_162759~2.jpg',
-      '/images/travel/IMG_20250716_142310.jpg',
-      '/images/travel/IMG_20260127_210047.jpg',
-      '/images/travel/IMG_20260128_110708.jpg',
+      '/images/travel/IMG-20260129-WA0113.webp',
+      '/images/travel/IMG_20241129_185851~2.webp',
+      '/images/travel/IMG_20241201_162759~2.webp',
+      '/images/travel/IMG_20250716_142310.webp',
+      '/images/travel/IMG_20260127_210047.webp',
+      '/images/travel/IMG_20260128_110708.webp',
     ],
     portrait: [
-      '/images/portrait/IMG_20260104_141749.jpg',
-      '/images/portrait/IMG_20260218_130129.jpg',
-      '/images/portrait/IMG_20260405_132005.jpg',
-      '/images/portrait/IMG_20260522_203539.jpg',
+      '/images/portrait/IMG_20260104_141749.webp',
+      '/images/portrait/IMG_20260218_130129.webp',
+      '/images/portrait/IMG_20260405_132005.webp',
+      '/images/portrait/IMG_20260522_203539.webp',
     ],
   }
 
@@ -146,7 +146,7 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
                     className="portfolio-image-wrapper group block cursor-pointer"
                   >
                     <img
-                      src={image}
+                      src={image.replace('.webp', '-thumb.webp')}
                       alt={`${title} ${index + 1}`}
                       className="w-full h-64 md:h-80 object-cover"
                       loading="lazy"

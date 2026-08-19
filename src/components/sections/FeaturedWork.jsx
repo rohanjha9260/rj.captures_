@@ -218,7 +218,7 @@ const FeaturedWork = () => {
                 className="block relative w-full h-full cursor-pointer"
               >
                 <img
-                  src={image.src}
+                  src={image.src.replace('.webp', '-thumb.webp')}
                   alt={image.title}
                   className="w-full h-full object-cover"
                   loading="lazy"
