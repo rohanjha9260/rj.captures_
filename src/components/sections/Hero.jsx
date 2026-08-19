@@ -1,11 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiInstagram } from 'react-icons/fi'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, EffectFade } from 'swiper/modules'
 import { useTheme } from '../../context/ThemeContext'
-import 'swiper/css'
-import 'swiper/css/effect-fade'
 
 const Hero = () => {
   const { theme } = useTheme()
@@ -15,63 +11,16 @@ const Hero = () => {
     document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  // Day/Night pairs for the exact same scenes (or thematic equivalents)
-  const heroImages = [
-    {
-      day: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=80',
-      night: 'https://images.unsplash.com/photo-1507272931001-fc06c17e4f4d?w=1920&h=1080&fit=crop&q=80',
-    },
-    {
-      day: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920&h=1080&fit=crop&q=80',
-      night: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&h=1080&fit=crop&q=80',
-    },
-    {
-      day: 'https://images.unsplash.com/photo-1500534314263-e9e4e6c0b24e?w=1920&h=1080&fit=crop&q=80',
-      night: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1920&h=1080&fit=crop&q=80',
-    },
-    {
-      day: 'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?w=1920&h=1080&fit=crop&q=80',
-      night: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=1920&h=1080&fit=crop&q=80',
-    }
-  ]
 
   return (
     <section id="home" className="relative w-full h-screen overflow-hidden">
-      {/* Layer 1: Background Image Carousel */}
-      <div className="absolute inset-0" style={{ zIndex: 1 }}>
-        <Swiper
-          modules={[Autoplay, EffectFade]}
-          effect="fade"
-          loop={true}
-          speed={2000}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          className="w-full h-full"
-        >
-          {heroImages.map((imagePair, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative w-full h-full overflow-hidden bg-black">
-                {/* Day Image */}
-                <img
-                  src={imagePair.day}
-                  alt={`Cinematic landscape day ${index + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover hero-ken-burns"
-                />
-                {/* Night Image with Fade */}
-                <motion.img
-                  src={imagePair.night}
-                  alt={`Cinematic landscape night ${index + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover hero-ken-burns"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: isNightMode ? 1 : 0 }}
-                  transition={{ duration: 1.5, ease: 'easeInOut' }}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {/* Layer 1: Background Image */}
+      <div className="absolute inset-0 bg-black overflow-hidden" style={{ zIndex: 1 }}>
+        <img
+          src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920&h=1080&fit=crop&q=80"
+          alt="Cinematic landscape"
+          className="absolute inset-0 w-full h-full object-cover hero-ken-burns"
+        />
       </div>
 
       {/* Layer 2: Cinematic Overlays */}
