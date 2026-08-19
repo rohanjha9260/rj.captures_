@@ -17,30 +17,6 @@ const SettingsPanel = ({ isOpen, onClose }) => {
           icon: FiMoon,
           accentColor: '#d4af37',
           bgColor: '#050505'
-        },
-        {
-          id: 'forest-dark',
-          name: 'Forest Emerald',
-          desc: 'Deep woods & moss green',
-          icon: FiCompass,
-          accentColor: '#52b788',
-          bgColor: '#0b1a14'
-        },
-        {
-          id: 'ocean-dark',
-          name: 'Ocean Deep',
-          desc: 'Abyss blue & coastal teal',
-          icon: FiDroplet,
-          accentColor: '#4ea8de',
-          bgColor: '#031122'
-        },
-        {
-          id: 'autumn-dark',
-          name: 'Autumn Amber',
-          desc: 'Charcoal & terracotta rust',
-          icon: FiSunset,
-          accentColor: '#f39c12',
-          bgColor: '#180d07'
         }
       ]
     },
@@ -54,30 +30,6 @@ const SettingsPanel = ({ isOpen, onClose }) => {
           icon: FiSun,
           accentColor: '#d4af37',
           bgColor: '#ffffff'
-        },
-        {
-          id: 'forest-light',
-          name: 'Forest Sage',
-          desc: 'Crisp morning mist & sage',
-          icon: FiCompass,
-          accentColor: '#2d6a4f',
-          bgColor: '#f4fcf7'
-        },
-        {
-          id: 'ocean-light',
-          name: 'Ocean Breeze',
-          desc: 'Clear sky blue & shore teal',
-          icon: FiDroplet,
-          accentColor: '#0077b6',
-          bgColor: '#f0f7ff'
-        },
-        {
-          id: 'autumn-light',
-          name: 'Autumn Gold',
-          desc: 'Crisp birch cream & maple rust',
-          icon: FiSunset,
-          accentColor: '#d35400',
-          bgColor: '#fffbf7'
         }
       ]
     }
