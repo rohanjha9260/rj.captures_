@@ -162,9 +162,9 @@ const ChatBot = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-            className="w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl border border-gold/20 flex flex-col"
+            className="w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl border border-theme-border flex flex-col"
             style={{
-              background: 'linear-gradient(135deg, rgba(10,10,10,0.97) 0%, rgba(15,15,15,0.97) 100%)',
+              background: 'var(--color-bg-card)',
               backdropFilter: 'blur(24px)',
               maxHeight: '520px',
             }}
@@ -220,7 +220,7 @@ const ChatBot = () => {
                     className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                       msg.role === 'user'
                         ? 'text-black rounded-br-sm'
-                        : 'text-gray-200 bg-white/5 border border-white/8 rounded-bl-sm'
+                        : 'text-theme-text bg-theme-bg-sec border border-theme-border rounded-bl-sm'
                     }`}
                     style={
                       msg.role === 'user'
@@ -244,7 +244,7 @@ const ChatBot = () => {
                   >
                     <FiCamera className="w-3 h-3 text-black" />
                   </div>
-                  <div className="bg-white/5 border border-white/8 rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
+                  <div className="bg-theme-bg-sec border border-theme-border rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
                     {[0, 1, 2].map((i) => (
                       <motion.span
                         key={i}
@@ -276,7 +276,7 @@ const ChatBot = () => {
 
             {/* Input */}
             <div className="px-3 pb-3 pt-2 border-t border-white/5">
-              <div className="flex items-end gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2 focus-within:border-gold/30 transition-all duration-300">
+              <div className="flex items-end gap-2 bg-theme-bg-sec border border-theme-border rounded-xl px-3 py-2 focus-within:border-gold/30 transition-all duration-300">
                 <textarea
                   ref={inputRef}
                   value={inputText}
@@ -284,7 +284,7 @@ const ChatBot = () => {
                   onKeyDown={handleKeyDown}
                   placeholder="Ask about photography..."
                   rows={1}
-                  className="flex-1 bg-transparent text-sm text-gray-200 placeholder-gray-600 resize-none outline-none leading-relaxed py-0.5"
+                  className="flex-1 bg-transparent text-sm text-theme-text placeholder-theme-text-sec resize-none outline-none leading-relaxed py-0.5"
                   style={{ maxHeight: '80px' }}
                   disabled={isLoading}
                 />

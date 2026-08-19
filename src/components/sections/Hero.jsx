@@ -107,7 +107,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-6 pointer-events-auto"
         >
-          <span className="inline-block px-5 py-2 rounded-full border border-gold/30 text-gold/80 text-xs tracking-[0.3em] uppercase font-medium backdrop-blur-sm bg-dark-bg/20">
+          <span className="inline-block px-5 py-2 rounded-full border border-gold/30 text-gold/80 text-xs tracking-[0.3em] uppercase font-medium backdrop-blur-sm bg-black/20">
             Cinematic Photography
           </span>
         </motion.div>
@@ -168,7 +168,7 @@ const Hero = () => {
             href="https://instagram.com/rj.captures_"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-gold/20 hover:border-gold/50 bg-dark-bg/30 backdrop-blur-sm transition-all duration-400 group hover:bg-gold/10 cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-gold/20 hover:border-gold/50 bg-black/30 backdrop-blur-sm transition-all duration-400 group hover:bg-gold/10 cursor-pointer"
           >
             <FiInstagram className="w-4 h-4 text-gold group-hover:scale-110 transition-transform duration-300" />
             <span className="text-gold/90 text-sm tracking-wider font-medium group-hover:text-gold transition-colors duration-300">

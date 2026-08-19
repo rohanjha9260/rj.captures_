@@ -65,7 +65,7 @@ const Navbar = ({ isScrolled }) => {
                 className="flex items-center gap-3 group"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-gold flex items-center justify-center shadow-gold-glow group-hover:shadow-gold-glow-lg transition-all duration-500">
-                  <span className="text-dark-bg font-bold text-sm font-playfair">RJ</span>
+                  <span className="text-black font-bold text-sm font-playfair">RJ</span>
                 </div>
                 <span className="text-xl font-bold text-gold-accent font-playfair hidden sm:block">
                   RJ Captures
@@ -84,7 +84,9 @@ const Navbar = ({ isScrolled }) => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="underline-animation px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-gold transition-colors duration-300 tracking-wide uppercase"
+                    className={`underline-animation px-4 py-2 rounded-md text-sm font-medium tracking-wide uppercase transition-colors duration-300 ${
+                      isScrolled ? 'text-theme-text hover:text-gold' : 'text-white/90 hover:text-gold'
+                    }`}
                     style={{ letterSpacing: '0.1em' }}
                   >
                     {link.name}
@@ -97,7 +99,9 @@ const Navbar = ({ isScrolled }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: navLinks.length * 0.1 }}
                   onClick={() => setIsSettingsOpen(true)}
-                  className="ml-4 p-2 rounded-full text-gray-300 hover:text-gold hover:bg-gold/10 transition-all duration-300"
+                  className={`ml-4 p-2 rounded-full hover:bg-gold/10 transition-all duration-300 ${
+                    isScrolled ? 'text-theme-text hover:text-gold' : 'text-white/90 hover:text-gold'
+                  }`}
                   aria-label="Settings"
                 >
                   <FiSettings className="w-5 h-5" />
@@ -165,7 +169,7 @@ const Navbar = ({ isScrolled }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-dark-bg/95 backdrop-blur-xl"
+              className="absolute inset-0 bg-theme-bg/95 backdrop-blur-xl"
               onClick={() => setIsOpen(false)}
             />
 

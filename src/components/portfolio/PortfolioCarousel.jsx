@@ -154,7 +154,7 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
                     />
 
                     {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end">
                       <div className="w-full p-5 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-500">
                         <p className="text-gold-light font-playfair font-semibold text-lg">
                           {title}
