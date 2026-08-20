@@ -130,10 +130,10 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
             navigation
             pagination={{ clickable: true }}
             loop
-            slidesPerView={1}
-            spaceBetween={20}
+            slidesPerView={2}
+            spaceBetween={10}
             breakpoints={{
-              640: { slidesPerView: 2, spaceBetween: 20 },
+              640: { slidesPerView: 3, spaceBetween: 20 },
               1024: { slidesPerView: 4, spaceBetween: 24 },
             }}
             className="portfolio-carousel pb-14"
