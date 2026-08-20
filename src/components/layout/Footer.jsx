@@ -31,7 +31,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative bg-dark-900 border-t border-gold/5 pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-theme-bg-sec border-t border-theme-border pt-16 pb-8 px-4 sm:px-6 lg:px-8">
       {/* Subtle top glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
@@ -47,7 +47,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-gradient-gold flex items-center justify-center">
-                <span className="text-dark-bg font-bold text-xs font-playfair">RJ</span>
+                <span className="text-black font-bold text-xs font-playfair">RJ</span>
               </div>
               <span className="text-lg font-bold text-gold-accent font-playfair">
                 RJ Captures
@@ -119,7 +119,7 @@ const Footer = () => {
         </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-white/5 my-8" />
+        <div className="border-t border-theme-border my-8" />
 
         {/* Bottom Section */}
         <motion.div

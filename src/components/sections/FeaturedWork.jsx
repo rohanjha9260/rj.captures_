@@ -218,14 +218,14 @@ const FeaturedWork = () => {
                 className="block relative w-full h-full cursor-pointer"
               >
                 <img
-                  src={image.src}
+                  src={image.src.replace('.webp', '-thumb.webp')}
                   alt={image.title}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end">
                   <div className="p-5 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-500">
                     <span className="text-gold/60 text-xs tracking-[0.2em] uppercase">{image.category}</span>
                     <p className="text-white font-playfair font-semibold text-lg mt-1">{image.title}</p>

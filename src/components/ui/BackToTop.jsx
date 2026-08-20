@@ -44,7 +44,7 @@ const BackToTop = () => {
           <div className="absolute inset-0 bg-gradient-gold rounded-full blur-xl opacity-50"></div>
 
           {/* Button */}
-          <div className="relative w-14 h-14 rounded-full bg-gradient-gold text-dark-bg flex items-center justify-center shadow-lg hover:shadow-gold-lg transition-all duration-300 hover:scale-110">
+          <div className="relative w-14 h-14 rounded-full bg-gradient-gold text-black flex items-center justify-center shadow-lg hover:shadow-gold-lg transition-all duration-300 hover:scale-110">
             <HiArrowUp className="w-6 h-6 font-bold" />
           </div>
         </motion.button>
