@@ -5,14 +5,15 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
-  // Check local storage or default to 'dark'
+  // Check sessionStorage or default to 'dark'
+  // When someone opens the link in a new tab/session, it will always default to 'dark'
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('app-theme') || 'dark'; // 'dark', 'dark-gray', 'day'
+    return sessionStorage.getItem('app-theme') || 'dark';
   });
 
   useEffect(() => {
-    // Save to local storage
-    localStorage.setItem('app-theme', theme);
+    // Save to session storage for the current session only
+    sessionStorage.setItem('app-theme', theme);
     
     // Update the document root attribute for CSS variables
     if (theme === 'dark') {
