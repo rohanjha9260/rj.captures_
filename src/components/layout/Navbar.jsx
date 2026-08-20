@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
-import { FiSettings } from 'react-icons/fi'
+import { FiSun, FiMoon } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
-import SettingsPanel from '../ui/SettingsPanel'
+import { useTheme } from '../../context/ThemeContext'
 
 const Navbar = ({ isScrolled }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -93,18 +93,18 @@ const Navbar = ({ isScrolled }) => {
                   </motion.a>
                 ))}
                 
-                {/* Settings Button */}
+                {/* Theme Toggle Button */}
                 <motion.button
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: navLinks.length * 0.1 }}
-                  onClick={() => setIsSettingsOpen(true)}
+                  onClick={() => setTheme(theme === 'dark' ? 'day' : 'dark')}
                   className={`ml-4 p-2 rounded-full hover:bg-gold/10 transition-all duration-300 ${
                     isScrolled ? 'text-theme-text hover:text-gold' : 'text-white/90 hover:text-gold'
                   }`}
-                  aria-label="Settings"
+                  aria-label="Toggle theme"
                 >
-                  <FiSettings className="w-5 h-5" />
+                  {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
                 </motion.button>
               </div>
             </div>
@@ -112,11 +112,11 @@ const Navbar = ({ isScrolled }) => {
             {/* Mobile menu buttons */}
             <div className="md:hidden flex items-center space-x-4">
               <motion.button
-                onClick={() => setIsSettingsOpen(true)}
+                onClick={() => setTheme(theme === 'dark' ? 'day' : 'dark')}
                 className="p-2 text-gold hover:text-gold-light transition-colors"
-                aria-label="Settings"
+                aria-label="Toggle theme"
               >
-                <FiSettings className="w-5 h-5" />
+                {theme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
               </motion.button>
               
               <motion.button
@@ -203,7 +203,7 @@ const Navbar = ({ isScrolled }) => {
                 className="mt-12"
               >
                 <div className="section-divider mb-4" />
-                <p className="text-gold/50 text-sm tracking-widest uppercase">
+                <p className="text-gold/50 text-sm tracking-widest uppercase text-center">
                   Capturing Nature, Sky & Village Stories
                 </p>
               </motion.div>
@@ -212,7 +212,7 @@ const Navbar = ({ isScrolled }) => {
         )}
       </AnimatePresence>
 
-      <SettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+      {/* Removed SettingsPanel */}
     </>
   )
 }

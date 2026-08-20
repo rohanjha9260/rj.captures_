@@ -26,13 +26,13 @@ const Hero = () => {
       {/* Layer 2: Cinematic Overlays */}
       <div className="absolute inset-0 overlay-gradient pointer-events-none" style={{ zIndex: 2 }} />
       <div className="absolute inset-0 hero-vignette pointer-events-none" style={{ zIndex: 2 }} />
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-deep-blue/30 via-transparent to-deep-blue/30 pointer-events-none" 
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-deep-blue/30 via-transparent to-deep-blue/30 pointer-events-none"
         style={{ zIndex: 2 }}
         animate={{ opacity: isNightMode ? 0.6 : 0.3 }}
         transition={{ duration: 1.5 }}
       />
-      
+
       {/* Night specific overlay to darken the scene slightly more */}
       <motion.div
         className="absolute inset-0 bg-black/40 pointer-events-none"
@@ -56,7 +56,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-6 pointer-events-auto"
         >
-          <span className="inline-block px-5 py-2 rounded-full border border-gold/30 text-gold/80 text-xs tracking-[0.3em] uppercase font-medium backdrop-blur-sm bg-black/20">
+          <span className="inline-block px-6 py-2.5 rounded-full border border-gold/20 text-xs tracking-[0.3em] uppercase font-bold backdrop-blur-[2px] bg-black/50" style={{ color: '#d4af37' }}>
             Cinematic Photography
           </span>
         </motion.div>
