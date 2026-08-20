@@ -4,10 +4,10 @@ import { FiInstagram, FiYoutube, FiTwitter, FiFacebook } from 'react-icons/fi'
 
 const Footer = () => {
   const socials = [
-    { icon: FiInstagram, url: 'https://instagram.com/@rj.captures_', name: 'Instagram' },
-    { icon: FiYoutube, url: 'https://youtube.com', name: 'YouTube' },
-    { icon: FiTwitter, url: 'https://x.com', name: 'Twitter' },
-    { icon: FiFacebook, url: 'https://facebook.com', name: 'Facebook' },
+    { icon: FiInstagram, url: 'https://instagram.com/rj.captures_', name: 'Instagram' },
+    { icon: FiYoutube, url: 'https://youtube.com/@rohanjha9260?si=uY4cwqZbCVowMrln', name: 'YouTube' },
+    { icon: FiTwitter, url: 'https://x.com/rjcaptures_', name: 'Twitter' },
+    { icon: FiFacebook, url: 'https://www.facebook.com/profile.php?id=61574357384042', name: 'Facebook' },
   ]
 
   const quickLinks = [

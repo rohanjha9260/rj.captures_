@@ -4,23 +4,186 @@ import { FiX, FiSend, FiCamera } from 'react-icons/fi'
 import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2'
 
 
-const SYSTEM_PROMPT = `You are a friendly and knowledgeable photography assistant for "RJ Captures" — a premium cinematic photography portfolio by Rohan Jha based in Delhi, India.
+const SYSTEM_PROMPT = `You are a concise, knowledgeable photography guide for "RJ Captures" — Rohan Jha's cinematic photography portfolio in Delhi.
 
-Your role is to:
-- Help users learn about photography techniques (composition, lighting, exposure, aperture, shutter speed, ISO, etc.)
-- Give tips on nature, sky, village, travel, and portrait photography — all specialties of RJ Captures
-- Explain camera settings and gear recommendations in simple terms
-- Share creative ideas for shots and storytelling through photography
-- Answer general photography questions warmly and encouragingly
-
-Keep responses concise, friendly, and practical. Use emojis occasionally to make responses feel warm. Format answers with bullet points or short paragraphs when helpful.`
+STRICT RULES:
+1. KEEP IT ULTRA-SHORT & PUNCHY: Maximum 2 to 4 bullet points or 2-3 brief sentences (under 60-80 words total). Never give long essays or textbook explanations.
+2. NEVER use markdown tables (| col |) or heavy headings (###).
+3. Use simple bullet points (•) and bold text (**key setting**) for quick readability on mobile.
+4. Provide direct, practical camera settings (aperture, shutter speed, ISO) and photography tips (nature, portrait, sky, street).
+5. Warm, friendly, and helpful tone.`
 
 const QUICK_QUESTIONS = [
-  '📷 Best camera settings for nature?',
-  '🌅 How to photograph golden hour?',
-  '🏔️ Tips for landscape shots?',
-  '🌃 Night sky photography guide',
+  '📷 Nature camera settings?',
+  '🌅 Golden hour tip?',
+  '🏔️ Landscape shot settings?',
+  '🌌 Night sky quick settings',
 ]
+
+const renderInlineFormatted = (text, isUser = false) => {
+  if (!text) return null
+  const regex = /(\*\*[^*]+?\*\*|\*[^*]+?\*|`[^`]+?`)/g
+  const parts = text.split(regex)
+
+  return parts.map((part, index) => {
+    if (!part) return null
+    if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+      const inner = part.slice(2, -2)
+      return (
+        <strong
+          key={index}
+          className={
+            isUser
+              ? 'font-bold text-black'
+              : 'font-semibold text-gold'
+          }
+        >
+          {inner}
+        </strong>
+      )
+    }
+    if (part.startsWith('*') && part.endsWith('*') && part.length >= 2) {
+      const inner = part.slice(1, -1)
+      return (
+        <em key={index} className="italic opacity-90">
+          {inner}
+        </em>
+      )
+    }
+    if (part.startsWith('`') && part.endsWith('`') && part.length >= 2) {
+      const inner = part.slice(1, -1)
+      return (
+        <code
+          key={index}
+          className={`px-1.5 py-0.5 rounded text-[11px] font-mono ${
+            isUser ? 'bg-black/10 text-black' : 'bg-white/10 text-gold-light'
+          }`}
+        >
+          {inner}
+        </code>
+      )
+    }
+    return <span key={index}>{part}</span>
+  })
+}
+
+const formatMessage = (text, isUser = false) => {
+  if (!text) return null
+  const rawLines = text.split('\n')
+  const elements = []
+
+  for (let i = 0; i < rawLines.length; i++) {
+    const rawLine = rawLines[i]
+    const trimmed = rawLine.trim()
+
+    // 1. Skip table separator lines e.g. |---|---| or |:---|:---|
+    if (/^\|?(\s*:?-+:?\s*\|?)+$/.test(trimmed)) {
+      continue
+    }
+
+    // 2. Handle table data rows e.g. | Full-frame DSLR | Bigger sensor | Budget tip |
+    if (trimmed.startsWith('|') && trimmed.endsWith('|') && trimmed.includes('|')) {
+      const cells = trimmed
+        .split('|')
+        .map((c) => c.trim())
+        .filter((c) => c.length > 0)
+
+      if (cells.length > 0) {
+        elements.push(
+          <div
+            key={`tbl-${i}`}
+            className={`my-1.5 p-2 rounded-lg border text-xs leading-snug ${
+              isUser
+                ? 'bg-black/10 border-black/20'
+                : 'bg-black/25 border-gold/20'
+            }`}
+          >
+            <div className="font-semibold text-gold">
+              {renderInlineFormatted(cells[0], isUser)}
+            </div>
+            {cells.length > 1 && (
+              <div className="text-theme-text-sec mt-0.5">
+                {renderInlineFormatted(cells.slice(1).join(' — '), isUser)}
+              </div>
+            )}
+          </div>
+        )
+        continue
+      }
+    }
+
+    // 3. Headings (# Title, ## Title, ### Title)
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/)
+    if (headingMatch) {
+      elements.push(
+        <div
+          key={`h-${i}`}
+          className={`font-bold mt-2 mb-1 text-xs md:text-sm tracking-wide ${
+            isUser ? 'text-black' : 'text-gold'
+          }`}
+        >
+          {renderInlineFormatted(headingMatch[2], isUser)}
+        </div>
+      )
+      continue
+    }
+
+    // 4. Bullet lists (- item, * item, • item, + item)
+    const bulletMatch = trimmed.match(/^[-*•+]\s+(.*)$/)
+    if (bulletMatch) {
+      elements.push(
+        <div key={`b-${i}`} className="flex items-start gap-1.5 my-1 text-xs md:text-sm">
+          <span
+            className={`font-bold leading-5 flex-shrink-0 ${
+              isUser ? 'text-black' : 'text-gold'
+            }`}
+          >
+            •
+          </span>
+          <div className="flex-1 leading-relaxed">
+            {renderInlineFormatted(bulletMatch[1], isUser)}
+          </div>
+        </div>
+      )
+      continue
+    }
+
+    // 5. Numbered lists (1. item, 2) item)
+    const numMatch = trimmed.match(/^(\d+)[\.\)]\s+(.*)$/)
+    if (numMatch) {
+      elements.push(
+        <div key={`n-${i}`} className="flex items-start gap-1.5 my-1 text-xs md:text-sm">
+          <span
+            className={`font-semibold text-[11px] md:text-xs leading-5 flex-shrink-0 min-w-[14px] ${
+              isUser ? 'text-black' : 'text-gold'
+            }`}
+          >
+            {numMatch[1]}.
+          </span>
+          <div className="flex-1 leading-relaxed">
+            {renderInlineFormatted(numMatch[2], isUser)}
+          </div>
+        </div>
+      )
+      continue
+    }
+
+    // 6. Empty line -> Spacing
+    if (trimmed === '') {
+      elements.push(<div key={`sp-${i}`} className="h-1.5" />)
+      continue
+    }
+
+    // 7. Regular paragraph / text
+    elements.push(
+      <p key={`p-${i}`} className="my-0.5 text-xs md:text-sm leading-relaxed">
+        {renderInlineFormatted(rawLine, isUser)}
+      </p>
+    )
+  }
+
+  return elements
+}
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,7 +191,7 @@ const ChatBot = () => {
     {
       role: 'assistant',
       content:
-        "Hi! I'm your photography guide 📸 Ask me anything about photography — from camera settings to composition tips. I'm here to help you capture stunning moments!",
+        "Hi! I'm your photography guide 📸 Ask me anything about camera settings, lighting, or composition tips!",
     },
   ])
   const [inputText, setInputText] = useState('')
@@ -69,7 +232,7 @@ const ChatBot = () => {
       
       const history = [
         { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'assistant', content: 'Got it! Ready to help with photography guidance.' }
+        { role: 'assistant', content: 'Understood! I will give short, crisp, practical photography guidance.' }
       ]
 
       for (let i = 1; i < updatedMessages.length; i++) {
@@ -89,8 +252,8 @@ const ChatBot = () => {
         body: JSON.stringify({
           model: 'openai/gpt-oss-120b', // Verified working model on user's Groq account
           messages: history,
-          temperature: 0.7,
-          max_tokens: 500
+          temperature: 0.6,
+          max_tokens: 200
         }),
       })
 
@@ -126,17 +289,6 @@ const ChatBot = () => {
       e.preventDefault()
       sendMessage()
     }
-  }
-
-  const formatMessage = (text) => {
-    return text
-      .split('\n')
-      .map((line, i) => (
-        <span key={i}>
-          {line}
-          {i < text.split('\n').length - 1 && <br />}
-        </span>
-      ))
   }
 
   return (
@@ -231,7 +383,7 @@ const ChatBot = () => {
                           : {}
                       }
                     >
-                      {formatMessage(msg.content)}
+                      {formatMessage(msg.content, msg.role === 'user')}
                     </div>
                   </div>
                 ))}
