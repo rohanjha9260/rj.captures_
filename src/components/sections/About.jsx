@@ -67,7 +67,7 @@ const About = () => {
               />
 
               {/* Photo container — circular */}
-              <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/30 shadow-gold-glow">
+              <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/30 shadow-gold-glow">
                 <img
                   src="/images/profile-thumb.webp"
                   alt="Rohan Jha — Photographer"

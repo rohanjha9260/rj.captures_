@@ -153,7 +153,7 @@ const ChatBot = () => {
   }
 
   return (
-    <div className="fixed bottom-8 right-28 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-8 right-4 md:right-8 lg:right-28 z-50 flex flex-col items-end gap-3">
       {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
@@ -162,7 +162,7 @@ const ChatBot = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-            className="w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl border border-theme-border flex flex-col"
+            className="w-[calc(100vw-2rem)] sm:w-96 rounded-2xl overflow-hidden shadow-2xl border border-theme-border flex flex-col"
             style={{
               background: 'var(--color-bg-card)',
               backdropFilter: 'blur(24px)',

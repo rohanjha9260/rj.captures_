@@ -35,7 +35,7 @@ const FilmStrip = () => {
   const duplicatedImages = [...images, ...images]
 
   return (
-    <div className="relative w-full h-48 md:h-64 bg-black overflow-hidden flex items-center border-y border-white/5 py-2">
+    <div className="relative w-full h-48 md:h-64 bg-black overflow-hidden flex items-center py-2">
       {/* Film strip "holes" effect at top and bottom */}
       <div className="absolute top-1 left-0 right-0 h-1 flex justify-around opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 2px, transparent 2px)', backgroundSize: '16px 16px' }} />
       <div className="absolute bottom-1 left-0 right-0 h-1 flex justify-around opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 2px, transparent 2px)', backgroundSize: '16px 16px' }} />

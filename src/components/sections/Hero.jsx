@@ -127,11 +127,11 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Layer 5: Scroll Indicator */}
+      {/* Layer 5: Scroll Indicator — hidden on mobile */}
       <motion.div
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex"
         style={{ zIndex: 10 }}
       >
         <span className="text-gold/40 text-[10px] tracking-[0.3em] uppercase">Scroll</span>

@@ -178,6 +178,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -185,7 +186,109 @@ body {
   color: var(--color-text-primary);
   @apply font-inter;
   overflow-x: hidden;
+  max-width: 100vw;
 }
+
+/* ═══════════════════════════════════════
+   DAY THEME — TEXT VISIBILITY FIXES
+   Make sure text is visible on light backgrounds
+   ═══════════════════════════════════════ */
+[data-theme='day'] p,
+[data-theme='day'] span:not(.text-gold):not(.text-gold-accent),
+[data-theme='day'] li {
+  color: var(--color-text-primary);
+}
+
+[data-theme='day'] .section-subtitle {
+  color: #374151; /* gray-700 — readable on white */
+}
+
+/* About bio text */
+[data-theme='day'] #about p,
+[data-theme='day'] #about .text-gray-300 {
+  color: #374151;
+}
+
+/* Portfolio + Featured descriptions */
+[data-theme='day'] .portfolio-image-wrapper p,
+[data-theme='day'] .portfolio-image-wrapper span:not(.text-gold) {
+  color: #1f2937;
+}
+
+/* Contact section */
+[data-theme='day'] #contact p,
+[data-theme='day'] #contact h3 {
+  color: #1f2937;
+}
+
+/* Skills tags in About */
+[data-theme='day'] .glass span {
+  color: #1f2937;
+}
+
+/* Glass card content */
+[data-theme='day'] .glass-card h3,
+[data-theme='day'] .glass-card p,
+[data-theme='day'] .glass-card span:not(.text-gold) {
+  color: #1f2937;
+}
+
+/* Social section */
+[data-theme='day'] #social p {
+  color: #374151;
+}
+
+/* Footer text */
+[data-theme='day'] footer p,
+[data-theme='day'] footer span:not(.text-gold),
+[data-theme='day'] footer li {
+  color: #374151;
+}
+
+/* Navbar links in day mode when scrolled */
+[data-theme='day'] .floating-nav.scrolled a {
+  color: var(--color-text-primary);
+}
+
+/* Portfolio section-subtitle (category labels on carousel) */
+[data-theme='day'] .portfolio-carousel p {
+  color: #1f2937;
+}
+
+/* Fix glass background for day mode so text has enough contrast */
+[data-theme='day'] .glass {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+[data-theme='day'] .glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(209, 213, 219, 1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* ── Apply same text fixes to all light themes ── */
+[data-theme='forest-light'] p,
+[data-theme='ocean-light'] p,
+[data-theme='autumn-light'] p {
+  color: var(--color-text-primary);
+}
+
+[data-theme='forest-light'] .section-subtitle,
+[data-theme='ocean-light'] .section-subtitle,
+[data-theme='autumn-light'] .section-subtitle {
+  color: var(--color-text-secondary);
+}
+
+[data-theme='forest-light'] .glass-card h3,
+[data-theme='forest-light'] .glass-card p,
+[data-theme='ocean-light'] .glass-card h3,
+[data-theme='ocean-light'] .glass-card p,
+[data-theme='autumn-light'] .glass-card h3,
+[data-theme='autumn-light'] .glass-card p {
+  color: var(--color-text-primary);
+}
+
 
 /* ═══════════════════════════════════════
    LOADING SCREEN
@@ -369,6 +472,11 @@ section {
 
 .hero-vignette {
   box-shadow: inset 0 0 150px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Hero overflow fix — prevents white strip on mobile */
+#home {
+  overflow: hidden;
 }
 
 /* Hero Swiper z-index fix */
@@ -629,11 +737,54 @@ input:focus, textarea:focus {
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — MOBILE FIRST
    ═══════════════════════════════════════ */
+
+/* ── Extra small phones (≤ 380px) ── */
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 2rem !important;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+
+  .section-title {
+    font-size: 1.6rem !important;
+  }
+
+  .section-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .btn-gold,
+  .btn-outline-gold {
+    @apply px-5 py-3 text-xs;
+  }
+
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 120px;
+    gap: 0.5rem;
+  }
+
+  .masonry-grid .masonry-tall {
+    grid-row: span 2;
+  }
+
+  .masonry-grid .masonry-wide {
+    grid-column: span 2;
+  }
+}
+
+/* ── Standard mobile phones (≤ 640px) ── */
 @media (max-width: 640px) {
   .hero-title {
     @apply text-4xl;
+    line-height: 1.15;
   }
 
   h2 {
@@ -644,17 +795,146 @@ input:focus, textarea:focus {
     @apply text-xl;
   }
 
-  .masonry-grid {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 220px;
+  .section-subtitle {
+    font-size: 0.95rem;
+    padding: 0 0.5rem;
   }
 
-  .masonry-grid .masonry-tall,
+  /* Prevent horizontal overflow */
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Tighter section padding on mobile */
+  section.py-24 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  /* About section: stack image above text with proper spacing */
+  #about .grid {
+    gap: 2rem;
+  }
+
+  /* Skills grid — single column on tiny screens */
+  #about .grid-cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Contact info cards — 1 col on mobile */
+  #contact .grid-cols-3,
+  #contact .md\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact form — reduce inner padding */
+  .glass-card.p-8,
+  .glass-card.md\:p-12 {
+    padding: 1.25rem;
+  }
+
+  /* Portfolio image height on mobile */
+  .portfolio-carousel .swiper-slide img,
+  .portfolio-carousel img {
+    height: 180px;
+  }
+
+  /* Masonry grid */
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+    gap: 0.625rem;
+  }
+
+  .masonry-grid .masonry-tall {
+    grid-row: span 2;
+  }
+
   .masonry-grid .masonry-wide {
-    grid-row: span 1;
-    grid-column: span 1;
+    grid-column: span 2;
+  }
+
+  /* Swiper nav arrows — smaller on mobile */
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 13px !important;
+  }
+
+  /* Footer */
+  footer .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
   }
 }
+
+/* ── Tablets portrait (641px – 768px) ── */
+@media (min-width: 641px) and (max-width: 768px) {
+  .hero-title {
+    @apply text-5xl;
+  }
+
+  .masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 200px;
+  }
+
+  .masonry-grid .masonry-tall {
+    grid-row: span 2;
+  }
+
+  .masonry-grid .masonry-wide {
+    grid-column: span 2;
+  }
+}
+
+/* ── Universal touch safety ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Minimum 44px tap targets for interactive elements */
+  button,
+  a,
+  [role='button'] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Disable hover-only transforms that look weird on touch */
+  .portfolio-image-wrapper:hover {
+    transform: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+/* ── Landscape phones ── */
+@media (max-width: 896px) and (orientation: landscape) {
+  #home {
+    min-height: 100svh;
+  }
+
+  .hero-title {
+    @apply text-4xl;
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+  }
+}
+
 
 /* ═══════════════════════════════════════
    GLIGHTBOX — FULLSCREEN MODERN VIEWER
