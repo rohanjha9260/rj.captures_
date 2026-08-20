@@ -178,6 +178,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -185,7 +186,109 @@ body {
   color: var(--color-text-primary);
   @apply font-inter;
   overflow-x: hidden;
+  max-width: 100vw;
 }
+
+/* ═══════════════════════════════════════
+   DAY THEME — TEXT VISIBILITY FIXES
+   Make sure text is visible on light backgrounds
+   ═══════════════════════════════════════ */
+[data-theme='day'] p,
+[data-theme='day'] span:not(.text-gold):not(.text-gold-accent),
+[data-theme='day'] li {
+  color: var(--color-text-primary);
+}
+
+[data-theme='day'] .section-subtitle {
+  color: #374151; /* gray-700 — readable on white */
+}
+
+/* About bio text */
+[data-theme='day'] #about p,
+[data-theme='day'] #about .text-gray-300 {
+  color: #374151;
+}
+
+/* Portfolio + Featured descriptions */
+[data-theme='day'] .portfolio-image-wrapper p,
+[data-theme='day'] .portfolio-image-wrapper span:not(.text-gold) {
+  color: #1f2937;
+}
+
+/* Contact section */
+[data-theme='day'] #contact p,
+[data-theme='day'] #contact h3 {
+  color: #1f2937;
+}
+
+/* Skills tags in About */
+[data-theme='day'] .glass span {
+  color: #1f2937;
+}
+
+/* Glass card content */
+[data-theme='day'] .glass-card h3,
+[data-theme='day'] .glass-card p,
+[data-theme='day'] .glass-card span:not(.text-gold) {
+  color: #1f2937;
+}
+
+/* Social section */
+[data-theme='day'] #social p {
+  color: #374151;
+}
+
+/* Footer text */
+[data-theme='day'] footer p,
+[data-theme='day'] footer span:not(.text-gold),
+[data-theme='day'] footer li {
+  color: #374151;
+}
+
+/* Navbar links in day mode when scrolled */
+[data-theme='day'] .floating-nav.scrolled a {
+  color: var(--color-text-primary);
+}
+
+/* Portfolio section-subtitle (category labels on carousel) */
+[data-theme='day'] .portfolio-carousel p {
+  color: #1f2937;
+}
+
+/* Fix glass background for day mode so text has enough contrast */
+[data-theme='day'] .glass {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+[data-theme='day'] .glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(209, 213, 219, 1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+/* ── Apply same text fixes to all light themes ── */
+[data-theme='forest-light'] p,
+[data-theme='ocean-light'] p,
+[data-theme='autumn-light'] p {
+  color: var(--color-text-primary);
+}
+
+[data-theme='forest-light'] .section-subtitle,
+[data-theme='ocean-light'] .section-subtitle,
+[data-theme='autumn-light'] .section-subtitle {
+  color: var(--color-text-secondary);
+}
+
+[data-theme='forest-light'] .glass-card h3,
+[data-theme='forest-light'] .glass-card p,
+[data-theme='ocean-light'] .glass-card h3,
+[data-theme='ocean-light'] .glass-card p,
+[data-theme='autumn-light'] .glass-card h3,
+[data-theme='autumn-light'] .glass-card p {
+  color: var(--color-text-primary);
+}
+
 
 /* ═══════════════════════════════════════
    LOADING SCREEN
@@ -369,6 +472,11 @@ section {
 
 .hero-vignette {
   box-shadow: inset 0 0 150px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Hero overflow fix — prevents white strip on mobile */
+#home {
+  overflow: hidden;
 }
 
 /* Hero Swiper z-index fix */
