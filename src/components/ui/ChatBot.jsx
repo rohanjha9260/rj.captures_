@@ -87,7 +87,7 @@ const ChatBot = () => {
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-          model: 'llama-3.1-8b-instant', // Updated to the official Llama 3.1 replacement model
+          model: 'openai/gpt-oss-120b', // Verified working model on user's Groq account
           messages: history,
           temperature: 0.7,
           max_tokens: 500
