@@ -159,7 +159,7 @@ const PortfolioCarousel = ({ id, title, category, description }) => {
                         <p className="text-gold-light font-playfair font-semibold text-lg">
                           {title}
                         </p>
-                        <p className="text-gray-400 text-xs mt-1 tracking-wider uppercase">
+                        <p className="click-to-view text-gray-400 text-xs mt-1 tracking-wider uppercase">
                           Click to view fullscreen
                         </p>
                       </div>
