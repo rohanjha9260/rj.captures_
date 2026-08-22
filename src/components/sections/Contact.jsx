@@ -156,7 +156,7 @@ const Contact = () => {
           animate={inView ? 'visible' : 'hidden'}
         >
           {/* Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
+          <motion.div variants={itemVariants} className="text-center mb-10 sm:mb-16">
             <span className="text-gold/50 text-xs tracking-[0.3em] uppercase block mb-3">
               Get In Touch
             </span>

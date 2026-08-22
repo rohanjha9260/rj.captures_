@@ -56,7 +56,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-6 pointer-events-auto"
         >
-          <span className="inline-block px-6 py-2.5 rounded-full border border-gold/20 text-xs tracking-[0.3em] uppercase font-bold backdrop-blur-[2px] bg-black/50" style={{ color: '#d4af37' }}>
+          <span className="inline-block px-4 py-2 sm:px-6 sm:py-2.5 rounded-full border border-gold/20 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-bold backdrop-blur-[2px] bg-black/50" style={{ color: '#d4af37' }}>
             Cinematic Photography
           </span>
         </motion.div>
@@ -86,7 +86,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          <p className="hero-subtitle mb-10">
+          <p className="hero-subtitle mb-6 sm:mb-10">
             Capturing Nature • Sky • Village Life
           </p>
         </motion.div>
@@ -100,7 +100,7 @@ const Hero = () => {
         >
           <button
             onClick={scrollToPortfolio}
-            className="btn-gold cursor-pointer text-sm uppercase tracking-widest"
+            className="btn-gold cursor-pointer text-xs sm:text-sm uppercase tracking-widest"
           >
             View Portfolio
           </button>
@@ -111,16 +111,16 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="mt-8 pointer-events-auto"
+          className="mt-5 sm:mt-8 pointer-events-auto"
         >
           <a
             href="https://instagram.com/rj.captures_"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-gold/20 hover:border-gold/50 bg-black/30 backdrop-blur-sm transition-all duration-400 group hover:bg-gold/10 cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 sm:gap-2.5 sm:px-5 sm:py-2.5 rounded-full border border-gold/20 hover:border-gold/50 bg-black/30 backdrop-blur-sm transition-all duration-400 group hover:bg-gold/10 cursor-pointer"
           >
             <FiInstagram className="w-4 h-4 text-gold group-hover:scale-110 transition-transform duration-300" />
-            <span className="text-gold/90 text-sm tracking-wider font-medium group-hover:text-gold transition-colors duration-300">
+            <span className="text-gold/90 text-xs sm:text-sm tracking-wider font-medium group-hover:text-gold transition-colors duration-300">
               @rj.captures_
             </span>
           </a>

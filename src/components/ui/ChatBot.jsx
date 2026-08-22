@@ -140,7 +140,7 @@ const formatMessage = (text, isUser = false) => {
           >
             •
           </span>
-          <div className="flex-1 leading-relaxed">
+          <div className={`flex-1 leading-relaxed ${isUser ? 'text-black font-medium' : ''}`}>
             {renderInlineFormatted(bulletMatch[1], isUser)}
           </div>
         </div>
@@ -149,7 +149,7 @@ const formatMessage = (text, isUser = false) => {
     }
 
     // 5. Numbered lists (1. item, 2) item)
-    const numMatch = trimmed.match(/^(\d+)[\.\)]\s+(.*)$/)
+    const numMatch = trimmed.match(/^(\d+)[.)]\s+(.*)$/)
     if (numMatch) {
       elements.push(
         <div key={`n-${i}`} className="flex items-start gap-1.5 my-1 text-xs md:text-sm">
@@ -160,7 +160,7 @@ const formatMessage = (text, isUser = false) => {
           >
             {numMatch[1]}.
           </span>
-          <div className="flex-1 leading-relaxed">
+          <div className={`flex-1 leading-relaxed ${isUser ? 'text-black font-medium' : ''}`}>
             {renderInlineFormatted(numMatch[2], isUser)}
           </div>
         </div>
@@ -176,7 +176,7 @@ const formatMessage = (text, isUser = false) => {
 
     // 7. Regular paragraph / text
     elements.push(
-      <p key={`p-${i}`} className="my-0.5 text-xs md:text-sm leading-relaxed">
+      <p key={`p-${i}`} className={`my-0.5 text-xs md:text-sm leading-relaxed ${isUser ? 'text-black font-medium' : ''}`}>
         {renderInlineFormatted(rawLine, isUser)}
       </p>
     )
@@ -213,7 +213,7 @@ const ChatBot = () => {
     if (!isOpen && messages.length > 1) {
       setHasUnread(true)
     }
-  }, [messages])
+  }, [messages, isOpen])
 
   const sendMessage = async (text) => {
     const userText = text || inputText.trim()
