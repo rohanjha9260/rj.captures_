@@ -124,16 +124,11 @@ const SocialLinks = () => {
                 {/* Icon container */}
                 <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full glass group-hover:border-gold/40 transition-all duration-500">
                   <Icon
-                    className="w-7 h-7 md:w-8 md:h-8 text-gray-400 transition-all duration-500"
+                    className="w-7 h-7 md:w-8 md:h-8 text-gray-400 group-hover:text-[var(--hover-color)] transition-all duration-500"
                     style={{
                       '--hover-color': social.color,
                     }}
                   />
-                  <style>{`
-                    .group:hover .${social.name.toLowerCase()}-icon {
-                      color: ${social.color};
-                    }
-                  `}</style>
                 </div>
 
                 {/* Label */}
