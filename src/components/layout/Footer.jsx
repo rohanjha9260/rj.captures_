@@ -31,7 +31,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative bg-theme-bg-sec border-t border-theme-border pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-theme-bg-sec border-t border-theme-border pt-10 sm:pt-16 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8">
       {/* Subtle top glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
@@ -41,11 +41,11 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12"
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12"
         >
           {/* Brand */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
+          <div className="text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
               <div className="w-8 h-8 rounded-full bg-gradient-gold flex items-center justify-center">
                 <span className="text-black font-bold text-xs font-playfair">RJ</span>
               </div>
@@ -56,7 +56,7 @@ const Footer = () => {
             <p className="text-gray-500 text-sm leading-relaxed">
               Capturing the beauty of nature, skies, and village life through cinematic visuals.
             </p>
-            <div className="flex items-center gap-2 mt-3 text-gray-500 text-xs">
+            <div className="flex items-center justify-center md:justify-start gap-2 mt-3 text-gray-500 text-xs">
               <span>📍</span>
               <span>Delhi, India</span>
             </div>
@@ -119,7 +119,7 @@ const Footer = () => {
         </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-theme-border my-8" />
+        <div className="border-t border-theme-border my-6 sm:my-8" />
 
         {/* Bottom Section */}
         <motion.div

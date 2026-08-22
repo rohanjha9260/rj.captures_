@@ -871,6 +871,11 @@ textarea:focus {
     line-height: 1.15;
   }
 
+  .hero-subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+  }
+
   h2 {
     @apply text-2xl;
   }
@@ -879,8 +884,12 @@ textarea:focus {
     @apply text-xl;
   }
 
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+
   .section-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     padding: 0 0.5rem;
   }
 
@@ -892,16 +901,26 @@ textarea:focus {
 
   /* Tighter section padding on mobile */
   section.py-24 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  section.py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   /* About section: stack image above text with proper spacing */
   #about .grid {
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
-  /* Skills grid — single column on tiny screens */
+  /* About text and heading — center on mobile */
+  #about .space-y-8 {
+    text-align: center;
+  }
+
+  /* Skills grid — keep 2 columns on mobile */
   #about .grid-cols-2 {
     grid-template-columns: 1fr 1fr;
   }
@@ -942,20 +961,32 @@ textarea:focus {
   /* Swiper nav arrows — smaller on mobile */
   .swiper-button-next,
   .swiper-button-prev {
-    width: 36px !important;
-    height: 36px !important;
+    width: 32px !important;
+    height: 32px !important;
   }
 
   .swiper-button-next::after,
   .swiper-button-prev::after {
-    font-size: 13px !important;
+    font-size: 12px !important;
   }
 
   /* Footer */
   footer .grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
     text-align: center;
+  }
+
+  /* Reduce button padding on mobile */
+  .btn-gold,
+  .btn-outline-gold {
+    @apply px-5 py-3 text-xs;
+  }
+
+  /* Featured Work section title spacing */
+  #featured .text-center.mb-16,
+  #portfolio .text-center.mb-14 {
+    margin-bottom: 2rem;
   }
 }
 

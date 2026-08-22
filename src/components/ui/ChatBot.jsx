@@ -140,7 +140,7 @@ const formatMessage = (text, isUser = false) => {
           >
             •
           </span>
-          <div className="flex-1 leading-relaxed">
+          <div className={`flex-1 leading-relaxed ${isUser ? 'text-black font-medium' : ''}`}>
             {renderInlineFormatted(bulletMatch[1], isUser)}
           </div>
         </div>
@@ -160,7 +160,7 @@ const formatMessage = (text, isUser = false) => {
           >
             {numMatch[1]}.
           </span>
-          <div className="flex-1 leading-relaxed">
+          <div className={`flex-1 leading-relaxed ${isUser ? 'text-black font-medium' : ''}`}>
             {renderInlineFormatted(numMatch[2], isUser)}
           </div>
         </div>
@@ -176,7 +176,7 @@ const formatMessage = (text, isUser = false) => {
 
     // 7. Regular paragraph / text
     elements.push(
-      <p key={`p-${i}`} className="my-0.5 text-xs md:text-sm leading-relaxed">
+      <p key={`p-${i}`} className={`my-0.5 text-xs md:text-sm leading-relaxed ${isUser ? 'text-black font-medium' : ''}`}>
         {renderInlineFormatted(rawLine, isUser)}
       </p>
     )

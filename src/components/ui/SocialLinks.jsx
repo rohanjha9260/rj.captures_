@@ -77,7 +77,7 @@ const SocialLinks = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-8 sm:mb-14"
         >
           <span className="text-gold/50 text-xs tracking-[0.3em] uppercase block mb-3">
             Follow My Journey
@@ -96,7 +96,7 @@ const SocialLinks = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="flex justify-center items-center gap-8 md:gap-12 flex-wrap"
+          className="flex justify-center items-center gap-5 sm:gap-8 md:gap-12 flex-wrap"
         >
           {socials.map((social) => {
             const Icon = social.icon
@@ -122,7 +122,7 @@ const SocialLinks = () => {
                 />
 
                 {/* Icon container */}
-                <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full glass group-hover:border-gold/40 transition-all duration-500">
+                <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full glass group-hover:border-gold/40 transition-all duration-500">
                   <Icon
                     className="w-7 h-7 md:w-8 md:h-8 text-gray-400 group-hover:text-[var(--hover-color)] transition-all duration-500"
                     style={{

@@ -36,7 +36,7 @@ const BackToTop = () => {
           exit={{ opacity: 0, scale: 0.5 }}
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 left-4 sm:left-auto sm:right-8 z-40"
+          className="fixed bottom-24 left-4 sm:bottom-8 sm:left-auto sm:right-8 z-40"
           title="Back to top"
           aria-label="Back to top"
         >
@@ -44,8 +44,8 @@ const BackToTop = () => {
           <div className="absolute inset-0 bg-gradient-gold rounded-full blur-xl opacity-50"></div>
 
           {/* Button */}
-          <div className="relative w-14 h-14 rounded-full bg-gradient-gold text-black flex items-center justify-center shadow-lg hover:shadow-gold-lg transition-all duration-300 hover:scale-110">
-            <HiArrowUp className="w-6 h-6 font-bold" />
+          <div className="relative w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-gradient-gold text-black flex items-center justify-center shadow-lg hover:shadow-gold-lg transition-all duration-300 hover:scale-110">
+            <HiArrowUp className="w-5 h-5 sm:w-6 sm:h-6 font-bold" />
           </div>
         </motion.button>
       )}

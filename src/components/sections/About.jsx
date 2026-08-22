@@ -67,7 +67,7 @@ const About = () => {
               />
 
               {/* Photo container — circular */}
-              <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/30 shadow-gold-glow">
+              <div className="relative w-32 h-32 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/30 shadow-gold-glow">
                 <img
                   src="/images/profile-thumb.webp"
                   alt="Rohan Jha — Photographer"
@@ -90,15 +90,15 @@ const About = () => {
               >
                 About Me
               </motion.span>
-              <h2 className="section-title !text-left !mb-2">Rohan Jha</h2>
-              <div className="flex items-center gap-2 text-gray-500 text-sm mt-2">
+              <h2 className="section-title text-center sm:text-left !mb-2">Rohan Jha</h2>
+              <div className="flex items-center justify-center sm:justify-start gap-2 text-gray-500 text-sm mt-2">
                 <FiMapPin className="w-3.5 h-3.5" />
                 <span>Delhi, India</span>
               </div>
             </div>
 
             {/* Bio */}
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-300 text-base sm:text-lg leading-relaxed text-center sm:text-left">
               I am a passionate photographer capturing the beauty of nature, skies,
               and village life through cinematic visuals. Every frame tells a story,
               and I strive to preserve the raw emotions and breathtaking moments
@@ -119,10 +119,10 @@ const About = () => {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={inView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-                      className="glass glass-hover px-4 py-3 flex items-center gap-3"
+                      className="glass glass-hover px-3 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2 sm:gap-3"
                     >
                       <Icon className="w-4 h-4 text-gold flex-shrink-0" />
-                      <span className="text-gray-300 text-sm font-medium">{skill.name}</span>
+                      <span className="text-gray-300 text-xs sm:text-sm font-medium">{skill.name}</span>
                     </motion.div>
                   )
                 })}
