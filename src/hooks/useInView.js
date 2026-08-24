@@ -5,12 +5,14 @@ export const useInView = ({ threshold = 0.2, triggerOnce = false } = {}) => {
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
+    const currentRef = ref.current
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-          if (triggerOnce && ref.current) {
-            observer.unobserve(ref.current)
+          if (triggerOnce && currentRef) {
+            observer.unobserve(currentRef)
           }
         } else if (!triggerOnce) {
           setInView(false)
@@ -19,7 +21,6 @@ export const useInView = ({ threshold = 0.2, triggerOnce = false } = {}) => {
       { threshold }
     )
 
-    const currentRef = ref.current
     if (currentRef) {
       observer.observe(currentRef)
     }
