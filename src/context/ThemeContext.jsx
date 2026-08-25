@@ -1,9 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
-const ThemeContext = createContext();
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useTheme = () => useContext(ThemeContext);
+import React, { useState, useEffect } from 'react';
+import { ThemeContext } from '../hooks/useTheme';
 
 export const ThemeProvider = ({ children }) => {
   // Check sessionStorage or default to 'dark'

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiMoon, FiSun, FiCompass, FiDroplet, FiSunset } from 'react-icons/fi';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../hooks/useTheme';
 
 const SettingsPanel = ({ isOpen, onClose }) => {
   const { theme, setTheme } = useTheme();
