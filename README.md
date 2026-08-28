@@ -2,7 +2,6 @@
 
 A modern, fully responsive photography portfolio website built with React, Tailwind CSS, Framer Motion, Swiper, and GLightbox. Features cinematic dark theme design with smooth animations and multiple image carousel galleries.
 
-
 ## 🎨 Key Features
 
 - **Modern Dark Theme Design**: Cinematic aesthetic with black, charcoal, and deep gray backgrounds
