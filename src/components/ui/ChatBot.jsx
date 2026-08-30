@@ -227,7 +227,7 @@ const ChatBot = () => {
     try {
       const apiKey = import.meta.env.VITE_GROQ_API_KEY
       if (!apiKey) {
-        throw new Error('Groq API key is missing. Please set VITE_GROQ_API_KEY in your .env.local file.')
+        throw new Error('Groq API key is missing. Please set VITE_GROQ_API_KEY in your .env file.')
       }
       
       const history = [
