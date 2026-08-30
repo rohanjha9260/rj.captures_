@@ -307,7 +307,7 @@ const ChatBot = () => {
         )}
       </AnimatePresence>
 
-      <div className="fixed bottom-8 right-4 md:right-8 lg:right-28 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-24 md:right-28 z-50 flex flex-col items-end gap-3">
         {/* Chat Window */}
         <AnimatePresence>
           {isOpen && (
@@ -316,7 +316,7 @@ const ChatBot = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 20 }}
               transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-              className="w-[calc(100vw-3rem)] max-w-[320px] md:max-w-none md:w-96 rounded-2xl overflow-hidden shadow-2xl border border-theme-border flex flex-col max-h-[60vh] md:max-h-[520px]"
+              className="w-[calc(100vw-2rem)] sm:w-[380px] md:w-96 max-w-[calc(100vw-2rem)] sm:max-w-none rounded-2xl overflow-hidden shadow-2xl border border-theme-border flex flex-col max-h-[calc(100dvh-5.5rem)] sm:max-h-[520px]"
               style={{
                 background: 'var(--color-bg-card)',
                 backdropFilter: 'blur(24px)'
@@ -324,23 +324,23 @@ const ChatBot = () => {
             >
               {/* Header */}
               <div
-                className="flex items-center justify-between px-3 md:px-4 py-2.5 md:py-3.5 border-b border-gold/10"
+                className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3.5 border-b border-gold/10 flex-shrink-0"
                 style={{
                   background: 'linear-gradient(90deg, rgba(var(--color-gold-rgb),0.12) 0%, rgba(var(--color-gold-rgb),0.05) 100%)',
                 }}
               >
-                <div className="flex items-center gap-2 md:gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
                   <div
-                    className="w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{
                       background: 'linear-gradient(135deg, var(--color-gold), var(--color-gold-light))',
                     }}
                   >
-                    <FiCamera className="w-3.5 h-3.5 md:w-4 md:h-4 text-black" />
+                    <FiCamera className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
                   </div>
                   <div>
-                    <p className="text-xs md:text-sm font-semibold text-gold leading-tight">RJ Photography Guide</p>
-                    <p className="text-[10px] md:text-xs text-gray-500 flex items-center gap-1">
+                    <p className="text-xs sm:text-sm font-semibold text-gold leading-tight">RJ Photography Guide</p>
+                    <p className="text-[10px] sm:text-xs text-gray-500 flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
                       Always ready to help
                     </p>
@@ -349,13 +349,14 @@ const ChatBot = () => {
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1.5 rounded-lg text-gray-500 hover:text-gold hover:bg-gold/10 transition-all duration-200"
+                  aria-label="Close chat assistant"
                 >
                   <FiX className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Messages */}
-              <div className="flex-1 overflow-y-auto px-3 md:px-4 py-3 space-y-3 min-h-[150px] md:min-h-[200px]">
+              <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 space-y-3 min-h-[140px] sm:min-h-[200px]">
                 {messages.map((msg, idx) => (
                   <div
                     key={idx}
@@ -363,14 +364,14 @@ const ChatBot = () => {
                   >
                     {msg.role === 'assistant' && (
                       <div
-                        className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 mr-2"
+                        className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 mr-2"
                         style={{ background: 'linear-gradient(135deg, var(--color-gold), var(--color-gold-light))' }}
                       >
-                        <FiCamera className="w-2.5 h-2.5 md:w-3 md:h-3 text-black" />
+                        <FiCamera className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-black" />
                       </div>
                     )}
                     <div
-                      className={`max-w-[85%] px-3 py-2 rounded-2xl text-xs md:text-sm leading-relaxed ${
+                      className={`max-w-[85%] px-3 py-2 rounded-2xl text-xs sm:text-sm leading-relaxed ${
                         msg.role === 'user'
                           ? 'text-black rounded-br-sm'
                           : 'text-theme-text bg-theme-bg-sec border border-theme-border rounded-bl-sm'
@@ -392,12 +393,12 @@ const ChatBot = () => {
                 {isLoading && (
                   <div className="flex justify-start">
                     <div
-                      className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 mr-2"
+                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 mr-2"
                       style={{ background: 'linear-gradient(135deg, var(--color-gold), var(--color-gold-light))' }}
                     >
-                      <FiCamera className="w-2.5 h-2.5 md:w-3 md:h-3 text-black" />
+                      <FiCamera className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-black" />
                     </div>
-                    <div className="bg-theme-bg-sec border border-theme-border rounded-2xl rounded-bl-sm px-3 md:px-4 py-2 md:py-3 flex items-center gap-1.5">
+                    <div className="bg-theme-bg-sec border border-theme-border rounded-2xl rounded-bl-sm px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-1.5">
                       {[0, 1, 2].map((i) => (
                         <motion.span
                           key={i}
@@ -414,12 +415,12 @@ const ChatBot = () => {
 
               {/* Quick Questions */}
               {messages.length === 1 && (
-                <div className="px-3 md:px-4 pb-2 flex flex-wrap gap-1.5">
+                <div className="px-3 sm:px-4 pb-2 flex flex-wrap gap-1.5 flex-shrink-0">
                   {QUICK_QUESTIONS.map((q, i) => (
                     <button
                       key={i}
                       onClick={() => sendMessage(q)}
-                      className="text-[10px] md:text-xs px-2 py-1.5 md:px-2.5 rounded-full border border-gold/20 text-gold/70 hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-200"
+                      className="text-[10px] sm:text-xs px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border border-gold/20 text-gold/70 hover:border-gold/50 hover:text-gold hover:bg-gold/5 transition-all duration-200"
                     >
                       {q}
                     </button>
@@ -428,8 +429,8 @@ const ChatBot = () => {
               )}
 
               {/* Input */}
-              <div className="px-2 md:px-3 pb-2 md:pb-3 pt-2 border-t border-white/5">
-                <div className="flex items-end gap-2 bg-theme-bg-sec border border-theme-border rounded-xl px-2 md:px-3 py-1.5 md:py-2 focus-within:border-gold/30 transition-all duration-300">
+              <div className="px-2.5 sm:px-3 pb-2.5 sm:pb-3 pt-2 border-t border-white/5 flex-shrink-0">
+                <div className="flex items-end gap-1.5 sm:gap-2 bg-theme-bg-sec border border-theme-border rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 focus-within:border-gold/30 transition-all duration-300">
                   <textarea
                     ref={inputRef}
                     value={inputText}
@@ -437,19 +438,20 @@ const ChatBot = () => {
                     onKeyDown={handleKeyDown}
                     placeholder="Ask about photography..."
                     rows={1}
-                    className="flex-1 bg-transparent text-xs md:text-sm text-theme-text placeholder-theme-text-sec resize-none outline-none leading-relaxed py-1"
+                    className="flex-1 bg-transparent text-xs sm:text-sm text-theme-text placeholder-theme-text-sec resize-none outline-none leading-relaxed py-1"
                     style={{ maxHeight: '80px' }}
                     disabled={isLoading}
                   />
                   <button
                     onClick={() => sendMessage()}
                     disabled={!inputText.trim() || isLoading}
-                    className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 mb-0.5"
+                    className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 mb-0.5"
                     style={{
                       background: inputText.trim()
                         ? 'linear-gradient(135deg, var(--color-gold), var(--color-gold-light))'
                         : 'rgba(255,255,255,0.05)',
                     }}
+                    aria-label="Send message"
                   >
                     <FiSend
                       className="w-3.5 h-3.5"
@@ -457,7 +459,7 @@ const ChatBot = () => {
                     />
                   </button>
                 </div>
-                <p className="text-center text-[9px] md:text-[10px] text-gray-700 mt-1.5">Powered by Groq AI</p>
+                <p className="text-center text-[9px] sm:text-[10px] text-gray-500 mt-1.5">Powered by Groq AI</p>
               </div>
             </motion.div>
           )}
@@ -466,9 +468,9 @@ const ChatBot = () => {
         {/* Toggle Button */}
         <motion.button
           onClick={() => setIsOpen((prev) => !prev)}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.93 }}
-          className="relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-xl"
+          className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-xl"
           style={{
             background: isOpen
               ? 'rgba(20,20,20,0.95)'
@@ -496,7 +498,7 @@ const ChatBot = () => {
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <FiX className="w-5 h-5 md:w-6 md:h-6" style={{ color: 'var(--color-gold)' }} />
+                <FiX className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: 'var(--color-gold)' }} />
               </motion.div>
             ) : (
               <motion.div
@@ -506,7 +508,7 @@ const ChatBot = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <HiOutlineChatBubbleLeftRight className="w-5 h-5 md:w-6 md:h-6 text-black" />
+                <HiOutlineChatBubbleLeftRight className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -516,9 +518,9 @@ const ChatBot = () => {
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="absolute -top-1 -right-1 w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-emerald-400 border-2 border-black flex items-center justify-center"
+              className="absolute -top-1 -right-1 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-400 border-2 border-black flex items-center justify-center"
             >
-              <span className="text-[7px] md:text-[8px] text-black font-bold">!</span>
+              <span className="text-[7px] sm:text-[8px] text-black font-bold">!</span>
             </motion.span>
           )}
         </motion.button>
