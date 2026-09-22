@@ -42,11 +42,11 @@
     --color-border-hover: rgba(156, 163, 175, 1);
     /* gray-400 */
     --color-nav-bg: rgba(255, 255, 255, 0.85);
-    --color-gold: #d4af37;
-    --color-gold-light: #e8c547;
-    --color-gold-dark: #b8941f;
-    --color-gold-muted: #a08930;
-    --color-gold-rgb: 212, 175, 55;
+    --color-gold: #2563eb;
+    --color-gold-light: #3b82f6;
+    --color-gold-dark: #1d4ed8;
+    --color-gold-muted: #1e40af;
+    --color-gold-rgb: 37, 99, 235;
   }
 
   [data-theme='forest-dark'] {
@@ -297,7 +297,7 @@ body {
 /* Fix glass background for day mode so text has enough contrast */
 [data-theme='day'] .glass {
   background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(37, 99, 235, 0.15);
 }
 
 [data-theme='day'] .glass-card {

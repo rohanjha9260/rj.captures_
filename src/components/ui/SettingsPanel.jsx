@@ -25,10 +25,10 @@ const SettingsPanel = ({ isOpen, onClose }) => {
       items: [
         {
           id: 'day',
-          name: 'Golden Desert',
-          desc: 'Sunlit sand & gold accents',
+          name: 'Sunlit Blue',
+          desc: 'Clean daylight & blue accents',
           icon: FiSun,
-          accentColor: '#d4af37',
+          accentColor: '#2563eb',
           bgColor: '#ffffff'
         }
       ]
