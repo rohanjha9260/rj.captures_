@@ -59,7 +59,12 @@ npm run dev
 # Open http://localhost:5173 in your browser
 ```
 
-Set `VITE_GEMINI_API_KEY` in `.env.local` before using the chatbot.
+Set `VITE_GROQ_API_KEY` in `.env.local` before using the chatbot.
+
+## 📖 Architecture & AI Assistant Guides
+
+- **Full Project Architecture & Outline**: See [`docs/PROJECT_OUTLINE.md`](docs/PROJECT_OUTLINE.md) for full component breakdown, theming engine, data flow, and modification playbook.
+- **AI Agent Context & Cheatsheet**: See [`AGENTS.md`](AGENTS.md) for quick guidelines tailored for AI models (ChatGPT, Claude, Cursor, Copilot, etc.).
 
 ### Production Build
 
