@@ -4,6 +4,7 @@ A modern, fully responsive photography portfolio website built with React, Tailw
 
 ## 🎨 Key Features
 
+
 - **Modern Dark Theme Design**: Cinematic aesthetic with black, charcoal, and deep gray backgrounds
 - **Warm Golden Accents**: Elegant golden color palette (#d4af37, #e8c547) with smooth gradients
 - **Glassmorphism Effects**: Modern UI elements with soft shadows and blur backgrounds
