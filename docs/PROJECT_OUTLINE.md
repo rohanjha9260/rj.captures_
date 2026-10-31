@@ -109,6 +109,7 @@ main.jsx
         ├── <AnimatePresence> LoadingScreen (0-900ms initial load)
         ├── <Navbar isScrolled={isScrolled} />
         ├── <Hero />
+        ├── <InstagramFeed />
         ├── <FilmStrip />
         ├── <About />
         ├── #portfolio wrapper

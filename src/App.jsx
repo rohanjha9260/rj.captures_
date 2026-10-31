@@ -2,8 +2,9 @@ import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
-import About from './components/sections/About'
+import InstagramFeed from './components/sections/InstagramFeed'
 import FilmStrip from './components/portfolio/FilmStrip'
+import About from './components/sections/About'
 import PortfolioCarousel from './components/portfolio/PortfolioCarousel'
 import FeaturedWork from './components/sections/FeaturedWork'
 import SocialLinks from './components/ui/SocialLinks'
@@ -81,8 +82,11 @@ function App() {
       <div className="w-full min-h-screen">
         <Navbar isScrolled={isScrolled} />
 
-        {/* Hero Section */}
+        {/* Hero Section (Landing Wallpaper) */}
         <Hero />
+
+        {/* Live Instagram Feed */}
+        <InstagramFeed />
 
         {/* Infinite Film Strip */}
         <FilmStrip />
@@ -133,8 +137,6 @@ function App() {
 
         {/* Social Links */}
         <SocialLinks />
-
-
 
         {/* Footer */}
         <Footer />
