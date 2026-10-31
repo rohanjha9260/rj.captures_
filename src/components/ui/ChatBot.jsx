@@ -307,7 +307,7 @@ const ChatBot = () => {
         )}
       </AnimatePresence>
 
-      <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-24 md:right-28 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] right-4 sm:bottom-8 sm:right-24 md:right-28 z-50 flex flex-col items-end gap-3">
         {/* Chat Window */}
         <AnimatePresence>
           {isOpen && (

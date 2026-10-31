@@ -1,148 +1,366 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from '../../hooks/useInView'
-import { FiCamera, FiSun, FiMapPin, FiImage } from 'react-icons/fi'
+import {
+  FiMapPin,
+  FiSun,
+  FiHome,
+  FiUser,
+  FiCamera,
+  FiPlay,
+  FiX,
+} from 'react-icons/fi'
 
-const About = () => {
+const STATS = [
+  { value: '5+', label: 'Categories' },
+  { value: '200+', label: 'Photos' },
+  { value: '3+', label: 'Years Journey' },
+  { value: '∞', label: 'Stories to Capture' },
+]
+
+const EXPERTISE = [
+  {
+    title: 'Nature',
+    subtitle: 'Photography',
+    icon: (
+      <svg
+        className="w-5 h-5 text-gold flex-shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="m8 17 4-5 4 5M3 20l6-9 4 5 5-8 3 12H3z"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: 'Sky & Sunset',
+    subtitle: 'Photography',
+    icon: <FiSun className="w-5 h-5 text-gold flex-shrink-0" />,
+  },
+  {
+    title: 'Village Life',
+    subtitle: 'Photography',
+    icon: <FiHome className="w-5 h-5 text-gold flex-shrink-0" />,
+  },
+  {
+    title: 'Travel',
+    subtitle: 'Photography',
+    icon: (
+      <svg
+        className="w-5 h-5 text-gold flex-shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: 'Portrait',
+    subtitle: 'Photography',
+    icon: <FiUser className="w-5 h-5 text-gold flex-shrink-0" />,
+  },
+  {
+    title: 'Cinematic',
+    subtitle: 'Storytelling',
+    icon: <FiCamera className="w-5 h-5 text-gold flex-shrink-0" />,
+  },
+]
+
+export default function About() {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
+  const closeButtonRef = useRef(null)
+
   const { ref, inView } = useInView({
-    threshold: 0.15,
+    threshold: 0.1,
     triggerOnce: true,
   })
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  }
+  useEffect(() => {
+    if (!isVideoModalOpen) return
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-    },
-  }
+    closeButtonRef.current?.focus()
 
-  const skills = [
-    { name: 'Nature Photography', icon: FiCamera },
-    { name: 'Microshot Photography', icon: FiSun },
-    { name: 'Village Photography', icon: FiMapPin },
-    { name: 'Travel Photography', icon: FiImage },
-  ]
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsVideoModalOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isVideoModalOpen])
+
+  const scrollToPortfolio = () => {
+    document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <section
       id="about"
       ref={ref}
-      className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-20 px-6 sm:px-12 lg:px-20 max-w-5xl mx-auto overflow-hidden text-white"
     >
-      {/* Parallax background */}
-      <div className="parallax-bg" />
-      <div className="absolute inset-0 bg-gradient-section pointer-events-none" />
+      {/* ── Background Subtle Glow ── */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gold/3 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      {/* ══════════════════════════════════════════════════════════════════
+          1. TOP HERO: BIO (LEFT) + PHOTOGRAPHER PHOTO (RIGHT BLENDED)
+          ══════════════════════════════════════════════════════════════════ */}
+      <div className="relative min-h-[460px] sm:min-h-[500px] flex items-center justify-between overflow-hidden rounded-3xl mb-12 sm:mb-16">
+        {/* ── Photographer Photo (Positioned on Right & Blended into Darkness) ── */}
+        <div className="absolute right-0 top-0 bottom-0 w-3/4 sm:w-7/12 lg:w-1/2 pointer-events-none z-0">
+          <img
+            src="/images/profile.webp"
+            alt="Rohan Jha — Photographer"
+            className="w-full h-full object-cover object-top sm:object-center opacity-90 sm:opacity-95"
+          />
+          {/* Left-edge smooth fade to black */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 sm:via-black/50 to-transparent" />
+          {/* Bottom & Top soft darkening */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60" />
+        </div>
+
+        {/* ── Left Content: About Me, Title, Location, Bio, Signature ── */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 max-w-md sm:max-w-lg pr-4 py-8"
         >
-          {/* profile photo — circular */}
-          <motion.div variants={itemVariants} className="flex justify-center">
-            <div className="relative">
-              {/* Outer glow ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-gold blur-2xl opacity-20 scale-110" />
+          {/* Overline with small gold line */}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-8 h-[1.5px] bg-gold rounded-full" />
+            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.28em] text-white/70 uppercase">
+              About Me
+            </span>
+          </div>
 
-              {/* Decorative ring */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-3 rounded-full border border-dashed border-gold/20"
-              />
+          {/* Name: Rohan Jha in Large Playfair Display */}
+          <h2 className="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight drop-shadow-lg leading-tight">
+            <span className="bg-gradient-to-r from-white via-[#f7e6b5] to-[#d4af37] bg-clip-text text-transparent">
+              Rohan Jha
+            </span>
+          </h2>
 
-              {/* Photo container — circular */}
-              <div className="relative w-32 h-32 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/30 shadow-gold-glow">
-                <img
-                  src="/images/profile-thumb.webp"
-                  alt="Rohan Jha — Photographer"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                {/* Subtle overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-deep-blue/30 via-transparent to-transparent" />
-              </div>
-            </div>
-          </motion.div>
+          {/* Subtitle / Location */}
+          <div className="flex items-center gap-2 text-xs sm:text-sm text-white/75 font-medium mt-2">
+            <span>Photographer</span>
+            <span className="text-white/30">|</span>
+            <span className="flex items-center gap-1 text-white/80">
+              <FiMapPin className="text-gold text-xs" />
+              Delhi, India
+            </span>
+          </div>
 
-          {/* Bio and Skills */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            {/* Title */}
-            <div>
-              <motion.span
-                variants={itemVariants}
-                className="text-gold/60 text-sm tracking-[0.3em] uppercase block mb-3"
-              >
-                About Me
-              </motion.span>
-              <h2 className="section-title text-center sm:text-left !mb-2">Rohan Jha</h2>
-              <div className="flex items-center justify-center sm:justify-start gap-2 text-gray-500 text-sm mt-2">
-                <FiMapPin className="w-3.5 h-3.5" />
-                <span>Delhi, India</span>
-              </div>
-            </div>
+          {/* Narrative Bio */}
+          <p className="text-white/80 text-xs sm:text-sm sm:text-base leading-relaxed font-light mt-4 max-w-md drop-shadow">
+            I am a passionate photographer capturing the beauty of nature, skies,
+            and village life through cinematic visuals. Every frame tells a story,
+            and I strive to preserve the raw emotions and breathtaking moments that
+            our world offers.
+          </p>
 
-            {/* Bio */}
-            <p className="text-gray-300 text-base sm:text-lg leading-relaxed text-center sm:text-left">
-              I am a passionate photographer capturing the beauty of nature, skies,
-              and village life through cinematic visuals. Every frame tells a story,
-              and I strive to preserve the raw emotions and breathtaking moments
-              that our world offers.
-            </p>
+          {/* Cursive Signature: Rohan Jha */}
+          <div className="mt-4 pt-1">
+            <span className="font-serif italic text-3xl sm:text-4xl text-gold/90 font-light tracking-wide select-none drop-shadow-md">
+              Rohan Jha
+            </span>
+          </div>
 
-            {/* Skills */}
-            <div>
-              <h3 className="text-sm tracking-[0.2em] uppercase text-gold/70 mb-4 font-medium">
-                My Expertise
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {skills.map((skill, index) => {
-                  const Icon = skill.icon
-                  return (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-                      className="glass glass-hover px-3 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2 sm:gap-3"
-                    >
-                      <Icon className="w-4 h-4 text-gold flex-shrink-0" />
-                      <span className="text-gray-300 text-xs sm:text-sm font-medium">{skill.name}</span>
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </div>
-
-            {/* CTA */}
-            <motion.a
-              href="mailto:rjcaptures.photography@gmail.com"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="btn-gold inline-block text-sm uppercase tracking-widest cursor-pointer"
-            >
-              Let's Connect
-            </motion.a>
-          </motion.div>
+          {/* Small Gold Divider */}
+          <div className="w-14 h-[1.5px] bg-gold/70 mt-3 rounded-full shadow-gold-glow" />
         </motion.div>
       </div>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          2. HORIZONTAL STATS BAR (Matches Mockup Single Rounded Box)
+          ══════════════════════════════════════════════════════════════════ */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.15 }}
+        className="mb-14 sm:mb-16 rounded-2xl border border-white/10 bg-theme-card/75 backdrop-blur-md px-3 sm:px-6 py-4 sm:py-5 flex items-center justify-between divide-x divide-white/10 shadow-lg text-center"
+      >
+        {STATS.map((stat) => (
+          <div key={stat.label} className="flex-1 px-1 sm:px-3">
+            <span className="block font-playfair text-xl sm:text-3xl font-bold text-gold leading-tight drop-shadow">
+              {stat.value}
+            </span>
+            <span className="block text-[9px] sm:text-xs font-sans tracking-wider uppercase text-white/60 font-medium mt-1">
+              {stat.label}
+            </span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          3. MY EXPERTISE (6 RECTANGULAR CARDS IN 2x3 or 3x2 GRID)
+          ══════════════════════════════════════════════════════════════════ */}
+      <div className="mb-14 sm:mb-16">
+        {/* Section Tag */}
+        <div className="flex items-center gap-2 mb-5">
+          <span className="w-6 h-[1.5px] bg-gold rounded-full" />
+          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-white/70 uppercase">
+            My Expertise
+          </span>
+        </div>
+
+        {/* 6 Expertise Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          {EXPERTISE.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 15 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className="group p-3.5 sm:p-4 rounded-2xl bg-theme-card/75 border border-white/10 hover:border-gold/45 backdrop-blur-md transition-all duration-300 flex items-center gap-3.5 shadow-sm"
+            >
+              <div className="p-2 sm:p-2.5 rounded-xl bg-gold/10 border border-gold/25 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
+                {item.icon}
+              </div>
+              <div className="text-left leading-tight">
+                <span className="block text-xs sm:text-sm font-semibold text-white/95 group-hover:text-gold transition-colors">
+                  {item.title}
+                </span>
+                <span className="block text-[11px] sm:text-xs text-white/60 font-light mt-0.5">
+                  {item.subtitle}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          4. BEHIND THE LENS (QUOTE) + GLIMPSE OF MY JOURNEY (VIDEO CARD)
+          ══════════════════════════════════════════════════════════════════ */}
+      <div className="mb-12 sm:mb-14">
+        {/* Tag */}
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-6 h-[1.5px] bg-gold rounded-full" />
+          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-white/70 uppercase">
+            Behind the Lens
+          </span>
+        </div>
+
+        {/* Quote in Gold Serif */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-6"
+        >
+          <blockquote className="font-playfair italic text-xl sm:text-3xl text-gold font-normal leading-snug drop-shadow-md">
+            &ldquo;Finding extraordinary beauty in ordinary moments.&rdquo;
+          </blockquote>
+          <div className="w-12 h-[1.5px] bg-gold/70 mt-3 rounded-full" />
+        </motion.div>
+
+        {/* Video / Glimpse Card */}
+        <motion.button
+          type="button"
+          aria-label="Watch a glimpse of my journey"
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          onClick={() => setIsVideoModalOpen(true)}
+          className="w-full text-left group relative aspect-[16/8] sm:aspect-[16/7] rounded-3xl overflow-hidden border border-white/15 hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold shadow-2xl bg-black cursor-pointer transition-all duration-300 block"
+        >
+          {/* Landscape Photo Silhouette */}
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1400&fit=crop&q=85"
+            alt="Photographer at golden sunset over mountains"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+            loading="lazy"
+          />
+
+          {/* Dark Cinematic Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40 group-hover:bg-black/35 transition-colors duration-300" />
+
+          {/* Center Play Button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-white/20 border border-white/50 backdrop-blur-md flex items-center justify-center text-white shadow-2xl group-hover:scale-115 group-hover:bg-gold group-hover:text-black group-hover:border-gold transition-all duration-300">
+              <FiPlay className="w-5 h-5 sm:w-6 sm:h-6 ml-0.5 fill-current" />
+            </div>
+          </div>
+
+          {/* Bottom Right Caption: A Glimpse of My Journey */}
+          <div className="absolute bottom-4 right-5 sm:bottom-6 sm:right-7 flex items-center gap-2">
+            <span className="text-[10px] sm:text-xs tracking-[0.25em] text-white/80 font-medium uppercase drop-shadow">
+              A Glimpse of My Journey
+            </span>
+            <span className="w-5 h-px bg-gold" />
+          </div>
+        </motion.button>
+      </div>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          5. CTA BUTTON: EXPLORE MY WORK →
+          ══════════════════════════════════════════════════════════════════ */}
+      <div className="text-center pt-2">
+        <button
+          onClick={scrollToPortfolio}
+          className="w-full sm:w-auto px-10 py-4 rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase bg-gradient-to-r from-[#e8c547] via-[#dfb93c] to-[#d4af37] text-black shadow-lg shadow-gold/25 hover:shadow-gold/45 hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>Explore My Work</span>
+          <span className="font-sans font-bold">→</span>
+        </button>
+      </div>
+
+      {/* ── Journey Video Modal (When Play Button Clicked) ── */}
+      <AnimatePresence>
+        {isVideoModalOpen && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="A Glimpse of My Journey Video"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-8"
+            onClick={() => setIsVideoModalOpen(false)}
+          >
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={() => setIsVideoModalOpen(false)}
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold text-white text-xl transition-colors cursor-pointer"
+              aria-label="Close video preview"
+            >
+              <FiX />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-gold/40 shadow-2xl bg-black relative"
+            >
+              <iframe
+                src="https://www.youtube-nocookie.com/embed?listType=user_uploads&list=rohanjha9260&autoplay=1"
+                title="Rohan Jha — Photography Journey"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
-
-export default About

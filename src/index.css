@@ -286,7 +286,7 @@ body {
 
 /* Navbar links in day mode when scrolled */
 [data-theme='day'] .floating-nav.scrolled a {
-  color: var(--color-text-primary);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Portfolio section-subtitle (category labels on carousel) */

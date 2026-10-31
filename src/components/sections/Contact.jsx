@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../../hooks/useInView'
-import { HiCheckCircle, HiExclamationCircle } from 'react-icons/hi'
-import { FiMail, FiMapPin, FiClock, FiSend } from 'react-icons/fi'
+import { FiMail, FiInstagram, FiCheckCircle } from 'react-icons/fi'
 
-const Contact = () => {
+export default function Contact() {
   const { ref, inView } = useInView({
-    threshold: 0.15,
+    threshold: 0.1,
     triggerOnce: true,
   })
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: '',
   })
 
@@ -21,289 +21,235 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const validateForm = () => {
-    if (!formData.name.trim()) {
-      setStatus({ type: 'error', message: 'Please enter your name' })
-      return false
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) {
-      setStatus({ type: 'error', message: 'Please enter a valid email address' })
-      return false
-    }
-    if (!formData.message.trim()) {
-      setStatus({ type: 'error', message: 'Please enter your message' })
-      return false
-    }
-    return true
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!validateForm()) return
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus({ type: 'error', message: 'Please complete all required fields.' })
+      return
+    }
 
     setIsSubmitting(true)
     setStatus(null)
 
-    const endpoint =
-      import.meta.env.VITE_CONTACT_FORM_ENDPOINT ||
-      (import.meta.env.VITE_WEB3FORMS_KEY
-        ? 'https://api.web3forms.com/submit'
-        : 'https://formspree.io/f/rjcaptures.photography@gmail.com')
+    const endpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT
 
-    try {
-      const payload = {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-        to_email: 'rjcaptures.photography@gmail.com',
-        subject: `New Client Inquiry from ${formData.name}`,
-        access_key: import.meta.env.VITE_WEB3FORMS_KEY || undefined,
-      }
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-
-      const data = await response.json().catch(() => ({}))
-
-      if (response.ok && data.success !== false) {
-        setStatus({
-          type: 'success',
-          message: "Thank you! Your message has been sent successfully. I'll get back to you soon!",
-        })
-        setFormData({ name: '', email: '', message: '' })
-        setTimeout(() => setStatus(null), 7000)
-      } else {
-        const errorMsg =
-          data.message ||
-          'Failed to send message. Please try again or email directly at rjcaptures.photography@gmail.com.'
-        setStatus({
-          type: 'error',
-          message: errorMsg,
-        })
-      }
-    } catch (err) {
-      console.error('Contact form submission error:', err)
+    if (!endpoint) {
       setStatus({
         type: 'error',
-        message:
-          'Network error while sending message. Please try again or email directly at rjcaptures.photography@gmail.com.',
+        message: 'Contact form endpoint is not configured. Please contact me directly via email or Instagram.',
+      })
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setStatus({
+          type: 'success',
+          message: 'Thank you! Your message has been sent successfully.',
+        })
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setStatus({
+          type: 'error',
+          message: 'Failed to send message. Please try again or reach out directly.',
+        })
+      }
+    } catch {
+      setStatus({
+        type: 'error',
+        message: 'A network error occurred. Please try again or contact me directly.',
       })
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.15 },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] },
-    },
-  }
-
-  const contactInfo = [
-    {
-      icon: FiMail,
-      title: 'Email',
-      value: 'rjcaptures.photography@gmail.com',
-      href: 'mailto:rjcaptures.photography@gmail.com',
-    },
-    {
-      icon: FiMapPin,
-      title: 'Location',
-      value: 'Delhi, India',
-      href: null,
-    },
-    {
-      icon: FiClock,
-      title: 'Response Time',
-      value: 'Within 24 hours',
-      href: null,
-    },
-  ]
-
   return (
-    <section id="contact" ref={ref} className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-section pointer-events-none" />
+    <section
+      id="contact"
+      ref={ref}
+      className="relative py-20 px-6 sm:px-12 lg:px-20 max-w-4xl mx-auto overflow-hidden"
+    >
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-gold/3 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-        >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="text-center mb-10 sm:mb-16">
-            <span className="text-gold/50 text-xs tracking-[0.3em] uppercase block mb-3">
-              Get In Touch
-            </span>
-            <h2 className="section-title">
-              Let's Create Together
-            </h2>
-            <p className="section-subtitle mt-4">
-              Have a project in mind? I'd love to hear about it.
-            </p>
-            <div className="section-divider mt-6" />
-          </motion.div>
+      {/* ── Section Header (Screen 5: Let's Connect) ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+        className="text-left mb-8 sm:mb-10"
+      >
+        <span className="text-gold text-xs sm:text-sm tracking-[0.28em] font-semibold uppercase block mb-2">
+          Get in Touch
+        </span>
+        <h2 className="font-playfair text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
+          Let's Connect
+        </h2>
+        <p className="text-sm sm:text-base text-white/70 max-w-xl mt-3 font-light leading-relaxed">
+          Have a story to capture?
+          <br />
+          Let's create something amazing together.
+        </p>
+      </motion.div>
 
-          {/* Contact Info Cards */}
-          <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-            {contactInfo.map((info) => {
-              const Icon = info.icon
-              return (
-                <div key={info.title} className="glass-card p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-5 h-5 text-gold" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-gray-300 mb-1">{info.title}</h3>
-                  {info.href ? (
-                    <a href={info.href} className="text-gold hover:text-gold-light text-sm">
-                      {info.value}
-                    </a>
-                  ) : (
-                    <p className="text-gold/80 text-sm">{info.value}</p>
-                  )}
-                </div>
-              )
-            })}
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.form
-            variants={itemVariants}
-            onSubmit={handleSubmit}
-            className="glass-card p-8 md:p-12"
+      {/* ── Contact Form ── */}
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.15 }}
+        className="space-y-3.5 sm:space-y-4"
+      >
+        {status && (
+          <div
+            className={`p-4 rounded-xl flex items-center gap-2.5 text-xs sm:text-sm ${
+              status.type === 'success'
+                ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-300'
+                : 'bg-red-500/15 border border-red-500/30 text-red-300'
+            }`}
           >
-            {/* Status Messages */}
-            <motion.div
-              animate={{
-                opacity: status ? 1 : 0,
-                height: status ? 'auto' : 0,
-              }}
-              transition={{ duration: 0.3 }}
-              className="mb-6 overflow-hidden"
-            >
-              {status && (
-                <div
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl ${
-                    status.type === 'success'
-                      ? 'bg-green-500/10 border border-green-500/30 text-green-400'
-                      : 'bg-red-500/10 border border-red-500/30 text-red-400'
-                  }`}
-                >
-                  {status.type === 'success' ? (
-                    <HiCheckCircle className="w-5 h-5 flex-shrink-0" />
-                  ) : (
-                    <HiExclamationCircle className="w-5 h-5 flex-shrink-0" />
-                  )}
-                  <span className="text-sm">{status.message}</span>
-                </div>
-              )}
-            </motion.div>
+            <FiCheckCircle className="flex-shrink-0 text-base" />
+            <span>{status.message}</span>
+          </div>
+        )}
 
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Name Field */}
-                <div>
-                  <label htmlFor="name" className="block text-xs font-medium mb-2 text-gold/70 tracking-wider uppercase">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  />
-                </div>
+        <div>
+          <label htmlFor="contact-name" className="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1.5">
+            Your Name
+          </label>
+          <input
+            id="contact-name"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all backdrop-blur-sm"
+          />
+        </div>
 
-                {/* Email Field */}
-                <div>
-                  <label htmlFor="email" className="block text-xs font-medium mb-2 text-gold/70 tracking-wider uppercase">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  />
-                </div>
-              </div>
+        <div>
+          <label htmlFor="contact-email" className="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1.5">
+            Your Email
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all backdrop-blur-sm"
+          />
+        </div>
 
-              {/* Message Field */}
-              <div>
-                <label htmlFor="message" className="block text-xs font-medium mb-2 text-gold/70 tracking-wider uppercase">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project..."
-                  rows="5"
-                  className="w-full resize-none"
-                  disabled={isSubmitting}
-                />
-              </div>
+        <div>
+          <label htmlFor="contact-subject" className="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1.5">
+            Subject
+          </label>
+          <input
+            id="contact-subject"
+            type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            placeholder="Subject"
+            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all backdrop-blur-sm"
+          />
+        </div>
 
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full btn-gold flex items-center justify-center gap-3 text-sm uppercase tracking-widest"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="spinner w-4 h-4 border-2" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <FiSend className="w-4 h-4" />
-                    Send Message
-                  </>
-                )}
-              </motion.button>
+        <div>
+          <label htmlFor="contact-message" className="block text-xs font-semibold text-white/80 uppercase tracking-wider mb-1.5">
+            Message
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows={4}
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Message"
+            required
+            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all resize-none backdrop-blur-sm"
+          />
+        </div>
+
+        {/* Send Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full py-4 rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase bg-gradient-to-r from-[#e8c547] via-[#dfb93c] to-[#d4af37] text-black shadow-lg shadow-gold/25 hover:shadow-gold/45 hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+        >
+          <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+          <span className="font-sans font-bold">→</span>
+        </button>
+      </motion.form>
+
+      {/* ── Direct Reach Divider & Cards (Screen 5) ── */}
+      <div className="mt-12 sm:mt-14">
+        {/* Divider */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-white/50">
+            Or Reach Me Directly
+          </span>
+          <div className="flex-1 h-px bg-white/10" />
+        </div>
+
+        {/* 2 Contact Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          {/* Email Card */}
+          <a
+            href="mailto:rjcaptures.photography@gmail.com"
+            className="flex items-center gap-3.5 p-4 rounded-2xl bg-theme-card/75 border border-theme-border/70 hover:border-gold/40 backdrop-blur-md transition-all duration-300 group cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+              <FiMail className="w-4 h-4" />
             </div>
-          </motion.form>
-        </motion.div>
+            <div className="text-left">
+              <span className="text-[10px] tracking-wider uppercase text-white/50 block font-medium">
+                Email Me
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gold transition-colors">
+                rjcaptures.photography@gmail.com
+              </span>
+            </div>
+          </a>
+
+          {/* Instagram Card */}
+          <a
+            href="https://instagram.com/rj.captures_"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3.5 p-4 rounded-2xl bg-theme-card/75 border border-theme-border/70 hover:border-gold/40 backdrop-blur-md transition-all duration-300 group cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+              <FiInstagram className="w-4 h-4" />
+            </div>
+            <div className="text-left">
+              <span className="text-[10px] tracking-wider uppercase text-white/50 block font-medium">
+                Instagram
+              </span>
+              <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gold transition-colors">
+                @rj.captures_
+              </span>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
   )
 }
-
-export default Contact

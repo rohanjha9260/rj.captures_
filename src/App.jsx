@@ -2,14 +2,13 @@ import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
-import InstagramFeed from './components/sections/InstagramFeed'
+import PortfolioSection from './components/sections/PortfolioSection'
 import FilmStrip from './components/portfolio/FilmStrip'
 import About from './components/sections/About'
-import PortfolioCarousel from './components/portfolio/PortfolioCarousel'
-import FeaturedWork from './components/sections/FeaturedWork'
-import SocialLinks from './components/ui/SocialLinks'
-
+import InstagramFeed from './components/sections/InstagramFeed'
+import Contact from './components/sections/Contact'
 import Footer from './components/layout/Footer'
+import BottomNav from './components/layout/BottomNav'
 import BackToTop from './components/ui/BackToTop'
 import './index.css'
 
@@ -54,7 +53,7 @@ function App() {
     return () => window.clearTimeout(timer)
   }, [])
 
-  // Loading screen
+  // Initial loading screen (900ms)
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
@@ -79,69 +78,35 @@ function App() {
         )}
       </AnimatePresence>
 
-      <div className="w-full min-h-screen">
+      <div className="w-full min-h-screen bg-theme-bg text-theme-text font-inter antialiased">
+        {/* Top Navbar (Brand + Desktop Nav + Mobile Icons) */}
         <Navbar isScrolled={isScrolled} />
 
-        {/* Hero Section (Landing Wallpaper) */}
+        {/* ── 1. HOME PAGE (Hero Section) ── */}
         <Hero />
 
-        {/* Live Instagram Feed */}
-        <InstagramFeed />
+        {/* ── 2. PORTFOLIO PAGE (Our Work / 5 Categories) ── */}
+        <PortfolioSection />
 
-        {/* Infinite Film Strip */}
+        {/* ── Cinematic 35mm Infinite Film Reel ── */}
         <FilmStrip />
 
-        {/* About Section */}
+        {/* ── 3. ABOUT PAGE (About Me / Rohan Jha Story, Stats, Expertise) ── */}
         <About />
 
-        {/* Portfolio Sections — wrapped with ID for navigation */}
-        <div id="portfolio">
-          <PortfolioCarousel
-            id="nature"
-            title="Nature Photography"
-            category="nature"
-            description="Capturing the raw beauty of natural landscapes and the serenity of wilderness"
-          />
+        {/* ── 4. INSTAGRAM / FEED PAGE (Journey / Moments on Feed) ── */}
+        <InstagramFeed />
 
-          <PortfolioCarousel
-            id="sky"
-            title="Sky Photography"
-            category="sky"
-            description="The ever-changing canvas of clouds, sunsets, and celestial moments"
-          />
+        {/* ── 5. CONTACT PAGE (Get in Touch / Let's Connect Form & Direct Reach) ── */}
+        <Contact />
 
-          <PortfolioCarousel
-            id="village"
-            title="Village Photography"
-            category="village"
-            description="Stories of culture, tradition, and life in quaint villages"
-          />
-
-          <PortfolioCarousel
-            id="travel"
-            title="Travel Photography"
-            category="travel"
-            description="Wanderlust captured through the lens, exploring diverse destinations"
-          />
-
-          <PortfolioCarousel
-            id="portrait"
-            title="Portrait Photography"
-            category="portrait"
-            description="Intimate moments and authentic expressions of the human soul"
-          />
-        </div>
-
-        {/* Featured Work */}
-        <FeaturedWork />
-
-        {/* Social Links */}
-        <SocialLinks />
-
-        {/* Footer */}
+        {/* ── Footer ── */}
         <Footer />
 
-        {/* Back to Top Button */}
+        {/* ── Mobile Bottom Navigation Bar (Phone Dock: Home, About, Work, Journey, Connect) ── */}
+        <BottomNav />
+
+        {/* ── Floating Controls ── */}
         <BackToTop />
 
         {/* Photography AI Chatbot */}

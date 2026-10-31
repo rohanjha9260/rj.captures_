@@ -81,48 +81,43 @@ rj-captures/
     └── components/
         ├── layout/
         │   ├── Navbar.jsx           # Sticky glassmorphism header, navigation, theme toggle
+        │   ├── BottomNav.jsx        # Mobile dock navigation with scroll-spy tab tracking
         │   └── Footer.jsx           # Brand footer, sitemap links, services list, contact info
         ├── portfolio/
-        │   ├── FilmStrip.jsx        # Infinite horizontally scrolling photographic film reel
-        │   └── PortfolioCarousel.jsx# Categorized Swiper image gallery with full lightbox view
+        │   └── FilmStrip.jsx        # Infinite horizontally scrolling photographic film reel
         ├── sections/
         │   ├── Hero.jsx             # Full-screen hero with carousel, tagline, quick stats
+        │   ├── PortfolioSection.jsx # Category portfolio cards with lightbox integration
         │   ├── About.jsx            # Bio, photographer narrative, gear & skills tags
-        │   ├── FeaturedWork.jsx     # Dynamic masonry grid showcasing highlights
+        │   ├── InstagramFeed.jsx    # Live 3x3 Instagram / Behold.so photo grid
         │   └── Contact.jsx          # Full contact form with Formspree/Web3Forms logic
         └── ui/
             ├── BackToTop.jsx        # Floating back-to-top button appearing after 400px scroll
             ├── ChatBot.jsx          # Photography AI assistant using Groq API
             ├── ImageViewer.jsx      # High-performance fullscreen image lightbox with keyboard controls
-            ├── SettingsPanel.jsx    # Slide-over panel for multi-theme selection
-            └── SocialLinks.jsx      # Interactive social media cards (Instagram, YouTube, etc.)
+            └── SettingsPanel.jsx    # Slide-over panel for multi-theme selection
 ```
 
 ---
 
 ## 4. Component Architecture & Data Flow
 
-```
+```text
 main.jsx
 └── <ThemeProvider>
     └── <App>
         ├── <AnimatePresence> LoadingScreen (0-900ms initial load)
         ├── <Navbar isScrolled={isScrolled} />
-        ├── <Hero />
-        ├── <InstagramFeed />
-        ├── <FilmStrip />
-        ├── <About />
-        ├── #portfolio wrapper
-        │   ├── <PortfolioCarousel category="nature" ... />
-        │   ├── <PortfolioCarousel category="sky" ... />
-        │   ├── <PortfolioCarousel category="village" ... />
-        │   ├── <PortfolioCarousel category="travel" ... />
-        │   └── <PortfolioCarousel category="portrait" ... />
-        ├── <FeaturedWork />
-        ├── <SocialLinks />
-        ├── <Footer />
+        ├── <Hero />                                 # Screen 1: HOME PAGE
+        ├── <PortfolioSection />                     # Screen 2: PORTFOLIO / WORK (5 Categories)
+        ├── <FilmStrip />                            # Cinematic 35mm film reel divider
+        ├── <About />                                # Screen 3: ABOUT PAGE (Story, Stats, Expertise)
+        ├── <InstagramFeed />                        # Screen 4: INSTAGRAM / FEED PAGE (3x3 Grid)
+        ├── <Contact />                              # Screen 5: CONTACT PAGE (Form & Direct Reach)
+        ├── <Footer />                               # Brand footer
+        ├── <BottomNav />                            # Mobile Bottom Dock (Phone)
         ├── <BackToTop />
-        └── <Suspense> <ChatBot /> (Lazy loaded after idle/timeout)
+        └── <Suspense> <ChatBot />                   # Non-blocking AI Assistant
 ```
 
 ### Detailed Component Summary
@@ -130,17 +125,17 @@ main.jsx
 | Component | Path | Key Props / State | Responsibilities & Architecture |
 |---|---|---|---|
 | **`App.jsx`** | `src/App.jsx` | `isScrolled`, `isLoading`, `shouldMountChatBot` | Root coordinator. Listens to `window.scroll` via `requestAnimationFrame`. Mounts ChatBot via `requestIdleCallback` (fallback 1600ms) to ensure non-blocking initial paint. |
-| **`Navbar.jsx`** | `src/components/layout/Navbar.jsx` | `isScrolled` (prop), `isOpen` (mobile drawer) | Sticky glassmorphic navbar. Smooth-scrolls to `#home`, `#about`, `#portfolio`, `#social`. Houses brand badge, desktop menu, mobile animated hamburger (`HiMenuAlt3`/`HiX`), and theme toggle (`FiSun`/`FiMoon`). |
-| **`Hero.jsx`** | `src/components/sections/Hero.jsx` | `currentSlide`, slide timer | Full-screen hero section. Displays headline, bio teaser, CTA buttons ("Explore Work", "Connect"), and photographer stats (5+ Years, 50k+ Shots, 100+ Stories). |
+| **`Navbar.jsx`** | `src/components/layout/Navbar.jsx` | `isScrolled` (prop), `isOpen` (mobile drawer) | Sticky glassmorphic navbar. Smooth-scrolls to `#home`, `#about`, `#portfolio`, `#instagram`, `#contact`. Houses brand badge, desktop menu, mobile animated hamburger (`HiMenuAlt3`/`HiX`), and theme toggle (`FiSun`/`FiMoon`). |
+| **`Hero.jsx`** | `src/components/sections/Hero.jsx` | `currentSlide`, slide timer, `isAutoRotatePaused` | Full-screen hero section. Displays headline, bio teaser, CTA buttons ("Explore My Work", "My Story"), slide counter (01/05), location tag, and accessible auto-rotation controls. |
+| **`PortfolioSection.jsx`** | `src/components/sections/PortfolioSection.jsx` | `viewerOpen`, `viewerImages`, `viewerIndex` | Category-driven portfolio section. Renders 5 interactive category cards (Nature, Sky, Village, Travel, Portrait) with responsive layout, numbered indices, and opens `ImageViewer` lightbox on activation. |
 | **`FilmStrip.jsx`** | `src/components/portfolio/FilmStrip.jsx` | CSS infinite ticker | Cinematic vintage film-strip animation running continuously across screen with border sprocket holes and preview frames. |
-| **`About.jsx`** | `src/components/sections/About.jsx` | `inView` trigger | Photographer biography, philosophy, photography focus pills (Landscape, Portrait, Street, Astro), and featured framed portrait (`profile.webp`). |
-| **`PortfolioCarousel.jsx`** | `src/components/portfolio/PortfolioCarousel.jsx` | `id`, `title`, `category`, `description` | Category gallery. Shuffles up to 8 images on mount from static collection, renders a responsive Swiper carousel (1 slide on mobile, 2 on tablet, 3 on desktop), and opens `ImageViewer` on click. |
-| **`FeaturedWork.jsx`** | `src/components/sections/FeaturedWork.jsx` | `viewerOpen`, `viewerIndex` | Masonry grid with custom responsive aspect ratios (`masonry-tall`, `masonry-wide`) featuring top curated photographs with hover zooms and metadata overlays. |
-| **`SocialLinks.jsx`** | `src/components/ui/SocialLinks.jsx` | None | Cards linking to social platforms: Instagram, YouTube, LinkedIn, GitHub, Twitter/X, with custom hover gradients. |
-| **`Contact.jsx`** | `src/components/sections/Contact.jsx` | `formData`, `status`, `isSubmitting` | Production-ready contact form supporting Formspree or Web3Forms with client-side validation, error handling, and animated success confirmation. |
+| **`About.jsx`** | `src/components/sections/About.jsx` | `inView` trigger, `isVideoModalOpen` | Photographer biography, philosophy, cursive signature, glass stat counter, 6 expertise cards, and journey-video card with accessible modal dialog. |
+| **`InstagramFeed.jsx`** | `src/components/sections/InstagramFeed.jsx` | `posts`, `profile`, `isLoading`, `isLiveFeed` | Live Instagram visual diary section. Connects to Behold.so JSON feed with fallback highlights gallery, profile badge, 3x3 photo grid, and follow button. |
+| **`Contact.jsx`** | `src/components/sections/Contact.jsx` | `formData`, `status`, `isSubmitting` | Production-ready contact form supporting Formspree with client-side validation, error handling, labeled inputs, and direct contact cards. |
 | **`Footer.jsx`** | `src/components/layout/Footer.jsx` | None | Multi-column footer containing brand statement, navigation shortcuts, photography services list, copyright, and direct email link (`rjcaptures.photography@gmail.com`). |
+| **`BottomNav.jsx`** | `src/components/layout/BottomNav.jsx` | `activeTab` | Mobile-only (`md:hidden`) fixed glassmorphism bottom navigation dock. Synchronizes active indicator with current scroll position across `#home`, `#about`, `#portfolio`, `#instagram`, `#contact`. |
 | **`BackToTop.jsx`** | `src/components/ui/BackToTop.jsx` | `isVisible` | Floating circular gold action button rendered when `scrollY > 400px`, smoothly scrolling user back to top. |
-| **`ChatBot.jsx`** | `src/components/ui/ChatBot.jsx` | `messages`, `isOpen`, `isLoading`, `inputText` | Floating interactive AI photography guide. Sends conversation history to Groq Cloud endpoint. Features custom markdown renderer for tables, bullet lists, bold text, and quick-prompt chips. |
+| **`ChatBot.jsx`** | `src/components/ui/ChatBot.jsx` | `messages`, `isOpen`, `isLoading`, `inputText` | Floating interactive AI photography guide with safe-area spacing. Sends conversation history to Groq Cloud endpoint. Features custom markdown renderer for tables, bullet lists, bold text, and quick-prompt chips. |
 | **`ImageViewer.jsx`** | `src/components/ui/ImageViewer.jsx` | `images`, `currentIndex`, `isOpen`, `onClose` | Fullscreen modal lightbox supporting keyboard navigation (`Esc` to close, `ArrowLeft`/`ArrowRight` to navigate), swipe gesture support, and backdrop click dismiss. |
 | **`SettingsPanel.jsx`** | `src/components/ui/SettingsPanel.jsx` | `isOpen`, `onClose` | Slide-out drawer displaying visual cards to select between different nature-inspired and day/night themes. |
 
@@ -248,27 +243,18 @@ const imagePath = '/images/nature/IMG_20260228_172521.webp'
    ```bash
    npm run convert-images
    ```
-3. Open `src/components/portfolio/PortfolioCarousel.jsx`.
-4. Add the new `.webp` file path into the corresponding array inside `baseImages.<category>`.
+3. Open `src/components/sections/PortfolioSection.jsx`.
+4. Add the new `.webp` file path into the corresponding array inside `CATEGORIES[i].images`.
 
 ### Task 2: Adding a New Portfolio Category
 1. Create directory `public/images/<new_category>/` and populate with WebP images.
-2. In `src/components/portfolio/PortfolioCarousel.jsx`, append `<new_category>` to `baseImages`.
-3. In `src/App.jsx`, add a new `<PortfolioCarousel>` instance under `#portfolio`:
-   ```jsx
-   <PortfolioCarousel
-     id="new_cat"
-     title="New Category Title"
-     category="new_cat"
-     description="Description of this photo series..."
-   />
-   ```
+2. In `src/components/sections/PortfolioSection.jsx`, append the new category object to `CATEGORIES`.
 
 ### Task 3: Modifying Brand Content or Contact Information
 - **Photographer Name & Titles**: `src/components/sections/Hero.jsx` and `src/components/layout/Navbar.jsx`.
 - **Bio & Skills**: `src/components/sections/About.jsx`.
 - **Contact Details & Email**: `src/components/layout/Footer.jsx` and `src/components/sections/Contact.jsx`.
-- **Social Media Links**: `src/components/ui/SocialLinks.jsx` and `src/components/layout/Footer.jsx`.
+- **Social Media Links**: `src/components/layout/Footer.jsx` and `src/components/sections/Contact.jsx`.
 
 ### Task 4: Re-enabling the Contact Form
 - `Contact.jsx` is fully implemented in `src/components/sections/Contact.jsx`.
