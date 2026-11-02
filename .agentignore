@@ -1,0 +1,53 @@
+# Antigravity & AI Agent Ignore File (.agentignore)
+# Prevents agents from indexing or scanning heavy build artifacts, dependencies, and sensitive files.
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production & Build Outputs
+dist/
+dist-ssr/
+build/
+out/
+coverage/
+.next/
+.cache/
+
+# Sensitive Environment & Secrets
+.env
+.env.*
+!.env.example
+*.local
+*.pem
+*.key
+*.cert
+
+# Logs & Debugging
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System & OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Tool-specific Dumps
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# Agent internal scratch and system directories
+.system_generated/
+.gemini/
+scratch/
+
