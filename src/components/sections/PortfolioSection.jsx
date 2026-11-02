@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FiArrowLeft, FiX, FiMaximize2 } from 'react-icons/fi'
 import { useInView } from '../../hooks/useInView'
 import ImageViewer from '../ui/ImageViewer'
 
@@ -77,17 +78,51 @@ const CATEGORIES = [
 ]
 
 export default function PortfolioSection() {
-  const [activeGallery, setActiveGallery] = useState(null)
-  const [viewerIndex, setViewerIndex] = useState(0)
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [fullscreenIndex, setFullscreenIndex] = useState(null)
+  const triggerRef = useRef(null)
+  const closeButtonRef = useRef(null)
 
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
 
-  const openCategory = (cat) => {
-    setActiveGallery(cat)
-    setViewerIndex(0)
+  // Prevent background scrolling and focus close button when gallery modal is open
+  useEffect(() => {
+    if (selectedCategory) {
+      document.body.style.overflow = 'hidden'
+      closeButtonRef.current?.focus()
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [selectedCategory])
+
+  // Close gallery view on Escape if fullscreen viewer is not active, and restore focus to trigger
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedCategory && fullscreenIndex === null) {
+        setSelectedCategory(null)
+        triggerRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedCategory, fullscreenIndex])
+
+  const openCategory = (cat, e) => {
+    triggerRef.current = e?.currentTarget || (typeof document !== 'undefined' ? document.activeElement : null)
+    setSelectedCategory(cat)
+    setFullscreenIndex(null)
+  }
+
+  const closeCategoryGallery = () => {
+    setSelectedCategory(null)
+    setFullscreenIndex(null)
+    triggerRef.current?.focus()
   }
 
   return (
@@ -117,18 +152,18 @@ export default function PortfolioSection() {
         </p>
       </motion.div>
 
-      {/* ── Category Cards Grid (Responsive: 1 col on mobile, 2 cols on PC) ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {/* ── Category List (Borderless & Cinematic layout) ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
         {CATEGORIES.map((cat, index) => (
           <motion.button
             key={cat.id}
             type="button"
-            aria-label={`View ${cat.title} gallery`}
+            aria-label={`Open ${cat.title} photo gallery`}
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            onClick={() => openCategory(cat)}
-            className="w-full text-left group relative flex items-center justify-between p-3.5 sm:p-5 rounded-2xl bg-theme-card/75 border border-theme-border/70 hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold backdrop-blur-md transition-all duration-300 hover:shadow-card-hover cursor-pointer"
+            onClick={(e) => openCategory(cat, e)}
+            className="w-full text-left group relative flex items-center justify-between py-4 px-2 sm:px-4 rounded-xl border-b border-white/10 hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all duration-300 cursor-pointer bg-transparent hover:bg-white/[0.02]"
           >
             {/* Left: Thumbnail + Titles */}
             <div className="flex items-center gap-3.5 sm:gap-5 flex-1 min-w-0 pr-3">
@@ -166,16 +201,109 @@ export default function PortfolioSection() {
         ))}
       </div>
 
-      {/* ── Category Fullscreen Lightbox Gallery ── */}
-      {activeGallery && (
+      {/* ── Step 1: Category Photos Arrangement Gallery Overlay ── */}
+      <AnimatePresence>
+        {selectedCategory && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selectedCategory.title} Photo Gallery`}
+            className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-2xl overflow-y-auto flex flex-col"
+          >
+            {/* Sticky Top Bar */}
+            <div className="sticky top-0 z-30 bg-black/85 backdrop-blur-xl border-b border-white/10 px-4 sm:px-8 py-3.5 sm:py-4 flex items-center justify-between shadow-lg">
+              <button
+                type="button"
+                onClick={closeCategoryGallery}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 !text-white/80 hover:text-gold hover:border-gold/50 hover:bg-gold/10 transition-all text-xs sm:text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold cursor-pointer"
+                aria-label="Back to Portfolio Categories"
+              >
+                <FiArrowLeft className="w-4 h-4 !text-gold" />
+                <span className="!text-white/80">Categories</span>
+              </button>
+
+              <div className="text-center px-2">
+                <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] !text-gold uppercase block">
+                  {selectedCategory.num} • {selectedCategory.images.length} Photos
+                </span>
+                <h3 className="font-playfair text-sm sm:text-lg font-bold !text-white truncate max-w-[180px] sm:max-w-md">
+                  {selectedCategory.title}
+                </h3>
+              </div>
+
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={closeCategoryGallery}
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/10 !text-white/80 hover:text-gold hover:border-gold/50 hover:bg-gold/10 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold cursor-pointer"
+                aria-label="Close Gallery View"
+              >
+                <FiX className="w-4 h-4 sm:w-5 sm:h-5 !text-gold" />
+              </button>
+            </div>
+
+            {/* Gallery Arrangement Body */}
+            <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-6 sm:py-10 pb-[calc(6rem+env(safe-area-inset-bottom))]">
+              {/* Category Subtitle */}
+              <div className="mb-6 sm:mb-8 text-center max-w-2xl mx-auto">
+                <p className="text-xs sm:text-sm !text-white/70 font-light leading-relaxed mb-1.5">
+                  {selectedCategory.description}
+                </p>
+                <span className="text-[11px] !text-gold/80 tracking-wide font-sans">
+                  Click any photograph to open in fullscreen lightbox
+                </span>
+              </div>
+
+              {/* Photos Grid Arrangement */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+                {selectedCategory.images.map((img, idx) => (
+                  <motion.button
+                    key={`${selectedCategory.id}-${idx}`}
+                    type="button"
+                    aria-label={`View photo ${idx + 1} of ${selectedCategory.title} in fullscreen`}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: idx * 0.04 }}
+                    onClick={() => setFullscreenIndex(idx)}
+                    className="group relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 hover:border-gold/60 bg-theme-card/50 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold text-left cursor-pointer shadow-md hover:shadow-gold-sm"
+                  >
+                    <img
+                      src={img}
+                      alt={`${selectedCategory.title} capture ${idx + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    {/* Gradient & Hover Expand Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3 sm:p-4">
+                      <span className="text-[11px] font-sans font-medium !text-white/90 tracking-wider">
+                        {String(idx + 1).padStart(2, '0')} / {String(selectedCategory.images.length).padStart(2, '0')}
+                      </span>
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gold/20 border border-gold/60 text-gold flex items-center justify-center shadow">
+                        <FiMaximize2 className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Step 2: Fullscreen Lightbox (Opens on Photo Click) ── */}
+      {selectedCategory && fullscreenIndex !== null && (
         <ImageViewer
-          images={activeGallery.images}
-          currentIndex={viewerIndex}
-          isOpen={Boolean(activeGallery)}
-          onClose={() => setActiveGallery(null)}
+          images={selectedCategory.images}
+          currentIndex={fullscreenIndex}
+          isOpen={fullscreenIndex !== null}
+          onClose={() => setFullscreenIndex(null)}
         />
       )}
     </section>
   )
 }
-

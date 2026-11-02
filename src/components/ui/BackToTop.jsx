@@ -36,7 +36,7 @@ const BackToTop = () => {
           exit={{ opacity: 0, scale: 0.5 }}
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 left-4 sm:bottom-8 sm:left-auto sm:right-8 z-40"
+          className="hidden md:flex fixed bottom-8 right-8 z-40 items-center justify-center"
           title="Back to top"
           aria-label="Back to top"
         >

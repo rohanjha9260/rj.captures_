@@ -136,7 +136,7 @@ export default function Contact() {
             onChange={handleChange}
             placeholder="Your Name"
             required
-            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all backdrop-blur-sm"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/35 transition-all"
           />
         </div>
 
@@ -152,7 +152,7 @@ export default function Contact() {
             onChange={handleChange}
             placeholder="Your Email"
             required
-            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all backdrop-blur-sm"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/35 transition-all"
           />
         </div>
 
@@ -167,7 +167,7 @@ export default function Contact() {
             value={formData.subject}
             onChange={handleChange}
             placeholder="Subject"
-            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all backdrop-blur-sm"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/35 transition-all"
           />
         </div>
 
@@ -183,7 +183,7 @@ export default function Contact() {
             onChange={handleChange}
             placeholder="Message"
             required
-            className="w-full px-4 py-3.5 rounded-xl bg-theme-card/80 border border-theme-border/70 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/40 transition-all resize-none backdrop-blur-sm"
+            className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10 hover:border-gold/40 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold text-sm text-white placeholder:text-white/35 transition-all resize-none"
           />
         </div>
 
@@ -209,41 +209,41 @@ export default function Contact() {
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
-        {/* 2 Contact Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {/* Email Card */}
+        {/* 2 Contact Items (Borderless & Open) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          {/* Email Item */}
           <a
             href="mailto:rjcaptures.photography@gmail.com"
-            className="flex items-center gap-3.5 p-4 rounded-2xl bg-theme-card/75 border border-theme-border/70 hover:border-gold/40 backdrop-blur-md transition-all duration-300 group cursor-pointer"
+            className="flex items-center gap-3.5 py-3 px-2 rounded-xl border-b border-white/10 hover:border-gold/50 bg-transparent hover:bg-white/[0.02] transition-all duration-300 group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+            <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform flex-shrink-0">
               <FiMail className="w-4 h-4" />
             </div>
-            <div className="text-left">
+            <div className="text-left min-w-0">
               <span className="text-[10px] tracking-wider uppercase text-white/50 block font-medium">
                 Email Me
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gold transition-colors">
+              <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gold transition-colors truncate block">
                 rjcaptures.photography@gmail.com
               </span>
             </div>
           </a>
 
-          {/* Instagram Card */}
+          {/* Instagram Item */}
           <a
             href="https://instagram.com/rj.captures_"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3.5 p-4 rounded-2xl bg-theme-card/75 border border-theme-border/70 hover:border-gold/40 backdrop-blur-md transition-all duration-300 group cursor-pointer"
+            className="flex items-center gap-3.5 py-3 px-2 rounded-xl border-b border-white/10 hover:border-gold/50 bg-transparent hover:bg-white/[0.02] transition-all duration-300 group cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform">
+            <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform flex-shrink-0">
               <FiInstagram className="w-4 h-4" />
             </div>
-            <div className="text-left">
+            <div className="text-left min-w-0">
               <span className="text-[10px] tracking-wider uppercase text-white/50 block font-medium">
                 Instagram
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gold transition-colors">
+              <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gold transition-colors truncate block">
                 @rj.captures_
               </span>
             </div>

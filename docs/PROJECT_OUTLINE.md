@@ -94,8 +94,7 @@ rj-captures/
         └── ui/
             ├── BackToTop.jsx        # Floating back-to-top button appearing after 400px scroll
             ├── ChatBot.jsx          # Photography AI assistant using Groq API
-            ├── ImageViewer.jsx      # High-performance fullscreen image lightbox with keyboard controls
-            └── SettingsPanel.jsx    # Slide-over panel for multi-theme selection
+            └── ImageViewer.jsx      # High-performance fullscreen image lightbox with keyboard controls
 ```
 
 ---
@@ -127,17 +126,16 @@ main.jsx
 | **`App.jsx`** | `src/App.jsx` | `isScrolled`, `isLoading`, `shouldMountChatBot` | Root coordinator. Listens to `window.scroll` via `requestAnimationFrame`. Mounts ChatBot via `requestIdleCallback` (fallback 1600ms) to ensure non-blocking initial paint. |
 | **`Navbar.jsx`** | `src/components/layout/Navbar.jsx` | `isScrolled` (prop), `isOpen` (mobile drawer) | Sticky glassmorphic navbar. Smooth-scrolls to `#home`, `#about`, `#portfolio`, `#instagram`, `#contact`. Houses brand badge, desktop menu, mobile animated hamburger (`HiMenuAlt3`/`HiX`), and theme toggle (`FiSun`/`FiMoon`). |
 | **`Hero.jsx`** | `src/components/sections/Hero.jsx` | `currentSlide`, slide timer, `isAutoRotatePaused` | Full-screen hero section. Displays headline, bio teaser, CTA buttons ("Explore My Work", "My Story"), slide counter (01/05), location tag, and accessible auto-rotation controls. |
-| **`PortfolioSection.jsx`** | `src/components/sections/PortfolioSection.jsx` | `viewerOpen`, `viewerImages`, `viewerIndex` | Category-driven portfolio section. Renders 5 interactive category cards (Nature, Sky, Village, Travel, Portrait) with responsive layout, numbered indices, and opens `ImageViewer` lightbox on activation. |
+| **`PortfolioSection.jsx`** | `src/components/sections/PortfolioSection.jsx` | `selectedCategory`, `fullscreenIndex` | Category-driven portfolio section. Renders 5 interactive category cards (Nature, Sky, Village, Travel, Portrait); clicking a category opens a responsive photo arrangement gallery, where selecting any photo launches `ImageViewer` in fullscreen. |
 | **`FilmStrip.jsx`** | `src/components/portfolio/FilmStrip.jsx` | CSS infinite ticker | Cinematic vintage film-strip animation running continuously across screen with border sprocket holes and preview frames. |
 | **`About.jsx`** | `src/components/sections/About.jsx` | `inView` trigger, `isVideoModalOpen` | Photographer biography, philosophy, cursive signature, glass stat counter, 6 expertise cards, and journey-video card with accessible modal dialog. |
 | **`InstagramFeed.jsx`** | `src/components/sections/InstagramFeed.jsx` | `posts`, `profile`, `isLoading`, `isLiveFeed` | Live Instagram visual diary section. Connects to Behold.so JSON feed with fallback highlights gallery, profile badge, 3x3 photo grid, and follow button. |
 | **`Contact.jsx`** | `src/components/sections/Contact.jsx` | `formData`, `status`, `isSubmitting` | Production-ready contact form supporting Formspree with client-side validation, error handling, labeled inputs, and direct contact cards. |
-| **`Footer.jsx`** | `src/components/layout/Footer.jsx` | None | Multi-column footer containing brand statement, navigation shortcuts, photography services list, copyright, and direct email link (`rjcaptures.photography@gmail.com`). |
+| **`Footer.jsx`** | `src/components/layout/Footer.jsx` | None | Multi-column footer containing brand statement, navigation shortcuts, photography categories list, and copyright. |
 | **`BottomNav.jsx`** | `src/components/layout/BottomNav.jsx` | `activeTab` | Mobile-only (`md:hidden`) fixed glassmorphism bottom navigation dock. Synchronizes active indicator with current scroll position across `#home`, `#about`, `#portfolio`, `#instagram`, `#contact`. |
 | **`BackToTop.jsx`** | `src/components/ui/BackToTop.jsx` | `isVisible` | Floating circular gold action button rendered when `scrollY > 400px`, smoothly scrolling user back to top. |
 | **`ChatBot.jsx`** | `src/components/ui/ChatBot.jsx` | `messages`, `isOpen`, `isLoading`, `inputText` | Floating interactive AI photography guide with safe-area spacing. Sends conversation history to Groq Cloud endpoint. Features custom markdown renderer for tables, bullet lists, bold text, and quick-prompt chips. |
 | **`ImageViewer.jsx`** | `src/components/ui/ImageViewer.jsx` | `images`, `currentIndex`, `isOpen`, `onClose` | Fullscreen modal lightbox supporting keyboard navigation (`Esc` to close, `ArrowLeft`/`ArrowRight` to navigate), swipe gesture support, and backdrop click dismiss. |
-| **`SettingsPanel.jsx`** | `src/components/ui/SettingsPanel.jsx` | `isOpen`, `onClose` | Slide-out drawer displaying visual cards to select between different nature-inspired and day/night themes. |
 
 ---
 
@@ -253,7 +251,7 @@ const imagePath = '/images/nature/IMG_20260228_172521.webp'
 ### Task 3: Modifying Brand Content or Contact Information
 - **Photographer Name & Titles**: `src/components/sections/Hero.jsx` and `src/components/layout/Navbar.jsx`.
 - **Bio & Skills**: `src/components/sections/About.jsx`.
-- **Contact Details & Email**: `src/components/layout/Footer.jsx` and `src/components/sections/Contact.jsx`.
+- **Contact Details & Email**: `src/components/sections/Contact.jsx`.
 - **Social Media Links**: `src/components/layout/Footer.jsx` and `src/components/sections/Contact.jsx`.
 
 ### Task 4: Re-enabling the Contact Form

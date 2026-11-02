@@ -1,31 +1,30 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 import { FiInstagram, FiYoutube, FiTwitter, FiFacebook } from 'react-icons/fi'
 
-const Footer = () => {
-  const socials = [
-    { icon: FiInstagram, url: 'https://instagram.com/rj.captures_', name: 'Instagram' },
-    { icon: FiYoutube, url: 'https://youtube.com/@rohanjha9260?si=uY4cwqZbCVowMrln', name: 'YouTube' },
-    { icon: FiTwitter, url: 'https://x.com/rjcaptures_', name: 'Twitter' },
-    { icon: FiFacebook, url: 'https://www.facebook.com/profile.php?id=61574357384042', name: 'Facebook' },
-  ]
+const SOCIALS = [
+  { icon: FiInstagram, url: 'https://instagram.com/rj.captures_', name: 'Instagram' },
+  { icon: FiYoutube, url: 'https://youtube.com/@rohanjha9260?si=uY4cwqZbCVowMrln', name: 'YouTube' },
+  { icon: FiTwitter, url: 'https://x.com/rjcaptures_', name: 'Twitter' },
+  { icon: FiFacebook, url: 'https://www.facebook.com/profile.php?id=61574357384042', name: 'Facebook' },
+]
 
-  const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Journey', href: '#instagram' },
-    { name: 'Connect', href: '#contact' },
-  ]
+const QUICK_LINKS = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Journey', href: '#instagram' },
+  { name: 'Connect', href: '#contact' },
+]
 
-  const services = [
-    'Nature Photography',
-    'Sky Photography',
-    'Village Photography',
-    'Travel Photography',
-    'Portrait Photography',
-  ]
+const SPECIALITIES = [
+  { name: 'Nature Photography', href: '#portfolio' },
+  { name: 'Sky & Sunsets', href: '#portfolio' },
+  { name: 'Village Life', href: '#portfolio' },
+  { name: 'Travel Stories', href: '#portfolio' },
+  { name: 'Portrait Moments', href: '#portfolio' },
+]
 
+export default function Footer() {
   const handleNavClick = (e, href) => {
     e.preventDefault()
     const el = document.querySelector(href)
@@ -33,122 +32,120 @@ const Footer = () => {
   }
 
   return (
-    <footer className="relative bg-theme-bg-sec border-t border-theme-border pt-10 sm:pt-16 pb-24 sm:pb-12 px-6 sm:px-12 lg:px-20">
-      {/* Subtle top glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+    <footer className="relative bg-theme-bg-sec border-t border-theme-border/60 pt-12 sm:pt-16 pb-[calc(7.5rem+env(safe-area-inset-bottom))] md:pb-14 px-5 sm:px-10 lg:px-20 overflow-hidden">
+      {/* Top subtle gold highlight glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12"
-        >
-          {/* Brand */}
-          <div className="text-center md:text-left">
-            <div className="flex flex-col items-center md:items-start leading-none mb-4">
-              <span className="font-playfair text-2xl font-bold text-gold tracking-tight">
-                RJ
-              </span>
-              <span className="text-[9px] tracking-[0.35em] text-gold/80 font-sans uppercase -mt-0.5">
-                CAPTURES
-              </span>
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 mb-10 sm:mb-14">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-7 flex flex-col items-center md:items-start text-center md:text-left">
+            {/* Logo Monogram Lockup */}
+            <div className="flex items-center gap-3.5 mb-4">
+              <div className="w-11 h-11 rounded-full border border-gold/40 bg-gold/10 flex items-center justify-center shadow-gold-sm">
+                <span className="font-playfair text-xl font-bold text-gold">RJ</span>
+              </div>
+              <div className="flex flex-col text-left leading-tight">
+                <span className="font-playfair text-xl font-bold text-theme-text tracking-wide">
+                  RJ Captures
+                </span>
+                <span className="text-[9px] tracking-[0.3em] text-gold/80 uppercase font-sans">
+                  Cinematic Photography
+                </span>
+              </div>
             </div>
-            <p className="text-theme-text-sec text-xs sm:text-sm leading-relaxed mb-6 font-light">
-              Capturing cinematic stories of nature, sky, village culture and human emotions through the lens.
+
+            <p className="text-theme-text-sec text-xs sm:text-sm leading-relaxed mb-6 max-w-md font-light">
+              Capturing cinematic stories of nature, atmospheric skies, and village culture. Preserving raw emotions and fleeting moments that deserve to last forever.
             </p>
-            {/* Social Icons */}
-            <div className="flex justify-center md:justify-start gap-4">
-              {socials.map((social) => {
+
+            {/* Social Pills */}
+            <div className="flex flex-wrap justify-center md:justify-start gap-2.5">
+              {SOCIALS.map((social) => {
                 const Icon = social.icon
                 return (
-                  <motion.a
+                  <a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-full glass flex items-center justify-center text-gray-400 hover:text-gold hover:border-gold/40 transition-colors duration-300"
-                    title={social.name}
+                    aria-label={`Visit RJ Captures on ${social.name}`}
+                    className="w-10 h-10 rounded-xl bg-theme-card/80 border border-theme-border/80 text-theme-text-sec hover:text-gold hover:border-gold/50 hover:bg-gold/10 flex items-center justify-center transition-all duration-300 shadow-sm"
                   >
                     <Icon className="w-4 h-4" />
-                  </motion.a>
+                  </a>
                 )
               })}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="text-center md:text-left">
-            <h4 className="text-white text-xs font-semibold tracking-widest uppercase mb-4">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-gray-400 hover:text-gold text-xs sm:text-sm transition-colors duration-300 tracking-wide font-light"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* Quick Links & Specialities */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-6 sm:gap-10">
+            {/* Quick Links */}
+            <div className="text-left">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block" />
+                <h4 className="text-theme-text text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
+                  Explore
+                </h4>
+              </div>
+              <ul className="space-y-2.5">
+                {QUICK_LINKS.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="group inline-flex items-center text-theme-text-sec hover:text-gold text-xs sm:text-sm transition-colors duration-200 font-light"
+                    >
+                      <span className="group-hover:translate-x-1 transition-transform duration-200">
+                        {link.name}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Specialities */}
+            <div className="text-left">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold inline-block" />
+                <h4 className="text-theme-text text-[11px] sm:text-xs font-semibold tracking-widest uppercase">
+                  Categories
+                </h4>
+              </div>
+              <ul className="space-y-2.5">
+                {SPECIALITIES.map((item) => (
+                  <li key={item.name}>
+                    <a
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className="group inline-flex items-center text-theme-text-sec hover:text-gold text-xs sm:text-sm transition-colors duration-200 font-light"
+                    >
+                      <span className="group-hover:translate-x-1 transition-transform duration-200">
+                        {item.name}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Specialities */}
-          <div className="text-center md:text-left">
-            <h4 className="text-white text-xs font-semibold tracking-widest uppercase mb-4">
-              Specialities
-            </h4>
-            <ul className="space-y-2.5">
-              {services.map((service) => (
-                <li
-                  key={service}
-                  className="text-gray-400 text-xs sm:text-sm tracking-wide font-light"
-                >
-                  {service}
-                </li>
-              ))}
-            </ul>
-          </div>
+        </div>
 
-          {/* Contact Info */}
-          <div className="text-center md:text-left">
-            <h4 className="text-white text-xs font-semibold tracking-widest uppercase mb-4">
-              Contact
-            </h4>
-            <p className="text-gray-400 text-xs sm:text-sm mb-3 font-light">
-              Based in Delhi, India
-            </p>
-            <a
-              href="mailto:rjcaptures.photography@gmail.com"
-              className="text-gold hover:text-gold-light text-xs sm:text-sm transition-colors duration-300 block mb-2 break-all"
-            >
-              rjcaptures.photography@gmail.com
-            </a>
-            <p className="text-gray-500 text-xs font-light">
-              Available for visual commissions & travel assignments.
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-theme-border pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <p className="text-gray-500 text-xs text-center sm:text-left font-light">
-            &copy; {new Date().getFullYear()} RJ Captures. All rights reserved.
+        {/* Bottom Horizontal Bar */}
+        <div className="border-t border-theme-border/60 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-theme-text-sec font-light">
+          <p className="text-center sm:text-left">
+            &copy; {new Date().getFullYear()} RJ Captures • All stories and photographs preserved.
           </p>
-          <p className="text-gray-500 text-xs text-center sm:text-right font-light">
-            Designed for Phone & PC with cinematic aesthetics.
+          <p className="text-gold font-medium text-center sm:text-right">
+            Rohan Jha
           </p>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer

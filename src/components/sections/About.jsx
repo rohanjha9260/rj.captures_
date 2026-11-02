@@ -186,13 +186,13 @@ export default function About() {
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════
-          2. HORIZONTAL STATS BAR (Matches Mockup Single Rounded Box)
+          2. HORIZONTAL STATS (Borderless & Open Flow)
           ══════════════════════════════════════════════════════════════════ */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 0.15 }}
-        className="mb-14 sm:mb-16 rounded-2xl border border-white/10 bg-theme-card/75 backdrop-blur-md px-3 sm:px-6 py-4 sm:py-5 flex items-center justify-between divide-x divide-white/10 shadow-lg text-center"
+        className="mb-14 sm:mb-16 py-6 border-y border-white/10 flex items-center justify-between divide-x divide-white/10 text-center"
       >
         {STATS.map((stat) => (
           <div key={stat.label} className="flex-1 px-1 sm:px-3">
@@ -207,35 +207,35 @@ export default function About() {
       </motion.div>
 
       {/* ══════════════════════════════════════════════════════════════════
-          3. MY EXPERTISE (6 RECTANGULAR CARDS IN 2x3 or 3x2 GRID)
+          3. MY EXPERTISE (Borderless & Cinematic Typography)
           ══════════════════════════════════════════════════════════════════ */}
       <div className="mb-14 sm:mb-16">
         {/* Section Tag */}
-        <div className="flex items-center gap-2 mb-5">
+        <div className="flex items-center gap-2 mb-6">
           <span className="w-6 h-[1.5px] bg-gold rounded-full" />
           <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-white/70 uppercase">
             My Expertise
           </span>
         </div>
 
-        {/* 6 Expertise Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+        {/* 6 Expertise Items (Borderless & Open) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-x-8">
           {EXPERTISE.map((item, index) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.06 }}
-              className="group p-3.5 sm:p-4 rounded-2xl bg-theme-card/75 border border-white/10 hover:border-gold/45 backdrop-blur-md transition-all duration-300 flex items-center gap-3.5 shadow-sm"
+              className="group flex items-start gap-3.5 text-left py-1"
             >
-              <div className="p-2 sm:p-2.5 rounded-xl bg-gold/10 border border-gold/25 group-hover:scale-110 group-hover:bg-gold/20 transition-all duration-300">
+              <div className="w-8 h-8 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:scale-110 transition-transform flex-shrink-0 mt-0.5">
                 {item.icon}
               </div>
-              <div className="text-left leading-tight">
+              <div className="leading-tight">
                 <span className="block text-xs sm:text-sm font-semibold text-white/95 group-hover:text-gold transition-colors">
                   {item.title}
                 </span>
-                <span className="block text-[11px] sm:text-xs text-white/60 font-light mt-0.5">
+                <span className="block text-[11px] sm:text-xs text-white/60 font-light mt-1">
                   {item.subtitle}
                 </span>
               </div>

@@ -91,7 +91,7 @@ export default function InstagramFeed() {
             },
             posts: combined.slice(0, 9),
           })
-          setIsLiveFeed(true)
+          setIsLiveFeed(livePosts.length > 0)
           setLoading(false)
         }
       } catch (err) {
