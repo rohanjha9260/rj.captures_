@@ -281,8 +281,8 @@ export default function About() {
         >
           {/* Landscape Photo Silhouette */}
           <img
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1400&fit=crop&q=85"
-            alt="Photographer at golden sunset over mountains"
+            src="/images/hero/IMG_20241015_162056.webp"
+            alt="Photographer at golden sunset over horizon"
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
             loading="lazy"
           />

@@ -12,9 +12,8 @@ import {
 const SLIDES = [
   {
     id: 1,
-    image:
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=1080&fit=crop&q=85',
-    alt: 'Golden mountain sunset over fjord and lake',
+    image: '/images/hero/IMG_20241015_162056.webp',
+    alt: 'Golden cinematic sunset and horizon landscape',
   },
   {
     id: 2,
