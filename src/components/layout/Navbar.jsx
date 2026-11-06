@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { HiX } from 'react-icons/hi'
+import { HiX, HiMenu } from 'react-icons/hi'
 import { FiSun, FiMoon } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../../hooks/useTheme'
@@ -156,11 +156,9 @@ export default function Navbar({ isScrolled }) {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="flex flex-col justify-center items-center gap-[4.5px] w-4.5"
+                      className="flex items-center justify-center"
                     >
-                      <span className="w-full h-[1.5px] bg-gold rounded-full" />
-                      <span className="w-full h-[1.5px] bg-gold rounded-full" />
-                      <span className="w-full h-[1.5px] bg-gold rounded-full" />
+                      <HiMenu className="h-5 w-5 text-gold" />
                     </motion.div>
                   )}
                 </AnimatePresence>

@@ -6,17 +6,14 @@ import {
   FiLinkedin,
   FiGithub,
   FiMapPin,
-  FiPlay,
-  FiPause,
 } from 'react-icons/fi'
 
 // 5 curated cinematic wallpapers matching the luxury aesthetic in the design
 const SLIDES = [
   {
     id: 1,
-    image:
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=1080&fit=crop&q=85',
-    alt: 'Golden mountain sunset over fjord and lake',
+    image: '/images/hero/IMG_20241015_162056.webp',
+    alt: 'Golden cinematic sunset and horizon landscape',
   },
   {
     id: 2,
@@ -65,22 +62,14 @@ const SOCIAL_LINKS = [
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isAutoRotatePaused, setIsAutoRotatePaused] = useState(false)
-  const [isControlFocused, setIsControlFocused] = useState(false)
 
-  // Auto-advance slides every 7 seconds when rotation is enabled
+  // Auto-advance slides every 7 seconds
   useEffect(() => {
-    if (isAutoRotatePaused || isControlFocused) return undefined
-
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length)
     }, 7000)
     return () => clearInterval(timer)
-  }, [isAutoRotatePaused, isControlFocused])
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % SLIDES.length)
-  }
+  }, [])
 
   const scrollToPortfolio = () => {
     document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
@@ -88,14 +77,6 @@ export default function Hero() {
 
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const scrollToNext = () => {
-    const nextSection =
-      document.getElementById('portfolio') ||
-      document.getElementById('about') ||
-      document.getElementById('instagram')
-    nextSection?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -224,75 +205,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Layer 4: Slide Indicator (01 | 05) & Pause/Resume Control ── */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        onFocus={() => setIsControlFocused(true)}
-        onBlur={(e) => {
-          if (!e.currentTarget.contains(e.relatedTarget)) {
-            setIsControlFocused(false)
-          }
-        }}
-        className="absolute right-5 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2.5 z-20"
-      >
-        <button
-          type="button"
-          onClick={nextSlide}
-          title="Next slide"
-          aria-label="Next slide"
-          className="flex flex-col items-center gap-2 p-1.5 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg"
-        >
-          <span className="font-inter text-xs sm:text-sm font-medium text-white group-hover:text-gold transition-colors tracking-widest">
-            {String(currentSlide + 1).padStart(2, '0')}
-          </span>
-          <div className="w-[1.5px] h-8 sm:h-10 bg-gold/50 group-hover:bg-gold transition-colors rounded-full" />
-          <span className="font-inter text-xs sm:text-sm font-light text-white/50 tracking-widest">
-            {String(SLIDES.length).padStart(2, '0')}
-          </span>
-        </button>
-
-        {/* Pause / Resume Control */}
-        <button
-          type="button"
-          onClick={() => setIsAutoRotatePaused((prev) => !prev)}
-          title={isAutoRotatePaused ? 'Resume auto-rotation' : 'Pause auto-rotation'}
-          aria-label={isAutoRotatePaused ? 'Resume auto-rotation' : 'Pause auto-rotation'}
-          className="p-1.5 rounded-full bg-black/50 border border-white/20 text-white/70 hover:text-gold hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all cursor-pointer"
-        >
-          {isAutoRotatePaused ? (
-            <FiPlay className="w-3 h-3 fill-current" />
-          ) : (
-            <FiPause className="w-3 h-3" />
-          )}
-        </button>
-      </motion.div>
-
-      {/* ── Layer 5: Bottom Section (Scroll Down on Left + Delhi India Pill on Right) ── */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 pb-20 sm:pb-8 flex items-end justify-between">
-        {/* Scroll Down Indicator */}
-        <motion.button
-          onClick={scrollToNext}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="flex flex-col items-start gap-1 cursor-pointer group text-left"
-          aria-label="Scroll down"
-        >
-          <div className="w-5 h-8 rounded-full border border-white/45 group-hover:border-gold flex justify-center pt-1.5 transition-colors">
-            <motion.div
-              animate={{ y: [0, 8, 0], opacity: [0.9, 0.2, 0.9] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1 h-2 rounded-full bg-gold"
-            />
-          </div>
-          <span className="text-[9px] sm:text-[10px] tracking-[0.25em] text-white/60 group-hover:text-gold uppercase font-medium mt-1 transition-colors">
-            Scroll Down
-          </span>
-          <div className="w-px h-6 sm:h-8 bg-white/20 group-hover:bg-gold/60 ml-2.5 transition-colors" />
-        </motion.button>
-
+      {/* ── Layer 4: Bottom Section (Delhi India Pill & Socials on Right) ── */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 pb-20 sm:pb-8 flex items-end justify-end">
         {/* Location Pill & Socials */}
         <div className="flex flex-col items-end gap-3">
           {/* Delhi India Pill (Matches Mobile Mockup Screen 1) */}
